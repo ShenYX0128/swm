@@ -129,13 +129,14 @@
         <li class="treeview">
           <a href="#">
             <i class="fa fa-pie-chart"></i>
-            <span>Charts</span>
+            <span>商品管理</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="pages/charts/chartjs.html"><i class="fa fa-circle-o"></i> ChartJS</a></li>
+            <li><a href="/admin/goods/create"><i class="fa fa-circle-o"></i> 商品添加</a></li>
+            <li><a href="/admin/goods"><i class="fa fa-circle-o"></i> 商品浏览</a></li>
           </ul>
         </li>
        
@@ -148,8 +149,23 @@
   <!-- <div class="form-group"><input type="checkbox" data-enable="expandOnHover" class="pull-right"></div> -->
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-  @section('content')
-  @show
+
+      @if(session('success'))
+        <div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <h4><i class="icon fa fa-check"></i> Alert!</h4>
+                {{session('success')}}
+              </div>
+      @endif
+      @if(session('error'))
+        <div class="alert alert-danger alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <h4><i class="icon fa fa-ban"></i>显示错误信息</h4>
+            {{session('error')}}
+        </div>
+      @endif
+    @section('content')
+    @show
   </div>
   <!-- /.content-wrapper -->
   <footer class="main-footer">
