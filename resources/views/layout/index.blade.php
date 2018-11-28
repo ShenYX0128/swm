@@ -81,7 +81,7 @@
                     <a href="#">Friends</a>
                   </div>
                 </div>
-                <!-- /.row -->
+                <!- /.row -->
               <!-- </li> -->
               <!-- Menu Footer-->
               <li class="user-footer">
@@ -126,21 +126,42 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
       
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-pie-chart"></i>
-            <span>Charts</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="pages/charts/chartjs.html"><i class="fa fa-circle-o"></i> ChartJS</a></li>
-          </ul>
-        </li>
+          <li class="treeview">
+            <a href="#">
+              <i class="fa fa-bars"></i>
+              <span>分类管理</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="/admin/category/create"><i class="fa fa-circle-o"></i>添加分类</a></li>
+              <li><a href="/admin/category"><i class="fa fa-circle-o"></i>浏览分类</a></li>
+            </ul>
+          </li>
+     </ul>
+    
+      <ul class="sidebar-menu" data-widget="tree">
+      
+          <li class="treeview">
+            <a href="#">
+              <i class="fa  fa-link"></i>
+              <span>友情链接</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="/admin/friend/create"><i class="fa fa-circle-o"></i>添加链接</a></li>
+              <li><a href="/admin/friend"><i class="fa fa-circle-o"></i>浏览链接</a></li>
+            </ul>
+          </li>
+     </ul>
+
+   
        
         
-      </ul>
+     
     </section>
     <!-- /.sidebar -->
   </aside>
@@ -148,8 +169,23 @@
   <!-- <div class="form-group"><input type="checkbox" data-enable="expandOnHover" class="pull-right"></div> -->
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-  @section('content')
-  @show
+
+      @if(session('success'))
+        <div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <h4><i class="icon fa fa-check"></i> Success</h4>
+                {{session('success')}}
+              </div>
+      @endif
+      @if(session('error'))
+        <div class="alert alert-danger alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <h4><i class="icon fa fa-ban"></i>显示错误信息</h4>
+            {{session('error')}}
+        </div>
+      @endif
+    @section('content')
+    @show
   </div>
   <!-- /.content-wrapper -->
   <footer class="main-footer">
@@ -202,5 +238,18 @@
 <script src="/admins/dist/js/demo.js"></script>
 @section('js')
 @show
+
+
+@section('js')
+<script>
+  $('.alert alert-success').delay(1000).fadeOut(2000);
+
+  
+</script>
+
+@stop
+
+
+
 </body>
 </html>
