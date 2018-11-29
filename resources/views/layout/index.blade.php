@@ -37,7 +37,9 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+
+    <a href="http://g-mall.cn/admin" class="logo">
+
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>A</b>LT</span>
       <!-- logo for regular state and mobile devices -->
@@ -50,21 +52,29 @@
         <span class="sr-only">Toggle navigation</span>
       </a>
 
+          @php
+            $user = DB::table('user')->where('id',session('uid'))->first();
+          @endphp
+
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="/admins/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-              <span class="hidden-xs">用户名</span>
+      
+              <img src="{{$user->header}}" class="user-image" alt="User Image">
+              <span class="hidden-xs">{{$user->username}}</span>
+
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="/admins/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+
+                <img src="{{$user->header}}" class="img-circle" alt="User Image">
 
                 <p>
-                  Alexander Pierce - Web Developer
+                  {{$user->username}}
+
                   <small>Member since Nov. 2012</small>
                 </p>
               </li>
@@ -81,15 +91,21 @@
                     <a href="#">Friends</a>
                   </div>
                 </div>
+
                 <!- /.row -->
+
               <!-- </li> -->
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">修改密码</a>
+
+                  <a href="/admin/header" class="btn btn-default btn-flat">修改头像</a>
+                </div>
+                <div class="pull-left">
+                  <a href="/admin/passchange" class="btn btn-default btn-flat">修改密码</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">退出</a>
+                  <a href="/admin/logout" class="btn btn-default btn-flat">退出</a>
                 </div>
               </li>
             </ul>
@@ -105,11 +121,12 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="/admins/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+
+          <img src="{{$user->header}}" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Alexander Pierce</p>
-          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+          <p>{{$user->username}}</p>
+
         </div>
       </div>
       <!-- search form -->
@@ -126,6 +143,7 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
       
+
 
         <li class="treeview">
           <a href="#">
@@ -154,9 +172,8 @@
               <li><a href="/admin/category"><i class="fa fa-circle-o"></i>浏览分类</a></li>
             </ul>
           </li>
-     </ul>
     
-      <ul class="sidebar-menu" data-widget="tree">
+
       
           <li class="treeview">
             <a href="#">
@@ -171,13 +188,25 @@
               <li><a href="/admin/friend"><i class="fa fa-circle-o"></i>浏览链接</a></li>
             </ul>
           </li>
-     </ul>
 
    
-
+            <li class="treeview">
+                    <a href="#">
+                      <i class="fa fa-user"></i>
+                      <span>管理员管理</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="/admin/user/create"><i class="fa fa-user-plus"></i>用户添加</a></li>
+            <li><a href="/admin/user"><i class="fa fa-users"></i>用户管理</a></li>
+          </ul>
+        </li>
        
         
-     
+      </ul>
+
     </section>
     <!-- /.sidebar -->
   </aside>
@@ -185,6 +214,7 @@
   <!-- <div class="form-group"><input type="checkbox" data-enable="expandOnHover" class="pull-right"></div> -->
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
+
 
       @if(session('success'))
         <div class="alert alert-success alert-dismissible">
@@ -200,8 +230,10 @@
             {{session('error')}}
         </div>
       @endif
+
     @section('content')
     @show
+
   </div>
   <!-- /.content-wrapper -->
   <footer class="main-footer">
@@ -231,7 +263,11 @@
 <!-- Sparkline -->
 <script src="/admins/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
 <!-- jvectormap -->
+
 <script src="/admins/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+
+<script src="/admins/plugins/jvectormap/jquery-jvectormap-3.3.1.min.js"></script>
+
 <script src="/admins/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
 <!-- jQuery Knob Chart -->
 <script src="/admins/bower_components/jquery-knob/dist/jquery.knob.min.js"></script>
@@ -253,19 +289,8 @@
 <!-- AdminLTE for demo purposes -->
 <script src="/admins/dist/js/demo.js"></script>
 @section('js')
+
 @show
-
-
-@section('js')
-<script>
-  $('.alert alert-success').delay(1000).fadeOut(2000);
-
-  
-</script>
-
-@stop
-
-
 
 </body>
 </html>
