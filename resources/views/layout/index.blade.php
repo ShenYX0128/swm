@@ -68,7 +68,11 @@
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
-              <li class="user-header">
+              <!-- <div class="widget-user-header bg-black" style="background: url('../dist/img/photo1.png') center center;">
+              <h3 class="widget-user-username"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">伊丽莎白皮尔斯</font></font></h3>
+              <h5 class="widget-user-desc"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">网页设计者</font></font></h5>
+            </div> -->
+              <li class="user-header" style="background: url('/admins/dist/img/photo1.png') center center;">
 
                 <img src="{{$user->header}}" class="img-circle" alt="User Image">
 
@@ -188,10 +192,7 @@
               <li><a href="/admin/friend"><i class="fa fa-circle-o"></i>浏览链接</a></li>
             </ul>
           </li>
-
-
-   
-            <li class="treeview">
+          <li class="treeview">
                     <a href="#">
                       <i class="fa fa-user"></i>
                       <span>管理员管理</span>
@@ -202,6 +203,18 @@
           <ul class="treeview-menu">
             <li><a href="/admin/user/create"><i class="fa fa-user-plus"></i>用户添加</a></li>
             <li><a href="/admin/user"><i class="fa fa-users"></i>用户管理</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+                    <a href="#">
+                      <i class="fa  fa-commenting"></i>
+                      <span>评论管理</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="/admin/comment"><i class="fa fa-circle-o"></i>评论浏览</a></li>
           </ul>
         </li>
         <li class="treeview">

@@ -488,15 +488,13 @@
 			$(':checkbox:checked').each(function(){
 				arr.push($(this).parents('ul').find('.check').attr('gid'));
 			})
-			var rem = $(this);
+			// var rem = $(this);
 				// console.log(rem);
 			$.post('/home/shopalldel',{arr:arr},function(data){
 				// console.log(data);
 				if(data == 1){
 					// console.log(12);
-					$("input[type=checkbox]:checked").each(function(){
-						rem.parents('ul').remove();
-					})
+					$(':checkbox:checked').parents('.bundle-main').remove();
 					// 刷新
 					nums()
 					}
