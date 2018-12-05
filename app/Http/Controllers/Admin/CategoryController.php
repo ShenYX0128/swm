@@ -22,9 +22,9 @@ class CategoryController extends Controller
         foreach($res as $v){
 
             //path
-            $ps=substr_count($v->path,',')-1;
+            $ps=abs(substr_count($v->path,',')-1);
 
-            $v->tname=str_repeat('&nbsp;',$ps*8).'|--'.
+            $v->tname=str_repeat('&nbsp;',$ps*10).'|--'.
             $v->tname;
         }
 
@@ -41,9 +41,10 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        //
-                //查询表里面的信息
+    {   
+
+
+        //查询表里面的信息
         $rs = Category::select(DB::raw('*,CONCAT(path,id) as paths'))->
         orderBy('paths')->
         get();
@@ -54,20 +55,24 @@ class CategoryController extends Controller
         foreach($rs as $v){
 
             //path  
-            $ps = substr_count($v->path,',')-1;
+            $ps =abs( substr_count($v->path,',')-1);
 
             //拼接  分类名
             // $v->catname = str_repeat('|--',$ps).$v->catname;
 
-            $v->tname = str_repeat('&nbsp;',$ps*8).'|--'.$v->tname;
+            $v->tname = str_repeat('&nbsp;',$ps*10).'|--'.$v->tname;
 
         }
+
+
 
         // select *,CONCAT(path,id) as paths from category order by paths
 
         return view('admin.category.add',[
             'title'=>'分类添加页面',
-            'rs'=>$rs
+            'rs'=>$rs,
+
+            
         ]);
 
     }
@@ -81,6 +86,15 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         //表单验证
+         $this->validate($request, [
+            'tname' => 'required',
+          
+        ],[
+            'tname.required' => '不能为空',
+         
+        ]);
+
+
        // $res= $req->all();
         $res=$request->except('_token');
 
@@ -122,7 +136,34 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        //
+        // //                //查询表里面的信息
+        // $rs = Category::select(DB::raw('*,CONCAT(path,id) as paths'))->
+        // orderBy('paths')->
+        // get();
+        // // dd($rs);
+        // // 家用电器
+        // // '|--'.电视
+
+        // foreach($rs as $v){
+
+        //     //path  
+        //     $ps = abs(substr_count($v->path,',')-1);
+
+        //     //拼接  分类名
+        //     // $v->catname = str_repeat('|--',$ps).$v->catname;
+
+        //     $v->tname = str_repeat('&nbsp;',$ps*10).'|--'.$v->tname;
+
+        // }
+
+        // // select *,CONCAT(path,id) as paths from category order by paths
+
+        // return view('admin.category.adds',[
+        //     'title'=>'分类添加页面',
+        //     'rs'=>$rs,
+        //     'id'=>$id
+            
+        // ]);
     }
 
     /**
@@ -138,10 +179,10 @@ class CategoryController extends Controller
         foreach($rs as $v){
 
             //path
-            $ps=substr_count($v->path,',');
+            $ps=abs(substr_count($v->path,',')-1);
 
             //拼接 分类名
-            $v->tname=str_repeat('&nbsp;',$ps*8).'|--'.$v->tname;
+            $v->tname=str_repeat('&nbsp;',$ps*10).'|--'.$v->tname;
         }
 
         $res=Category::find($id);
@@ -165,18 +206,21 @@ class CategoryController extends Controller
     {
         
         // dd($request->all());
-        $res=$request->only('tname');
+        $res=$request->only('tname','pid');
+        // dd($res);
+            try{
+                $data=Category::where('id',$id)->update($res);
+                // dd($data);
+                if($data==0 || $data){
+                    return redirect('/admin/category')->with('success','修改成功');
+                }
+            }catch(\Exception $e){
 
-        try{
-            $data=Category::where('id',$id)->update($res);
-
-            if($data){
-                return redirect('/admin/category')->with('success','修改成功');
+                return back()->with('error','修改失败');
             }
-        }catch(\Exception $e){
+     
 
-            return back()->with('error','修改失败');
-        }
+
     }
 
     /**
@@ -199,7 +243,13 @@ class CategoryController extends Controller
       
 
         //判断类别下是否有商品
-        
+        $cate=Category::find($id);
+        $goods=Goods::where('tid',$cate->id)->get();
+
+        if(count($goods)!=0){
+            return back()->with('error','有商品不能删');
+
+        }
 
 
         //删除
@@ -214,4 +264,7 @@ class CategoryController extends Controller
             return back()->with('error','删除失败');
         }
     }
+
+
+
 }

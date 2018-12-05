@@ -73,6 +73,11 @@
                                 colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 224px;">
                                    链接地址
                                 </th>
+
+                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
+                                colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 224px;">
+                                   图片链接
+                                </th>
                                
                                
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
@@ -87,6 +92,7 @@
                             
                                 <td>{{$v->id}}</td>
                                 <td>{{$v->url}}</td>
+                                <td>{{$v->src}}</td>
 
                                 <td>
                                     <a href="/admin/banner/{{$v->id}}/edit" class='btn btn-info'>修改</a>

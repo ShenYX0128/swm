@@ -161,7 +161,7 @@
 
           <li class="treeview">
             <a href="#">
-              <i class="fa fa-bars"></i>
+              <i class="fa  fa-list"></i>
               <span>分类管理</span>
               <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
@@ -204,6 +204,7 @@
             <li><a href="/admin/user"><i class="fa fa-users"></i>用户管理</a></li>
           </ul>
         </li>
+
         <li class="treeview">
             <a href="#">
               <i class="fa   fa-life-buoy"></i>
@@ -217,6 +218,22 @@
               <li><a href="/admin/banner"><i class="fa fa-circle-o"></i>浏览轮播图</a></li>
             </ul>
           </li>
+
+
+          <li class="treeview">
+            <a href="#">
+              <i class="fa  fa-file-text"></i>
+              <span>订单管理</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="/admin/orders"><i class="fa fa-circle-o"></i>浏览订单</a></li>
+            </ul>
+          </li>
+
+
       </ul>
 
     </section>

@@ -31,7 +31,11 @@ class BannerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
+    {   
+         
+        
+
+
         return view('admin.banner.add',['title'=>'轮播添加页面']);
     }
 
@@ -41,9 +45,37 @@ class BannerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        $res=$request->except('_token');
+    public function store(Request $req)
+    {    
+        //表单验证
+         $this->validate($req, [
+            
+            'url' => 'required',
+            'src' => 'required',
+          
+        ],[
+            
+            'url.required' => '链接地址不能为空',
+            'src.required' => '请选择上传文件',
+         
+        ]);
+
+     $res=$req->except('_token');
+
+         if($req->hasFile('src')){
+            //自定义名字
+            $name = rand(111,999).time();
+
+            //获取后缀
+            $suffix = $req->file('src')->getClientOriginalExtension();
+
+            $req->file('src')->move('./uploads',$name.'.'.$suffix);
+
+            $res['src'] = '/uploads/'.$name.'.'.$suffix;
+               
+            }
+
+      
 
      try{
         $data = Banner::create($res);
@@ -96,10 +128,29 @@ class BannerController extends Controller
     public function update(Request $request, $id)
     {
         
-        $res=$request->except(['_token','_method']);
 
+
+        $res=$request->except(['_token','_method','src']);
+    
+     
+      
+         if($request->hasFile('src')){
+            //自定义名字
+            $name = rand(111,999).time();
+
+            //获取后缀
+            $suffix = $request->file('src')->getClientOriginalExtension();
+
+            $request->file('src')->move('./uploads',$name.'.'.$suffix);
+
+            $res['src'] = '/uploads/'.$name.'.'.$suffix;
+               
+            }
+
+         // dd($res);
           try{
             $data=Banner::where('id',$id)->update($res);
+
 
             if($data){
                 return redirect('/admin/banner')->with('success','修改成功');
