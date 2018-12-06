@@ -44,7 +44,17 @@ class FriendController extends Controller
      */
     public function store(Request $req)
     {
-        //
+        //表单验证
+         $this->validate($req, [
+            'fname' => 'required',
+            'url' => 'required',
+          
+        ],[
+            'fname.required' => '链接名称不能为空',
+            'url.required' => '链接地址不能为空',
+         
+        ]);
+
         $res=$req->except('_token');
 
         // dd($req->all());

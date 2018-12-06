@@ -99,8 +99,9 @@
                                
                                
                                
-                                <td>
+                                <td width='220px'>
                                     <a href="/admin/category/{{$v->id}}/edit" class='btn btn-info'>修改</a>
+                                    <!-- <a href="/admin/category/{{$v->id}}" class='btn btn-info'>添加子分类</a> -->
 
                                     <form action="/admin/category/{{$v->id}}" method='post' style='display:inline'>
                                 {{csrf_field()}}
@@ -176,5 +177,7 @@
 <script>
   $('.alert').delay(1000).fadeOut(2000);
 </script>
+
+
 
 @stop
