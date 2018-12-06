@@ -56,6 +56,9 @@ class GoodsController extends Controller
     {
         //表单验证
         $res = $request->except('_token','gpic');
+        $tid = $request->tid;
+        $typ = Type::find($tid);
+        $res['pid'] = $typ->pid;
         $rs = Goods::create($res);
         // var_dump($res);
         $id = $rs->id;

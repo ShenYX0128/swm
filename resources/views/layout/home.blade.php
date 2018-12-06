@@ -14,12 +14,8 @@
 
 		<link href="/homes/css/hmstyle.css" rel="stylesheet" type="text/css"/>
 		<link href="/homes/css/skin.css" rel="stylesheet" type="text/css" />
-		<script src="/homes/AmazeUI-2.4.2/assets/js/jquery.min.js"></script>
 		<link href="/homes/css/cartstyle.css" rel="stylesheet" type="text/css" />
 		<link href="/homes/css/optstyle.css" rel="stylesheet" type="text/css" />
-
-		<script src="/homes/AmazeUI-2.4.2/assets/js/amazeui.min.js"></script>
-		<script type="text/javascript" src="/homes/js/jquery.js"></script>
 	</head>
 
 	<body>

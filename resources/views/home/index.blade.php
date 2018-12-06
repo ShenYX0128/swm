@@ -1,5 +1,8 @@
 @extends('layout.home')
 @section('title',$title)
+		<script type="text/javascript" src="/homes/js/jquery.js"></script>
+		<script src="/homes/AmazeUI-2.4.2/assets/js/jquery.min.js"></script>
+		<script src="/homes/AmazeUI-2.4.2/assets/js/amazeui.min.js"></script>
 @section('content')
 			<div class="banner">
                       <!--轮播 -->
@@ -743,46 +746,13 @@
 								<h3>春节送礼优选</h3>
 							</div>														
 						</div>
-						
-						<div class="am-u-sm-3 ">
-						  <div class="icon-sale two "></div>	
-							<h4>特惠</h4>
-							<div class="activityMain ">
-								<img src="/homes/images/activity2.jpg "></img>
-							</div>
-							<div class="info ">
-								<h3>春节送礼优选</h3>								
-							</div>							
-						</div>						
-						
-						<div class="am-u-sm-3 ">
-							<div class="icon-sale three "></div>
-							<h4>团购</h4>
-							<div class="activityMain ">
-								<img src="/homes/images/activity3.jpg "></img>
-							</div>
-							<div class="info ">
-								<h3>春节送礼优选</h3>
-							</div>							
-						</div>						
-
-						<div class="am-u-sm-3 last ">
-							<div class="icon-sale "></div>
-							<h4>超值</h4>
-							<div class="activityMain ">
-								<img src="/homes/images/activity.jpg "></img>
-							</div>
-							<div class="info ">
-								<h3>春节送礼优选</h3>
-							</div>													
-						</div>
 
 					  </div>
                    </div>
 					<div class="clear "></div>
 
 					@foreach($type as $k => $v)
-                    <div id="f1">
+                    <div id="f{{$v->id}}">
 					<!--甜点-->
 					
 					<div class="am-container ">
@@ -790,12 +760,11 @@
 							<h4>{{$v->tname}}</h4>
 							<h3>每一道甜品都有一个故事</h3>
 							<div class="today-brands ">
-								<a href="# ">桂花糕</a>
-								<a href="# ">奶皮酥</a>
-								<a href="# ">栗子糕 </a>
-								<a href="# ">马卡龙</a>
-								<a href="# ">铜锣烧</a>
-								<a href="# ">豌豆黄</a>
+								@foreach($arr as $ke =>$va )
+									@if($v->id == $va->pid)
+										<a href="# ">{{$va->tname}}</a>
+									@endif
+								@endforeach
 							</div>
 							<span class="more ">
                     <a href="# ">更多美味<i class="am-icon-angle-right" style="padding-left:10px ;" ></i></a>
@@ -804,9 +773,14 @@
 					</div>
 					
 					<div class="am-g am-g-fixed floodFour">
+
 						<div class="am-u-sm-5 am-u-md-4 text-one list ">
 							<div class="word">
-								<a class="outer" href="#"><span class="inner"><b class="text">核桃</b></span></a>						
+								@foreach($arr as $ke =>$va )
+									@if($v->id == $va->pid)
+									<a class="outer" href="#"><span class="inner"><b class="text">{{$va->tname}}</b></span></a>	
+									@endif
+								@endforeach					
 							</div>
 							<a href="# ">
 								<div class="outer-con ">
@@ -820,89 +794,119 @@
                                   <img src="/homes/images/act1.png " />								
 							</a>
 							<div class="triangle-topright"></div>						
-						</div>
-						
-							<div class="am-u-sm-7 am-u-md-4 text-two sug">
+						</div> 
+						@foreach($gods[$v->id] as $key => $val)
+						@if($key == 0)
+						<div class="am-u-sm-7 am-u-md-4 text-two sug">
+						@foreach($img as $vlu)
+								@if($vlu->gid == $val->id)
+								<a href="http://g-mall.cn/home/detail/{{$val->id}}"><img src="{{$vlu->gpic}}" /></a>
+								@endif						
+						@endforeach
 								<div class="outer-con ">
 									<div class="title ">
-										雪之恋和风大福
+										{{$val->gname}}
 									</div>									
 									<div class="sub-title ">
-										¥13.8
+										{{$val->price}}
 									</div>
-									<i class="am-icon-shopping-basket am-icon-md  seprate"></i>
+									<a href="http://g-mall.cn/home/detail/{{$val->id}}"><i class="am-icon-shopping-basket am-icon-md  seprate"></i></a>
 								</div>
-								<a href="# "><img src="/homes/images/2.jpg" /></a>
 							</div>
-
-							<div class="am-u-sm-7 am-u-md-4 text-two">
+						@elseif($key == 1)
+						<div class="am-u-sm-7 am-u-md-4 text-two">
+						@foreach($img as $vlu)
+								@if($vlu->gid == $val->id)
+								<a href="http://g-mall.cn/home/detail/{{$val->id}}"><img src="{{$vlu->gpic}}" /></a>
+								@endif						
+						@endforeach
 								<div class="outer-con ">
 									<div class="title ">
-										雪之恋和风大福
+										{{$val->gname}}
 									</div>
 									<div class="sub-title ">
-										¥13.8
+										{{$val->price}}
 									</div>
-									<i class="am-icon-shopping-basket am-icon-md  seprate"></i>
+									<a href="http://g-mall.cn/home/detail/{{$val->id}}"><i class="am-icon-shopping-basket am-icon-md  seprate"></i></a>
 								</div>
-								<a href="# "><img src="/homes/images/1.jpg" /></a>
 							</div>
-
-
+						@elseif($key == 2)
 						<div class="am-u-sm-3 am-u-md-2 text-three big">
+						@foreach($img as $vlu)
+							@if($vlu->gid == $val->id)
+								<a href="http://g-mall.cn/home/detail/{{$val->id}}"><img src="{{$vlu->gpic}}" /></a>
+								@endif						
+						@endforeach
 							<div class="outer-con ">
 								<div class="title ">
-									小优布丁
+									{{$val->gname}}
 								</div>
 								<div class="sub-title ">
-									¥4.8
+									{{$val->price}}
 								</div>
-								<i class="am-icon-shopping-basket am-icon-md  seprate"></i>
+								<a href="http://g-mall.cn/home/detail/{{$val->id}}"><i class="am-icon-shopping-basket am-icon-md  seprate"></i></a>
 							</div>
-							<a href="# "><img src="/homes/images/5.jpg" /></a>
-						</div>
-
+						</div>		
+						@elseif($key == 3)	
 						<div class="am-u-sm-3 am-u-md-2 text-three sug">
+						@foreach($img as $vlu)
+							@if($vlu->gid == $val->id)
+								<a href="http://g-mall.cn/home/detail/{{$val->id}}"><img src="{{$vlu->gpic}}" /></a>
+								@endif						
+						@endforeach
 							<div class="outer-con ">
 								<div class="title ">
-									小优布丁
+									{{$val->gname}}
 								</div>
 								<div class="sub-title ">
-									¥4.8
+									{{$val->price}}
 								</div>
-								<i class="am-icon-shopping-basket am-icon-md  seprate"></i>
+								<a href="http://g-mall.cn/home/detail/{{$val->id}}"><i class="am-icon-shopping-basket am-icon-md  seprate"></i></a>
 							</div>
-							<a href="# "><img src="/homes/images/3.jpg" /></a>
-						</div>
-
+						</div>	
+						@elseif($key == 4)
 						<div class="am-u-sm-3 am-u-md-2 text-three ">
+						@foreach($img as $vlu)
+							@if($vlu->gid == $val->id)
+								<a href="http://g-mall.cn/home/detail/{{$val->id}}"><img src="{{$vlu->gpic}}" /></a>
+								@endif						
+						@endforeach
 							<div class="outer-con ">
 								<div class="title ">
-									小优布丁
+									{{$val->gname}}
 								</div>
 								<div class="sub-title ">
-									¥4.8
+									{{$val->price}}
 								</div>
-								<i class="am-icon-shopping-basket am-icon-md  seprate"></i>
+								<a href="http://g-mall.cn/home/detail/{{$val->id}}"><i class="am-icon-shopping-basket am-icon-md  seprate"></i></a>
 							</div>
-							<a href="# "><img src="/homes/images/4.jpg" /></a>
-						</div>
-
+						</div>	
+						@elseif($key == 5)
 						<div class="am-u-sm-3 am-u-md-2 text-three last big ">
 							<div class="outer-con ">
 								<div class="title ">
-									小优布丁
+									{{$val->gname}}
 								</div>
 								<div class="sub-title ">
-									¥4.8
+									{{$val->price}}
 								</div>
-								<i class="am-icon-shopping-basket am-icon-md  seprate"></i>
+								<a href="http://g-mall.cn/home/detail/{{$val->id}}"><i class="am-icon-shopping-basket am-icon-md  seprate"></i></a>
 							</div>
-							<a href="# "><img src="/homes/images/5.jpg" /></a>
-						</div>
-
-					</div>
+						@foreach($img as $vlu)
+							@if($vlu->gid == $val->id)
+								<a href="http://g-mall.cn/home/detail/{{$val->id}}"><img src="{{$vlu->gpic}}" /></a>
+								@endif						
+						@endforeach
+						</div>	
+						@endif
+					@endforeach
                  <div class="clear "></div>  
                  </div>
+                 
                  @endforeach
+@stop
+@section('js')
+<script type="text/javascript">
+	
+</script>
 @stop
