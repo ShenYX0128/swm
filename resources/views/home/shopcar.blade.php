@@ -3,7 +3,8 @@
 
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"><meta name="csrf-token" content="{{ csrf_token() }}">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<meta name="csrf-token" content="{{ csrf_token() }}">
 
 
 		<title>{{$title}}</title>
@@ -130,6 +131,8 @@
 							<div class="clear"></div>
 
 							@foreach($res as $k => $v)
+							@foreach($gods as $ke => $val)
+							@if($val->id == $v->gid)
 							<div class="bundle-main">
 								<ul class="item-content clearfix">
 									<li class="td td-chk">
@@ -141,7 +144,7 @@
 									<li class="td td-item">
 										<div class="item-pic">
 											<a href="#" target="_blank" data-title="{{$v->name}}" class="J_MakePoint" data-point="tbcart.8.12">
-												<img src="{{$v->shop_img}}" class="itempic J_ItemImg"></a>
+												<img src="{{$v->shop_img}}" class="itempic J_ItemImg" width="80px"></a>
 										</div>
 										<div class="item-info">
 											<div class="item-basic-info">
@@ -161,10 +164,10 @@
 										<div class="item-price price-promo-promo">
 											<div class="price-content">
 												<div class="price-line">
-													<em class="price-original">{{$v->prime}}</em>
+													<em class="price-original">{{$val->discount}}</em>
 												</div>
 												<div class="price-line">
-													<em class="J_Price price-now" tabindex="0">{{$v->price}}</em>
+													<em class="J_Price price-now" tabindex="0">{{$val->price}}</em>
 												</div>
 											</div>
 										</div>
@@ -182,7 +185,7 @@
 									</li>
 									<li class="td td-sum">
 										<div class="td-inner">
-											<em tabindex="0" class="J_ItemSum number">{{$v->num*$v->price}}</em>
+											<em tabindex="0" class="J_ItemSum number">{{$v->prime}}</em>
 										</div>
 									</li>
 									<li class="td td-op">
@@ -195,6 +198,8 @@
 									</li>
 								</ul>
 							</div>
+							@endif
+							@endforeach
 							@endforeach
 						</div>
 					</tr>
@@ -345,15 +350,7 @@
 		</div>
 	</body>
 	<script type="text/javascript">
-		// 加
-		$('.add').click(function(){
-			// 获取数量的值
-			var tb = $(this).prev().val();
-			tb++;
-			// 获取单价
-			var prc = $(this).parents('ul').find('.price-now').text().trim();
-			// console.log(tb);
-			function accMul(arg1,arg2) {
+		function accMul(arg1,arg2) {
 				var m = 0,s1 = arg1.toString(),s2 = arg2.toString();
 				try {
 					m += s1.split('.')[1].length
@@ -363,6 +360,14 @@
 				} catch (e) { }
 				return Number(s1.replace(".",""))*Number(s2.replace(".",""))/Math.pow(10,m)
 			}
+		// 加
+		$('.add').click(function(){
+			// 获取数量的值
+			var tb = $(this).prev().val();
+			tb++;
+			// 获取单价
+			var prc = $(this).parents('ul').find('.price-now').text().trim();
+			// console.log(tb);
 			$(this).parents('ul').find('.number').text(accMul(tb,prc));
 			totals()
 		})
@@ -378,17 +383,6 @@
 			$(this).next().val(tb);
 			// 获取单价
 			var prc = $(this).parents('ul').find('.price-now').text().trim();
-			function accMul(arg1, arg2) {
-
-		        var m = 0, s1 = arg1.toString(), s2 = arg2.toString();
-
-		        try { m += s1.split(".")[1].length } catch (e) { }
-
-		        try { m += s2.split(".")[1].length } catch (e) { }
-
-		        return Number(s1.replace(".", "")) * Number(s2.replace(".", "")) / Math.pow(10, m)
-
-			}
 			// 让小计发生改变
 			$(this).parents('ul').find('.number').text(accMul(prc,tb));
 			totals()
@@ -414,13 +408,14 @@
 			    m=Math.pow(10,Math.max(r1,r2))  
 			    return (arg1*m+arg2*m)/m  
 			}
+
 			// 遍历
 			var pcr = 0;
 			var sum = 0;
 			$(':checkbox:checked').each(function(){
 				// 获取小计
 				pcr = parseFloat($(this).parents('ul').find('.number').text());
-				// console.log(pcr);
+				console.log(pcr);
 			sum = accAdd(sum,pcr);
 
 			})

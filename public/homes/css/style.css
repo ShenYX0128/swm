@@ -330,16 +330,17 @@ div.zoomMask {position:absolute; background:url(../images/mask.png)repeat scroll
 .sys_item_mktprice{font-size:14px ;}
 .shopPromotion.gold .gold-list p{margin-top:8px;color:#E4393C;font-weight: bold;}
   	
-   	 	
 /*规格*/
-.theme-popover {display: block;position: static;border:none ;box-shadow: none;}
+.norns{display: block;position: static;border:none ;box-shadow: none}
+   	 	
+/*规格确认*/
+.theme-popover {display: block;position: static;border:none ;box-shadow: none}
 .theme-poptit,.theme-signin-right,.iteminfo_parameter dt.theme-login,.btn-op{display: none;}
-
 .theme-options{overflow: visible;padding:0px 0px;}
 .theme-options ul{overflow: hidden;float: none;}
 .theme-signin-left {max-width:100%;margin-bottom: 0;}
 .theme-signin-left .sku-line{margin: 5px;cursor: pointer;}
-.theme-signin-left .cart-title{margin-left: -46px;margin-top:10px;font-size:12px ;font-weight: 100;color:#888 ;float: left;}   	
+.theme-signin-left .cart-title{ margin-right:26px; font-size:12px ! important ;font-weight: 100 ! important ;color:#888 ;float: left;}   	
    	
 
 /*优惠活动*/

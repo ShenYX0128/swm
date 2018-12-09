@@ -11,9 +11,11 @@ class ShopcarController extends Controller
     public function shopcar()
     {
     	$res = DB::table('shopcar')->get();
+        $gods = DB::table('goods')->get();
     	// dd($res);
-    	return view('home.shopcar',['title'=>'g-mall商城---购物车','res'=>$res]);
+    	return view('home.shopcar',['title'=>'g-mall商城---购物车','res'=>$res,'gods'=>$gods]);
     }
+   
     // 购物车单个删除
     public function shopdata(Request $request)
     {
