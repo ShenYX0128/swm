@@ -1,14 +1,15 @@
 @extends('layout.home')
 @section('title',$title)
+		<meta name="_token" content="{!! csrf_token() !!}">
 		<link type="text/css" href="/homes/css/style.css" rel="stylesheet" />
-
+		<link rel="stylesheet" type="text/css" href="/homes/js-plug/css/zcity.css">
 		<script type="text/javascript" src="/homes/basic/js/jquery-1.7.min.js"></script>
 		<script type="text/javascript" src="/homes/basic/js/quick_links.js"></script>
 		<script type="text/javascript" src="/homes/AmazeUI-2.4.2/assets/js/amazeui.js"></script>
 		<script type="text/javascript" src="/homes/js/jquery.imagezoom.min.js"></script>
 		<script type="text/javascript" src="/homes/js/jquery.flexslider.js"></script>
 		<script type="text/javascript" src="/homes/js/list.js"></script>
-		
+		<script type="text/javascript" src="/homes/js-plug/js/zcity.js"></script>
 @section('content')
  <b class="line"></b>
 <div class="listMain">
@@ -128,22 +129,11 @@
 							<!--地址-->
 							<dl class="iteminfo_parameter freight">
 								<dt>配送至</dt>
-								<div class="iteminfo_freprice">
-									<div class="am-form-content address">
-										<select data-am-selected="{btnWidth: '32%'}">
-											<option value="a">浙江省</option>
-											<option value="b">湖北省</option>
-										</select>
-										<select data-am-selected="{btnWidth: '32%'}">
-											<option value="a">温州市</option>
-											<option value="b">武汉市</option>
-										</select>
-										<select data-am-selected="{btnWidth: '32%'}">
-											<option value="a">瑞安区</option>
-											<option value="b">洪山区</option>
-										</select>
+								<div class="iteminfo_freprice" >
+									<div class="am-form-content address" style="position: relative;">
+										<div class="zcityGroup" city-range="{'level_start':1,'level_end':3}" city-ini="广东,深圳市,龙华新区"></div>
 									</div>
-									<div class="pay-logis">
+									<div class="postage" style="position: absolute; left: 50%; top:115px; z-index:999;">
 										快递<b class="sys_item_freprice">10</b>元
 									</div>
 								</div>
@@ -152,11 +142,12 @@
 
 							<!--销量-->
 							<ul class="tm-ind-panel">
+
 								<li class="tm-ind-item tm-ind-sellCount canClick">
 									<div class="tm-indcon"><span class="tm-label">月销量</span><span class="tm-count">1015</span></div>
 								</li>
 								<li class="tm-ind-item tm-ind-sumCount canClick">
-									<div class="tm-indcon"><span class="tm-label">累计销量</span><span class="tm-count">6015</span></div>
+									<div class="tm-indcon"><span class="tm-label">累计销量</span><span class="tm-count">{{$v->num}}</span></div>
 								</li>
 								<li class="tm-ind-item tm-ind-reviewCount canClick tm-line3">
 									<div class="tm-indcon"><span class="tm-label">累计评价</span><span class="tm-count">640</span></div>
@@ -165,64 +156,101 @@
 							<div class="clear"></div>
 
 							<!--各种规格-->
-							<dl class="iteminfo_parameter sys_item_specpara">
+							<dl class="iteminfo_parameter sys_item_specpara" style="padding-left: 0">
 								<dt class="theme-login"><div class="cart-title">可选规格<span class="am-icon-angle-right"></span></div></dt>
 								<dd>
 									<!--操作页面-->
 
 									<div class="theme-popover-mask"></div>
+									<div class="norns" >
+										<div class="theme-span"></div>
+										<div class="theme-popbod" >
+											<form class="theme-signin" action="" method="post">
+												<input type="hidden" gid="{{$v->id}}" id="hidden" value="@if($v->discount)
+															{{$v->discount}}
+														 @else
+														 {{$v->price}}
+														 @endif">
+												<div class="theme-signin-left" style="width: 100%;">
 
-									<div class="theme-popover">
+													<div class="theme-options">
+														<div class="cart-title">口味</div>
+														<ul class="taste">
+															@foreach($arr as $ke => $val)
+															<li class="sku-line @if($ke == 0)selected @endif">{{$val}}<i></i></li>
+															@endforeach
+														</ul>
+													</div>
+													<div class="theme-options">
+														<div class="cart-title number" style="margin-left: 5px">数量</div>
+														<dd>
+															<input id="min" class="am-btn am-btn-default" name="" type="button" value="-" />
+															<input id="text_box" name="" type="text" value="1" style="width:30px;" />
+															<input id="add" class="am-btn am-btn-default" name="" type="button" value="+" />
+															<span id="Stock" class="tb-hidden">库存<span class="stock">{{$v->stock}}</span>件</span>
+														</dd>
+
+													</div>
+													<div class="clear"></div>
+												</div>
+											</form>
+										</div>
+									</div>
+									<div class="theme-popover" style="min-width: 200px;" >
 										<div class="theme-span"></div>
 										<div class="theme-poptit">
 											<a href="javascript:;" title="关闭" class="close">×</a>
 										</div>
 										<div class="theme-popbod" >
-											<form class="theme-signin" name="loginform" action="" method="post">
+											<form class="theme-signin" name="loginform" action="" method="" id="forms">
+												<input type="hidden" name="hid" value="PUT">
 
 												<div class="theme-signin-left">
 
-													<div class="theme-options">
+													<div class="theme-options" style="min-width: 250px">
 														<div class="cart-title">口味</div>
-														<ul>
-															<li class="sku-line selected">原味<i></i></li>
-															<li class="sku-line">奶油<i></i></li>
-															<li class="sku-line">炭烧<i></i></li>
-															<li class="sku-line">咸香<i></i></li>
+														<ul id="testes">
+															@foreach($arr as $ke => $val)
+															<li class="sku-line @if($ke == 0)selected @endif">{{$val}}<i></i></li>
+															@endforeach
 														</ul>
 													</div>
-													<div class="theme-options">
+												<!-- 	<div class="theme-options">
 														<div class="cart-title">包装</div>
 														<ul>
 															<li class="sku-line selected">手袋单人份<i></i></li>
-															<li class="sku-line">礼盒双人份<i></i></li>
-															<li class="sku-line">全家福礼包<i></i></li>
 														</ul>
-													</div>
+													</div> -->
 													<div class="theme-options">
 														<div class="cart-title number">数量</div>
 														<dd>
-															<input id="min" class="am-btn am-btn-default" name="" type="button" value="-" />
-															<input id="text_box" name="" type="text" value="1" style="width:30px;" />
-															<input id="add" class="am-btn am-btn-default" name="" type="button" value="+" />
-															<span id="Stock" class="tb-hidden">库存<span class="stock">1000</span>件</span>
+															<input id="tmin" class="am-btn am-btn-default" name="" type="button" value="-" />
+															<input id="text_boxs" name="num" type="text" value="1" style="width:30px;" />
+															<input id="tadd" class="am-btn am-btn-default" name="" type="button" value="+" />
+															<span id="Stock" class="tb-hidden">库存<span class="stock">{{$v->stock}}</span>件</span>
 														</dd>
 
 													</div>
 													<div class="clear"></div>
 
 													<div class="btn-op">
-														<div class="btn am-btn am-btn-warning">确认</div>
+
+														<div class="btn am-btn am-btn-warning" id="form_sub">确认</div>
 														<div class="btn close am-btn am-btn-warning" id="indent_close">取消</div>
 													</div>
 												</div>
 												<div class="theme-signin-right">
 													<div class="img-info">
-														<img src="/homes/images/songzi.jpg" />
+														<img src="{{$img->gpic}}" />
 													</div>
 													<div class="text-info">
-														<span class="J_Price price-now">¥39.00</span>
-														<span id="Stock" class="tb-hidden">库存<span class="stock">1000</span>件</span>
+														<span class="J_Price price-now">¥@if($v->discount)
+															{{$v->discount}}
+														 @else
+														 {{$v->price}}
+														 @endif
+														</span>
+														<span id="Stock" class="tb-hidden">库存<span class="stock">{{$v->stock}}</span>件</span>
 													</div>
 												</div>
 
@@ -263,12 +291,12 @@
 							</div>
 							<li>
 								<div class="clearfix tb-btn tb-btn-buy theme-login">
-									<a id="LikBuy" title="点此按钮到下一步确认购买信息" href="#">立即购买</a>
+									<a id="LikBuy" title="点此按钮到下一步确认购买信息" href="javascript:void(0)">立即购买</a>
 								</div>
 							</li>
 							<li>
 								<div class="clearfix tb-btn tb-btn-basket theme-login">
-									<a id="LikBasket" title="加入购物车" href="#"><i></i>加入购物车</a>
+									<a id="LikBasket" title="加入购物车" href="javascript:void(0)"><i></i>加入购物车</a>
 								</div>
 							</li>
 						</div>
@@ -424,13 +452,7 @@
 											<h4>商品细节</h4>
 										</div>
 										<div class="twlistNews">
-											<img src="/homes/images/tw1.jpg" />
-											<img src="/homes/images/tw2.jpg" />
-											<img src="/homes/images/tw3.jpg" />
-											<img src="/homes/images/tw4.jpg" />
-											<img src="/homes/images/tw5.jpg" />
-											<img src="/homes/images/tw6.jpg" />
-											<img src="/homes/images/tw7.jpg" />
+											{!!$v->descr!!}
 										</div>
 									</div>
 									<div class="clear"></div>
@@ -1083,13 +1105,51 @@
 
 @stop
 @section('js')
+<!-- <script type="text/javascript" src="/homes/js-plug/js/jquery-1.9.1.min.js"></script> -->
+
+
 <script type="text/javascript">
+zcityrun('.zcityGroup');
+</script>
+<script type="text/javascript">
+	// 单价与商品数量相乘的函数
+	function accMul(arg1, arg2) {
+	        var m = 0, s1 = arg1.toString(), s2 = arg2.toString();
+
+	        try { m += s1.split(".")[1].length } catch (e) { }
+
+	        try { m += s2.split(".")[1].length } catch (e) { }
+
+	        return Number(s1.replace(".", "")) * Number(s2.replace(".", "")) / Math.pow(10, m)
+
+		}
 	// 点击显示
+	// 购买
 	$('#LikBuy').click(function(){
 		$('.theme-popover-mask,.theme-popover,.btn-op,.theme-poptit').css('display','block');
 	})
+	// 加入购物车
 	$('#LikBasket').click(function(){
 		$('.theme-popover-mask,.theme-popover,.btn-op,.theme-poptit').css('display','block');
+		// 将选中的值传送到确认页面
+		var data = $('#text_box').val().trim();
+		$('#text_boxs').val(data);
+		var tst = $('.taste').children('.selected').text().trim();
+		var pri = $('#hidden').val().trim();
+		// console.log(pri);
+		$('.J_Price').text('￥'+accMul(data,pri));
+
+		// var tsts = $('#testes').children().text();
+		$('#testes').children('.selected').removeClass('selected');
+		var len = $('#testes').children().length;
+		for(i=1; i<=len; i++){
+		 	var tsts = $('#testes li:nth-child('+i+')').text();
+			// console.log(tsts);
+			if( tsts == tst){
+				$('#testes li:nth-child('+i+')').addClass('selected');
+			}
+		}
+		
 	})
 	// 点击关闭
 	$('#indent_close').click(function(){
@@ -1098,6 +1158,66 @@
 	$('.close').click(function(){
 		$('.theme-popover-mask,.theme-popover,.btn-op,.theme-poptit').css('display','none');
 	})
+	// 提交
+	$.ajaxSetup({
+   		headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+	});
 
+		var data1 = [];
+		// data1['address'] = [];
+		for(i = 0; i < $('.zcityGroup').children().length; i++){
+			 data1 += $('.zcityGroup').find('.currentValue').eq(i).val().trim();
+		}
+		data1 += ','+$('#testes').children('.selected').text().trim();
+		data1 += ','+$('#text_boxs').val().trim();
+		data1 += ','+$('.tb-detail-hd').text().trim();
+		data1 += ','+$('#hidden').attr('gid');
+		data1 += ','+$('.img-info').children().attr('src');
+		data1 += ','+$('.J_Price').text().trim().substring(1);
+		// var da = data1.join(',');
+		console.log(data1);
+		$('#form_sub').click(function(){
+			$.ajax({  
+                type:'post',
+        		contentType: "application/x-www-form-urlencoded",  
+                traditional: true,  
+                url:'/home/detailadd',  
+                data:{arr:data1},
+                success: function (data){
+                    window.location.href="http://g-mall.cn/home/shopcar";
+                },
+                error:function(){
+                	alert('加入购物车失败');
+                }  
+            }); 
+			
+		});
+	// 获取商品数量
+	// 加
+	$('#tadd').click(function(){
+		var td = $(this).prev().val();
+		td++;
+		$(this).prev().val(td);
+		// 获取单价
+		var pri = $('#hidden').val().trim();
+		// console.log(pri);
+		$('.J_Price').text('￥'+accMul(td,pri));
+		
+	})
+	// 减
+	$('#tmin').click(function(){
+		var td = $(this).next().val();
+		// console.log(td);
+		td--;
+		if(td <= 1){
+			td = 1;
+		}
+		$(this).next().val(td);
+		// 获取单价
+		var pri = $('#hidden').val().trim();
+		// console.log(pri);
+		$('.J_Price').text('￥'+accMul(td,pri));
+		
+	})
 </script> 
 @stop

@@ -8,6 +8,8 @@ use App\Model\Admin\Goods;
 use App\Model\Admin\Goodsimg;
 use App\Model\Admin\Category;
 use DB;
+use App\Model\Admin\Banner;
+
 class IndexController extends Controller
 {
     //
@@ -34,7 +36,12 @@ class IndexController extends Controller
         }
         $img = DB::table('goods_img')
         ->join('goods', 'goods_img.gid', '=', 'goods.id')->select('goods_img.gid','goods_img.id','goods_img.gpic')->groupBy('gid')->get();
+    	$data=Category::getSubCates();
 
-    	return view('home.index',['title'=>'g-mall首页','type'=>$type,'arr'=>$arr,'gods'=>$gods,'img'=>$img]);
+    	// dd($data);
+    	$banner=Banner::get();
+
+    	return view('home.index',['title'=>'g-mall首页','type'=>$type,'arr'=>$arr,'gods'=>$gods,'img'=>$img,'data'=>$data,'banner'=>$banner]);
+
     }
 }
