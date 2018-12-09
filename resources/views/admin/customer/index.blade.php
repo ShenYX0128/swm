@@ -1,8 +1,27 @@
 @extends('layout.index')
 @section('title',$title)
 @section('content')
-<div class="box-body">
-    <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+	<section class="content-header">
+    </section>
+    <section class="content">
+      <div class="row">
+      	<div class="col-md-8 col-md-offset-2">
+		    <!-- general form elements -->
+		    <div class="box box-primary">
+		        <div class="box-header with-border">
+		            <h3 class="box-title">
+		                <font style="vertical-align: inherit;">
+		                    <font style="vertical-align: inherit;">
+		                        {{$title}}
+		                    </font>
+		                </font>
+		            </h3>
+		        </div>
+		        <!-- /.box-header -->
+		        <!-- form start -->
+		        <form role="form" action="/admin/customer" method="get">
+		            <div class="box-body">
+		        <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
         <div class="row">
             <div class="col-sm-6">
             </div>
@@ -11,8 +30,8 @@
         </div>
 
         <div class="row">
-        	<form action="/admin/user" method='get'>
-        	<div class="col-sm-6">
+          <form action="/admin/customer" method='get'>
+          <div class="col-sm-6">
     <div class="dataTables_length" id="example1_length">
         <label>
             <font style="vertical-align: inherit;">
@@ -52,7 +71,7 @@
     </div>
 </div>
 
-		<div class="col-sm-6">
+    <div class="col-sm-6">
     <div id="example1_filter" class="dataTables_filter">
         <label>
             <font style="vertical-align: inherit;">
@@ -60,7 +79,7 @@
                     查找：
                 </font>
             </font>
-            <input type="search" name="username" value="{{$request->username}}" class="form-control input-sm" placeholder="" aria-controls="example1">
+            <input type="search" name="customername" value="{{$request->customername}}" class="form-control input-sm" placeholder="" aria-controls="example1">
             <button class='btn btn-info'>搜索</button>
         </label>
     </div>
@@ -123,14 +142,6 @@
                             colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">
                                 <font style="vertical-align: inherit;">
                                     <font style="vertical-align: inherit;">
-                                        用户权限
-                                    </font>
-                                </font>
-                            </th>
-                            <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1"
-                            colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">
-                                <font style="vertical-align: inherit;">
-                                    <font style="vertical-align: inherit;">
                                         头像
                                     </font>
                                 </font>
@@ -149,11 +160,11 @@
                     <tbody>
                         @foreach($res as $k => $v)
 
-						@if($k % 2 == 0)
-						 	<tr class="odd">
-						@else 
-							<tr class="even">
-						@endif
+            @if($k % 2 == 0)
+              <tr class="odd">
+            @else 
+              <tr class="even">
+            @endif
                             <td class="">
                                 <font style="vertical-align: inherit;">
                                     <font style="vertical-align: inherit;">
@@ -164,20 +175,20 @@
                             <td class="">
                                 <font style="vertical-align: inherit;">
                                     <font style="vertical-align: inherit;">
-                                        {{$v->username}}
+                                        {{$v->customername}}
                                     </font>
                                 </font>
                             </td>
                             <td class="">
                                 <font style="vertical-align: inherit;">
                                     <font style="vertical-align: inherit;">
-                                        @if($v->sex== 0)
-											女
-			                        	@elseif($v->sex== 1) 
-			                        		男
-			                        	@elseif($v->sex== 2)	
-											保密
-			                        	@endif
+                                @if($v->sex== 0)
+                                  女
+                                @elseif($v->sex== 1) 
+                                  男
+                                @elseif($v->sex== 2)  
+                                  保密
+                                @endif
                                     </font>
                                 </font>
                             </td>
@@ -198,43 +209,30 @@
                             <td class="">
                                 <font style="vertical-align: inherit;">
                                     <font style="vertical-align: inherit;">
-                                        {{$v->address}}
+                                        {{$v->location}}
                                     </font>
                                 </font>
                             </td>
                             <td class="">
                                 <font style="vertical-align: inherit;">
                                     <font style="vertical-align: inherit;">
-                                        @if($v->auth== 1)
-
-			                        		普通用户
-			                        	@else 
-			                        		管理员
-
-			                        	@endif
-                                    </font>
-                                </font>    
-                            </td>
-                            <td class="">
-                                <font style="vertical-align: inherit;">
-                                    <font style="vertical-align: inherit;">
-                                        <img src="{{$v->header}}" alt="" width='80px'>
+                                        <img src="{{$v->profile}}" alt="" width='80px'>
                                     </font>
                                 </font>
                             </td>
                             <td class="">
-                            	<a href="/admin/user/{{$v->id}}/edit" class='btn btn-info'>修改</a>
+                              <a href="/admin/customer/{{$v->id}}/edit" class='btn btn-info'>修改</a>
 
-                               <form action="/admin/user/{{$v->id}}" method='post' style='display:inline'>
-                            	{{csrf_field()}}
+                               <form action="/admin/customer/{{$v->id}}" method='post' style='display:inline'>
+                              {{csrf_field()}}
 
-                            	{{method_field("DELETE")}}
-                            	<button class='btn btn-danger'>删除</button>
-                                <a href="/admin/user_role?id={{$v->id}}" class='btn btn-success'>添加角色</a>
+                              {{method_field("DELETE")}}
+                              <button class='btn btn-danger'>删除</button>
+                                
                             </form>
                             </td>
                         </tr>
-                      	@endforeach
+                        @endforeach
                     </tbody>
                    
                 </table>
@@ -244,11 +242,16 @@
         {{$res->appends($request->all())->links()}}
     </div>
 </div>
+		        </form>
+		    </div>
+		</div>
+      </div>
+    	
+    </section>
+	
 @stop
-
 @section('js')
 <script>
   $('.alert').delay(1000).fadeOut(2000);
 </script>
-
 @stop

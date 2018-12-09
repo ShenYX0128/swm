@@ -4,7 +4,7 @@ namespace App\Model\Admin;
 
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class Address extends Model
 {
     //
      /**
@@ -12,7 +12,7 @@ class User extends Model
      *
      * @var string
      */
-    protected $table = 'user';
+    protected $table = 'address';
 
     protected $primaryKey = 'id';
 
@@ -30,11 +30,12 @@ class User extends Model
 	 */
 	protected $guarded = [];
 
+
     /**
-     * 获得此用户的角色。
+     * 获得此角色的权限。
      */
-    public function roles()
+    public function pers()
     {
-        return $this->belongsToMany('App\Model\Admin\Role','user_role');
+        return $this->belongsToMany('App\Model\Admin\Permission','role_permission','role_id','per_id');
     }
 }
