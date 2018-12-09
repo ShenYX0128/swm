@@ -255,7 +255,7 @@ b.line{display: block;width:100%;height:2px ;border-bottom:2px solid #d2364c;pos
 }
 .item {
     text-align: center;
-    cursor: pointer;
+    
 	position:relative;
     padding-bottom: 3px;
 }

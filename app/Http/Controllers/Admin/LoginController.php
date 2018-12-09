@@ -58,7 +58,7 @@ class LoginController extends Controller
     }
 
     //生成验证码方法
-public function captcha()
+    public function captcha()
     {
         $phrase = new PhraseBuilder;
         // 设置验证码位数
