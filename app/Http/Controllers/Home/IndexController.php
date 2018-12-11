@@ -42,6 +42,9 @@ class IndexController extends Controller
     	$banner=Banner::get();
 
     	return view('home.index',['title'=>'g-mall首页','type'=>$type,'arr'=>$arr,'gods'=>$gods,'img'=>$img,'data'=>$data,'banner'=>$banner]);
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
     }
 }
