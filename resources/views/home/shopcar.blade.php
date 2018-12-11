@@ -47,23 +47,36 @@
 		<!--顶部导航条 -->
 		<div class="am-container header">
 			<ul class="message-l">
-				<div class="topMessage">
-					<div class="menu-hd">
-						<a href="#" target="_top" class="h">亲，请登录</a>
-						<a href="#" target="_top">免费注册</a>
+				@php
+				$customer = DB::table('customer')->where('id',session('cid'))->first();
+				@endphp
+					<div class="topMessage">
+						@if(session('cid'))
+						<div class="menu-hd">
+							<a href="#" target="_top" class="h">欢迎回来,{{$customer->customername}}</a>
+							<a href="/home/logout" target="_top">退出登录</a>
+						</div>
+						@else
+						<div class="menu-hd">
+							<a href="/home/login" target="_top" class="h">亲，请登录</a>
+							<a href="/home/register" target="_top">免费注册</a>
+						</div>
+						@endif
 					</div>
-				</div>
-			</ul>
+				</ul>
 			<ul class="message-r">
 				<div class="topMessage home">
-					<div class="menu-hd"><a href="#" target="_top" class="h">商城首页</a></div>
-				</div>
-				<div class="topMessage my-shangcheng">
-					<div class="menu-hd MyShangcheng"><a href="#" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
-				</div>
-				<div class="topMessage mini-cart">
-					<div class="menu-hd"><a id="mc-menu-hd" href="#" target="_top"><i class="am-icon-shopping-cart  am-icon-fw"></i><span>购物车</span><strong id="J_MiniCartNum" class="h">0</strong></a></div>
-				</div>
+						<div class="menu-hd"><a href="/" target="_top" class="h">商城首页</a></div>
+					</div>
+					<div class="topMessage my-shangcheng">
+						<div class="menu-hd MyShangcheng"><a href="/home/personal/information" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
+					</div>
+					<div class="topMessage mini-cart">
+						@php
+						$count = DB::table('shopcar')->where('uid',session('cid'))->count();
+						@endphp
+						<div class="menu-hd"><a id="mc-menu-hd" href="http://g-mall.cn/home/shopcar" target="_top"><i class="am-icon-shopping-cart  am-icon-fw"></i><span>购物车</span><strong id="J_MiniCartNum" class="h">({{$count}})</strong></a></div>
+					</div>
 				<div class="topMessage favorite">
 					<div class="menu-hd"><a href="#" target="_top"><i class="am-icon-heart am-icon-fw"></i><span>收藏夹</span></a></div>
 			</ul>
@@ -131,6 +144,7 @@
 							<div class="clear"></div>
 
 							@foreach($res as $k => $v)
+							@if($v->uid == session('cid'))
 							@foreach($gods as $ke => $val)
 							@if($val->id == $v->gid)
 							<div class="bundle-main">
@@ -200,6 +214,7 @@
 							</div>
 							@endif
 							@endforeach
+							@endif
 							@endforeach
 						</div>
 					</tr>

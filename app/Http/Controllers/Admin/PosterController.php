@@ -103,24 +103,37 @@ class PosterController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $data = Poster::find($id);
-        if($data->src){
-            unlink('.'.$data->src);
+        $req = $request->only('src');
+        // dd($req);
+        if($req){
+            $data = Poster::find($id);
+            // dd($data);
+            if($data->src){
+                unlink('.'.$data->src);
+            }
+            
+            $res = $request->except('_token','src','_method');
+            if($request->hasFile('src')){
+                $name = rand(1111,9999).time();
+                $suffix = $request->file('src')->getClientOriginalExtension();
+                $request->file('src')->move('./uploads',$name.'.'.$suffix);
+                $res['src']= '/uploads/'.$name.'.'.$suffix;
+            }
+            $re = Poster::where('id',$id)->update($res);
+            if($re){
+                return redirect('/admin/poster')->with('success','修改成功');
+            }else{
+                return back()->with('error','修改成功');
+            }
         }
+         $res = $request->except('_token','_method');
+         $re = Poster::where('id',$id)->update($res);
+         if($re){
+                return redirect('/admin/poster')->with('success','修改成功');
+            }else{
+                return back()->with('error','修改成功');
+            }
         
-        $res = $request->except('_token','src','_method');
-        if($request->hasFile('src')){
-            $name = rand(1111,9999).time();
-            $suffix = $request->file('src')->getClientOriginalExtension();
-            $request->file('src')->move('./uploads',$name.'.'.$suffix);
-            $res['src']= '/uploads/'.$name.'.'.$suffix;
-        }
-        $re = Poster::where('id',$id)->update($res);
-        if($re){
-            return redirect('/admin/poster')->with('success','修改成功');
-        }else{
-            return back()->with('error','修改成功');
-        }
 
     }
 

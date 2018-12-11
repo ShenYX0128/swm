@@ -193,18 +193,61 @@
             </ul>
           </li>
           <li class="treeview">
-                    <a href="#">
-                      <i class="fa fa-user"></i>
-                      <span>管理员管理</span>
-            <span class="pull-right-container">
+          <a href="#">
+          <i class="fa fa-user"></i>
+          <span>管理员管理</span>
+          <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
-            </span>
+          </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="/admin/user/create"><i class="fa fa-user-plus"></i>用户添加</a></li>
-            <li><a href="/admin/user"><i class="fa fa-users"></i>用户管理</a></li>
+            <li><a href="/admin/user/create"><i class="fa fa-user-plus"></i>管理员添加</a></li>
+            <li><a href="/admin/user"><i class="fa fa-users"></i>浏览管理员</a></li>
           </ul>
+
         </li>
+
+          <li class="treeview">
+          <a href="#">
+          <i class="fa fa-user"></i>
+          <span>用户管理</span>
+          <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+          </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="/admin/customer/create"><i class="fa fa-user-plus"></i>用户添加</a></li>
+            <li><a href="/admin/customer"><i class="fa fa-users"></i>浏览用户</a></li>
+          </ul>
+          </li>
+
+          <li class="treeview">
+                <a href="#">
+                <i class="fa fa-user"></i>
+                <span>角色管理</span>
+          <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+          </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="/admin/role/create"><i class="fa fa-user-plus"></i>角色添加</a></li>
+            <li><a href="/admin/role"><i class="fa fa-users"></i>浏览角色</a></li>
+          </ul>
+          </li>
+
+          <li class="treeview">
+                <a href="#">
+                <i class="fa fa-key"></i>
+                <span>权限管理</span>
+          <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+          </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="/admin/permission/create"><i class="fa fa-key"></i>权限添加</a></li>
+            <li><a href="/admin/permission"><i class="fa fa-key"></i>浏览权限</a></li>
+          </ul>
+          </li>
 
         <li class="treeview">
                     <a href="#">

@@ -23,22 +23,35 @@
 			<!--顶部导航条 -->
 			<div class="am-container header">
 				<ul class="message-l">
+				@php
+				$customer = DB::table('customer')->where('id',session('cid'))->first();
+				@endphp
 					<div class="topMessage">
+						@if(session('cid'))
 						<div class="menu-hd">
-							<a href="#" target="_top" class="h">亲，请登录</a>
-							<a href="#" target="_top">免费注册</a>
+							<a href="#" target="_top" class="h">欢迎回来,{{$customer->customername}}</a>
+							<a href="/home/logout" target="_top">退出登录</a>
 						</div>
+						@else
+						<div class="menu-hd">
+							<a href="/home/login" target="_top" class="h">亲，请登录</a>
+							<a href="/home/register" target="_top">免费注册</a>
+						</div>
+						@endif
 					</div>
 				</ul>
 				<ul class="message-r">
 					<div class="topMessage home">
-						<div class="menu-hd"><a href="#" target="_top" class="h">商城首页</a></div>
+						<div class="menu-hd"><a href="/" target="_top" class="h">商城首页</a></div>
 					</div>
 					<div class="topMessage my-shangcheng">
-						<div class="menu-hd MyShangcheng"><a href="#" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
+						<div class="menu-hd MyShangcheng"><a href="/home/personal/information" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
 					</div>
 					<div class="topMessage mini-cart">
-						<div class="menu-hd"><a id="mc-menu-hd" href="#" target="_top"><i class="am-icon-shopping-cart  am-icon-fw"></i><span>购物车</span><strong id="J_MiniCartNum" class="h">0</strong></a></div>
+						@php
+						$count = DB::table('shopcar')->where('uid',session('cid'))->count();
+						@endphp
+						<div class="menu-hd"><a id="mc-menu-hd" href="http://g-mall.cn/home/shopcar" target="_top"><i class="am-icon-shopping-cart  am-icon-fw"></i><span>购物车</span><strong id="J_MiniCartNum" class="h">({{$count}})</strong></a></div>
 					</div>
 					<div class="topMessage favorite">
 						<div class="menu-hd"><a href="#" target="_top"><i class="am-icon-heart am-icon-fw"></i><span>收藏夹</span></a></div>
@@ -100,7 +113,7 @@
 			<li><a href="shopcart.html"><i class="am-icon-shopping-basket"></i>购物车</a></li>	
 			<li><a href="../person/index.html"><i class="am-icon-user"></i>我的</a></li>					
 		</div>
-
+		
 
 		<!--菜单 -->
 		<div class=tip>
@@ -110,21 +123,42 @@
 						<a href="# ">
 							<span class="setting "></span>
 						</a>
-						<div class="ibar_login_box status_login ">
-							<div class="avatar_box ">
-								<p class="avatar_imgbox "><img src="/homes/images/no-img_mid_.jpg " /></p>
-								<ul class="user_info ">
-									<li>用户名sl1903</li>
-									<li>级&nbsp;别普通会员</li>
-								</ul>
-							</div>
-							<div class="login_btnbox ">
-								<a href="# " class="login_order ">我的订单</a>
-								<a href="# " class="login_favorite ">我的收藏</a>
-							</div>
-							<i class="icon_arrow_white "></i>
-						</div>
 
+				@if(session('cid'))
+					<div class="ibar_login_box status_login ">
+				@php
+				$customer = DB::table('customer')->where('id',session('cid'))->first();
+						
+				@endphp
+
+						<div class="avatar_box ">
+							<p class="avatar_imgbox"><img src="{{$customer->profile}}" / style="width:100px;height:100px;margin-right:30px;"></p>
+							<ul class="user_info ">
+								<li>{{$customer->customername}}</li>
+								<li><a href="/home/logout" style="align:center;width:110px; padding-left:26px;">退出登录</a></li>
+							</ul>
+						</div>
+						<div class="login_btnbox ">
+							<a href="# " class="login_order ">我的订单</a>
+							<a href="# " class="login_favorite ">我的收藏</a>
+						</div>
+						<i class="icon_arrow_white "></i>
+					</div>
+				@else
+					<div class="ibar_login_box status_login ">
+						<div class="avatar_box ">
+							<p class="avatar_imgbox "><img src="/homes/images/no-img_mid_.jpg " /></p>
+							<ul class="user_info ">
+								<li>亲，请先登录</li>
+							</ul>
+						</div>
+						<div class="login_btnbox ">
+							<a href="# " class="login_order ">我的订单</a>
+							<a href="# " class="login_favorite ">我的收藏</a>
+						</div>
+						<i class="icon_arrow_white "></i>
+					</div>
+				@endif
 					</div>
 					<div id="shopCart " class="item ">
 						<a href="# ">
@@ -133,7 +167,7 @@
 						<p>
 							购物车
 						</p>
-						<p class="cart_num ">0</p>
+						<p class="cart_num ">{{$count}}</p>
 					</div>
 					<div id="asset " class="item ">
 						<a href="# ">

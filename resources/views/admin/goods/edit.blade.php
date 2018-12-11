@@ -8,15 +8,9 @@
 @section('content')
 
 	<section class="content-header">
-      <h1><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-        常规表单元素
-         </font></font><small><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">预览</font></font></small>
+      <h1>
+        
       </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 家</font></font></a></li>
-        <li><a href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">形式</font></font></a></li>
-        <li class="active"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">一般要素</font></font></li>
-      </ol>
     </section>
     <section class="content">
     	@if(count($errors) > 0)
@@ -34,11 +28,11 @@
 		    <div class="box box-primary">
 		        <div class="box-header with-border">
 		            <h3 class="box-title">
-		                <font style="vertical-align: inherit;">
-		                    <font style="vertical-align: inherit;">
+		                
+		                    
 		                        商品的添加页面
-		                    </font>
-		                </font>
+		                    
+		                
 		            </h3>
 		        </div>
 		        <!-- /.box-header -->
@@ -64,11 +58,11 @@
 		                </div>
 		                <div class="form-group">
 		                    <label for="exampleInputPassword1">
-		                        <font style="vertical-align: inherit;">
-		                            <font style="vertical-align: inherit;">
+		                        
+		                            
 		                                商品名称
-		                            </font>
-		                        </font>
+		                            
+		                        
 		                    </label>
 		                    <input type="text" class="form-control" id="exampleInputPassword1" value="{{$res->gname}}" name="gname" 
 		                    placeholder="请输入商品的名称">

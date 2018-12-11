@@ -1,6 +1,10 @@
 @extends('layout.index')
 @section('title',$title)
 @section('content')
+  <section class="content">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <div class="box box-primary">
 	<div class="box-body">
 		@if (count($errors) > 0)
 			<div class="callout callout-danger">
@@ -20,7 +24,7 @@
               <input type="text" class="form-control" name="username" placeholder="Enter ...">
             </div>
 			
-			<!-- 密码 -->
+			     <!-- 密码 -->
             <div class="form-group">
                   <label for="exampleInputPassword1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">密码</font></font></label>
                   <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
@@ -85,6 +89,9 @@
 
           </form>
         </div>
+        </div>
+      </div>
+    </div>
 @endsection
 
 @section('js')

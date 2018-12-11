@@ -17,7 +17,7 @@ class ListController extends Controller
         if(!empty($id)){
             $path = Category::where('path','like',"%,$id,%")->get();
 
-            dd($path);
+            // dd($path);
         }
         $ids = [];
         foreach ($path as $k => $v) {

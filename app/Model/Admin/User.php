@@ -29,4 +29,12 @@ class User extends Model
 	 * @var array
 	 */
 	protected $guarded = [];
+
+    /**
+     * 获得此用户的角色。
+     */
+    public function roles()
+    {
+        return $this->belongsToMany('App\Model\Admin\Role','user_role');
+    }
 }

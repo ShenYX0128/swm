@@ -223,14 +223,14 @@
                                 </font>
                             </td>
                             <td class="">
-                            	 <a href="/admin/user/{{$v->id}}/edit" class='btn btn-info'>修改</a>
+                            	<a href="/admin/user/{{$v->id}}/edit" class='btn btn-info'>修改</a>
 
                                <form action="/admin/user/{{$v->id}}" method='post' style='display:inline'>
                             	{{csrf_field()}}
 
                             	{{method_field("DELETE")}}
                             	<button class='btn btn-danger'>删除</button>
-
+                                <a href="/admin/user_role?id={{$v->id}}" class='btn btn-success'>添加角色</a>
                             </form>
                             </td>
                         </tr>
@@ -244,4 +244,11 @@
         {{$res->appends($request->all())->links()}}
     </div>
 </div>
+@stop
+
+@section('js')
+<script>
+  $('.alert').delay(1000).fadeOut(2000);
+</script>
+
 @stop

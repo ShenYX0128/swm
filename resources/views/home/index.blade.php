@@ -1,8 +1,10 @@
 @extends('layout.home')
 @section('title',$title)
+		<link rel="stylesheet" type="text/css" href="/homes/adv.css">
 		<script type="text/javascript" src="/homes/js/jquery.js"></script>
 		<script src="/homes/AmazeUI-2.4.2/assets/js/jquery.min.js"></script>
 		<script src="/homes/AmazeUI-2.4.2/assets/js/amazeui.min.js"></script>
+		<script type="text/javascript" src="/homes/js/jquery.SuperSlide2.js"></script>
 @section('content')
 			<div class="banner">
                       <!--轮播 -->
@@ -557,22 +559,50 @@
                               <a href="# ">全部活动<i class="am-icon-angle-right" style="padding-left:10px ;" ></i></a>
                         </span>
 						</div>
-					  <div class="am-g am-g-fixed ">
-						<div class="am-u-sm-3 ">
-							<div class="icon-sale one "></div>	
-								<h4>秒杀</h4>							
-							<div class="activityMain ">
-								<img src="/homes/images/activity1.jpg "></img>
-							</div>
-							<div class="info ">
-								<h3>春节送礼优选</h3>
-							</div>														
+						<div id="friends">
+						    <div class="mr_frbox">
+						        <div class="mr_frBtnL prev">
+						        	<img src="/homes/images/mfrl.gif" style="width: 14px;" />
+						        </div>
+    							<div class="am-g am-g-fixed" id="adv1" style="overflow: hidden;">
+    							<ul id="mr_fu">
+						    	@foreach($adv as $k => $v)
+									<li class="am-u-sm-3 adv_child" style="overflow:hidden;position:relative; left: 15px; margin-left: 3px;" >
+										<div class="icon-sale one "></div>	
+											<h4>秒杀</h4>							
+										<div class="activityMain ">
+											<img src="{{$v->src}}" width="100%"></img>
+										</div>
+										<div class="info ">
+											<h3>{{$v->content}}</h3>
+										</div>
+									</li>							
+								@endforeach
+								</ul>	
+								</div>	
+						        
+						        <div class="mr_frBtnR next">
+						        	<img src="/homes/images/mfrr.gif" style="width: 14px;" />
+						        </div>
+						    </div>
 						</div>
-
-					  </div>
-                   </div>
+							  
+                    </div>
 					<div class="clear "></div>
-
+					<script type="text/javascript">
+						$(document).ready(function () {
+	
+							/* 图片滚动效果 */
+							$(".mr_frbox").slide({
+								titCell: "",
+								mainCell: "#adv1 ul",
+								autoPage: true,
+								effect: "leftLoop",
+								autoPlay: true,
+								vis: 4
+							});
+						});
+					</script>
 					@foreach($type as $k => $v)
                     <div id="f{{$v->id}}">
 					<!--甜点-->
@@ -732,7 +762,3 @@
 	
 </script>
 @stop
-
-
-                 
-					
