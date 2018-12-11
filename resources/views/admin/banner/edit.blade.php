@@ -29,7 +29,7 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form" action="/admin/banner/{{$res->id}}" method="post" ">
+            <form role="form" action="/admin/banner/{{$res->id}}" method="post" enctype="multipart/form-data" >
                 <div class="box-body">
 
                     
@@ -46,7 +46,19 @@
                         placeholder="请输入链接名称" value="{{$res->url}}">
                     </div>
 
-        
+                     <div class="form-group">
+                        <label for="exampleInputPassword1">
+                            <font style="vertical-align: inherit;">
+                                <font style="vertical-align: inherit;">
+                                    图片链接
+                                </font>
+                            </font>
+                        </label>
+                        <img src="{{$res->src}}" alt="">
+                        <input type="file" class="" id="exampleInputPassword1" name="src" 
+                        placeholder="请输入链接名称">
+                    </div>
+
 
                    </div>
                 </div>
@@ -58,7 +70,7 @@
                     {{csrf_field()}}
 
                     {{method_field('PUT')}}
-                    <input type="submit" name="" class="btn btn-primary" value="添加">
+                    <input type="submit" name="" class="btn btn-primary" value="修改">
                  
                 </div>
             </form>

@@ -10,6 +10,7 @@ use App\Model\Admin\Category;
 use DB;
 use App\Model\Admin\Banner;
 
+
 class IndexController extends Controller
 {
     //
@@ -18,8 +19,8 @@ class IndexController extends Controller
     	// 
     	$type = Category::where('pid',0)->get();
     	// $sub = Category::where('pid','>',0)->take(6)->get();
-    	$data = Category::all();
-    	$goods = Goods::all();
+    	/*$data = Category::all();
+    	$goods = Goods::all();*/
        
         foreach ($type as $k => $v) {
             $sub =Category::where('pid',$v->id)->take(6)->get();
@@ -42,9 +43,6 @@ class IndexController extends Controller
     	$banner=Banner::get();
 
     	return view('home.index',['title'=>'g-mall首页','type'=>$type,'arr'=>$arr,'gods'=>$gods,'img'=>$img,'data'=>$data,'banner'=>$banner]);
-<<<<<<< Updated upstream
 
-=======
->>>>>>> Stashed changes
     }
 }

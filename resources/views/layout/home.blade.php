@@ -76,17 +76,18 @@
 			</div>
 				@section('content')
 				@show	
-		    
+		    	
+		    	
 					<div class="footer ">
 						<div class="footer-hd ">
 							<p>
-								<a href="# ">恒望科技</a>
+								@php
+						           $friend = DB::table('friend')->get();
+						        @endphp
+								@foreach($friend as $k=>$v)
+								<a href="{{$v->url}}" >{{$v->fname}}</a>
 								<b>|</b>
-								<a href="# ">商城首页</a>
-								<b>|</b>
-								<a href="# ">支付宝</a>
-								<b>|</b>
-								<a href="# ">物流</a>
+								@endforeach
 							</p>
 						</div>
 						<div class="footer-bd ">
