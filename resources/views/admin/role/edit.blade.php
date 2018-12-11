@@ -1,6 +1,10 @@
 @extends('layout.index')
 @section('title',$title)
 @section('content')
+  <section class="content-header col-md-offset-5">
+      <h1>
+      </h1>
+    </section>
 	<section class="content">
 		<div class="row">
 			<div class="col-md-8 col-md-offset-2">

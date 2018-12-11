@@ -25,4 +25,11 @@ class Type extends Model
      * @var array
      */
     protected $guarded = [];
+    /**
+     * 获得此博客文章的评论。
+     */
+    public function tis()
+    {
+        return $this->hasMany('App\Model\Admin\Goods','tid');
+    }
 }

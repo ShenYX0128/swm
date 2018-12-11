@@ -16,6 +16,26 @@ class Category extends Model
 
     protected $primaryKey = 'id';
 
+    static public function getSubCates($cates=[],$pid=0)
+    {
+        if(empty($cates)){
+            $cates=self::get();
+        }
+
+        $arr=[];
+        foreach($cates as $k=>$v){
+            if($v->pid==$pid){
+               $v->sub=self::getSubCates($cates,$v->id);
+               foreach($v->sub as $kk=>$vv)
+               {
+                $vv->sub=self::getSubCates($cates,$vv->id);
+               }
+                $arr[]=$v;
+            }
+        }
+        return $arr;
+    }
+
     /**
      * 该模型是否被自动维护时间戳
      *
@@ -29,4 +49,6 @@ class Category extends Model
 	 * @var array
 	 */
 	protected $guarded = [];
+
+
 }

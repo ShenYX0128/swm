@@ -4,9 +4,7 @@
 
 @section('content')
   <section class="content-header col-md-offset-5">
-      <h1><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-        分类的修改页面
-         </font></font><small><font style="vertical-align: inherit;"></font></small>
+      <h1>
       </h1>
      
     </section>
@@ -20,11 +18,7 @@
         <div class="box box-primary">
             <div class="box-header with-border">
                 <h3 class="box-title">
-                    <font style="vertical-align: inherit;">
-                        <font style="vertical-align: inherit;">
-                           
-                        </font>
-                    </font>
+                    分类的修改
                 </h3>
             </div>
             <!-- /.box-header -->
@@ -67,7 +61,6 @@
         -->
                           
                    </div>
-                </div>
                 <!-- /.box-body -->
                 <div class="box-footer">
                     <!-- <button type="submit" class="btn btn-primary">

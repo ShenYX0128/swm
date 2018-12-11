@@ -2,14 +2,15 @@
 @section('title',$title)
 
 @section('content')
+  <section class="content-header">
+      <h1>
+        角色管理
+      </h1>
+    </section>
     <!-- Content Header (Page header) -->
     <section class="content">
       <div class="box">
-        <div class="box-header">
-        <h3 class="box-title">
-            角色管理
-        </h3>
-      </div>
+       
     <!-- /.box-header -->
     <div class="box-body ">
         <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
@@ -20,7 +21,7 @@
                         <label>
                             显示
                             <select name="num" aria-controls="example1" class="form-control input-sm">
-                                <option value="10" @if($request->num == 5) selected = "selected" @endif>
+                                <option value="5" @if($request->num == 5) selected = "selected" @endif>
                                    5
                                 </option>
                                 <option value="25" @if($request->num == 25) selected="selected" @endif>

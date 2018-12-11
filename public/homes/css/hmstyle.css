@@ -7,7 +7,7 @@ ul, li, ol {list-style: none;}
 .am-thumbnails > li {padding: 0 0rem 0.2rem .2rem;}
 .am-container {padding-left:0px;padding-right:0px ;}
 .am-container > .am-g {margin-left: 0px;margin-right:0px ;}
-img{width:100%;}
+
 .slideall{background:#fff ;}
 .smallnav img,.smallnav a,.am-g.smallnav {border:none;}
 a:hover {color:#000000;}
@@ -440,7 +440,7 @@ top: 11px;text-align: right;}
 
 /*导航图标*/
 #meauBack{display: none;}
-.sort-side .dl-sort{ float:left; width:50%; }
+.sort-side .dl-sort{ float:left; width:100%; }
 .category-list li.hover .menu-in { border: 1px solid #333; }
 /*.category-list li.hover{border: 2px solid #d83e54; border-right: none; }*/
 /*.category-list li.last.hover ,.category-list li.hover .menu-in{border-bottom-color:transparent ;}*/

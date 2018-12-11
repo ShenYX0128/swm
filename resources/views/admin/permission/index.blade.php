@@ -3,20 +3,20 @@
 
 @section('content')
     <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        权限管理
+      </h1>
+    </section>
+    <!-- Content Header (Page header) -->
     <section class="content">
       <div class="box">
-        <div class="box-header">
-        <h3 class="box-title">
-            权限管理
-        </h3>
-      </div>
     <!-- /.box-header -->
     <div class="box-body ">
         <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
             <form action="/admin/permission" method="get">
                <div class="row">
                 <div class="col-sm-6">
-                 
                         <label>
                             显示
                             <select name="num" aria-controls="example1" class="form-control input-sm">

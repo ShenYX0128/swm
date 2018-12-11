@@ -3,10 +3,20 @@
 
 
 @section('content')
-  <section class="content-header col-md-offset-5">
-      <h1><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-        友情链接添加
-         </font></font><small><font style="vertical-align: inherit;"></font></small>
+    @if (count($errors) > 0)
+      <div class="callout callout-danger">
+              显示错误信息
+                <ul>
+                  @foreach ($errors->all() as $error)
+                  <li style='font-size:14px'>{{$error}}</li>
+                  @endforeach
+                </ul>
+            </div>
+        @endif
+
+
+  <section class="content-header">
+      <h1>
       </h1>
      
     </section>
@@ -20,11 +30,7 @@
         <div class="box box-primary">
             <div class="box-header with-border">
                 <h3 class="box-title">
-                    <font style="vertical-align: inherit;">
-                        <font style="vertical-align: inherit;">
-                           
-                        </font>
-                    </font>
+                   友情链接添加
                 </h3>
             </div>
             <!-- /.box-header -->
@@ -76,3 +82,8 @@
   
 @stop
 
+@section('js')
+<script>
+  $('.callout').delay(1000).fadeOut(2000);
+</script>
+@stop

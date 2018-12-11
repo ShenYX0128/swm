@@ -6,21 +6,11 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
     <h1>
-        Dashboard
-        <small>Control panel</small>
+        友情链接浏览
       </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Dashboard</li>
-      </ol>
     </section>
     <section class="content">
         <div class="box">
-            <div class="box-header">
-        <h3 class="box-title">
-            友情链接浏览
-        </h3>
-        </div>
     <!-- /.box-header -->
     <div class="box-body">
         <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">

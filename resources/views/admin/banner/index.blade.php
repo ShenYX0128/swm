@@ -6,21 +6,13 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
     <h1>
-        Dashboard
-        <small>Control panel</small>
+        轮播图浏览
       </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Dashboard</li>
-      </ol>
+     
     </section>
     <section class="content">
         <div class="box">
-            <div class="box-header">
-        <h3 class="box-title">
-            轮播图浏览
-        </h3>
-        </div>
+          
     <!-- /.box-header -->
     <div class="box-body">
         <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
@@ -73,6 +65,11 @@
                                 colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 224px;">
                                    链接地址
                                 </th>
+
+                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
+                                colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 224px;">
+                                   图片链接
+                                </th>
                                
                                
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
@@ -87,6 +84,7 @@
                             
                                 <td>{{$v->id}}</td>
                                 <td>{{$v->url}}</td>
+                                <td>{{$v->src}}</td>
 
                                 <td>
                                     <a href="/admin/banner/{{$v->id}}/edit" class='btn btn-info'>修改</a>

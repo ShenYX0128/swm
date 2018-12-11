@@ -6,21 +6,11 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
     <h1>
-        Dashboard
-        <small>Control panel</small>
+        类别管理
       </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Dashboard</li>
-      </ol>
     </section>
     <section class="content">
         <div class="box">
-            <div class="box-header">
-        <h3 class="box-title">
-            类别管理
-        </h3>
-        </div>
     <!-- /.box-header -->
     <div class="box-body">
         <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
@@ -99,8 +89,9 @@
                                
                                
                                
-                                <td>
+                                <td width='220px'>
                                     <a href="/admin/category/{{$v->id}}/edit" class='btn btn-info'>修改</a>
+                                    <!-- <a href="/admin/category/{{$v->id}}" class='btn btn-info'>添加子分类</a> -->
 
                                     <form action="/admin/category/{{$v->id}}" method='post' style='display:inline'>
                                 {{csrf_field()}}
@@ -176,5 +167,7 @@
 <script>
   $('.alert').delay(1000).fadeOut(2000);
 </script>
+
+
 
 @stop

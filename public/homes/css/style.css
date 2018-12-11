@@ -280,9 +280,45 @@ flex: 1 1 0%;line-height: 16px;cursor: pointer;}
 .tb-thumb .tb-selected div { background-color:#FFFFFF; border:medium none; }
 .tb-thumb li div { border:1px solid #CDCDCD; }
 div.zoomDiv { z-index:999; position:absolute; top:0px; left:0px; width:400px; height:400px; background:#ffffff; border:1px solid #CCCCCC; display:none; text-align:center; overflow:hidden; }
-div.zoomMask { position:absolute; background:url(../images/mask.png)repeat scroll 0 0 transparent; cursor:move; z-index:1; }
-	
-		
+div.zoomMask {position:absolute; background:url(../images/mask.png)repeat scroll 0 0 transparent; cursor:move; z-index:1; width:225px ! important; height:200px ! important; }
+/*#small{
+      width: 400px;
+      height: 400px;
+      border: 1px solid blue;
+      position: absolute;
+      left: 60px;
+      top: 258px;
+      cursor: move;
+      overflow: hidden;
+      border: 1px solid #CDCDCD;
+      /*z-index:1;*/
+ /*   }
+#move{
+      width: 225px;
+      height: 200px;
+      position: absolute;
+      left: 0;
+      top: 0;
+      background:url(../images/mask.png)repeat scroll 0 0 transparent;
+      display: none;
+    }
+#big{
+      width: 450px;
+      height: 400px;
+      position: absolute;
+      left: 480px;
+      top: 258px;
+      overflow: hidden;
+      /*display: none;*/
+      z-index:999;
+      border: 1px solid #CDCDCD;
+   /* }
+#bigimg{
+  position: absolute;
+  max-width: none ! important;
+  width: none ! important;
+  max-height: none ! important;*/
+/*}*/
  /*价格*/	
 .tb-detail-hd h1 {font-size:18px;}
 
@@ -294,16 +330,17 @@ div.zoomMask { position:absolute; background:url(../images/mask.png)repeat scrol
 .sys_item_mktprice{font-size:14px ;}
 .shopPromotion.gold .gold-list p{margin-top:8px;color:#E4393C;font-weight: bold;}
   	
-   	 	
 /*规格*/
-.theme-popover {display: block;position: static;border:none ;box-shadow: none;}
+.norns{display: block;position: static;border:none ;box-shadow: none}
+   	 	
+/*规格确认*/
+.theme-popover {display: block;position: static;border:none ;box-shadow: none}
 .theme-poptit,.theme-signin-right,.iteminfo_parameter dt.theme-login,.btn-op{display: none;}
-
 .theme-options{overflow: visible;padding:0px 0px;}
 .theme-options ul{overflow: hidden;float: none;}
 .theme-signin-left {max-width:100%;margin-bottom: 0;}
 .theme-signin-left .sku-line{margin: 5px;cursor: pointer;}
-.theme-signin-left .cart-title{margin-left: -46px;margin-top:10px;font-size:12px ;font-weight: 100;color:#888 ;float: left;}   	
+.theme-signin-left .cart-title{ margin-right:26px; font-size:12px ! important ;font-weight: 100 ! important ;color:#888 ;float: left;}   	
    	
 
 /*优惠活动*/

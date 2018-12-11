@@ -3,16 +3,22 @@
 
 
 @section('content')
+
+    @if (count($errors) > 0)
+      <div class="callout callout-danger">
+              显示错误信息
+                <ul>
+                  @foreach ($errors->all() as $error)
+                  <li style='font-size:14px'>{{$error}}</li>
+                  @endforeach
+                </ul>
+            </div>
+        @endif
+
   <section class="content-header col-md-offset-5">
-      <h1><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-        分类的添加页面
-         </font></font><small><font style="vertical-align: inherit;"></font></small>
+      <h1>
       </h1>
-     
     </section>
-
-
-
     <section class="content">
       <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -20,11 +26,7 @@
         <div class="box box-primary">
             <div class="box-header with-border">
                 <h3 class="box-title">
-                    <font style="vertical-align: inherit;">
-                        <font style="vertical-align: inherit;">
-                           
-                        </font>
-                    </font>
+                    分类的添加
                 </h3>
             </div>
             <!-- /.box-header -->
@@ -36,7 +38,7 @@
                       <select name="pid" class="form-control">
                           <option value='0'>请选择</option>
                         @foreach($rs as $v)
-                          <option value="{{$v->id}}">
+                          <option  value="{{$v->id}}" >
                             {{$v->tname}}
                           </option>
                         @endforeach
@@ -83,3 +85,8 @@
   
 @stop
 
+@section('js')
+<script>
+  $('.callout').delay(1000).fadeOut(2000);
+</script>
+@stop
