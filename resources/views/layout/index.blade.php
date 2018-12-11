@@ -207,6 +207,7 @@
 
         </li>
 
+
           <li class="treeview">
           <a href="#">
           <i class="fa fa-user"></i>
@@ -248,7 +249,6 @@
             <li><a href="/admin/permission"><i class="fa fa-key"></i>浏览权限</a></li>
           </ul>
           </li>
-
         <li class="treeview">
                     <a href="#">
                       <i class="fa  fa-commenting"></i>

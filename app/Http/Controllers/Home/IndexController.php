@@ -9,6 +9,7 @@ use App\Model\Admin\Goodsimg;
 use App\Model\Admin\Category;
 use DB;
 use App\Model\Admin\Banner;
+
 class IndexController extends Controller
 {
     //
@@ -48,3 +49,5 @@ class IndexController extends Controller
     }
 
 }
+
+ 
