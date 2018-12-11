@@ -39,9 +39,11 @@ class IndexController extends Controller
 
     	// dd($data);
     	$banner=Banner::get();
+
         $adv = DB::table('poster')->get();
     	return view('home.index',['title'=>'g-mall首页','type'=>$type,'arr'=>$arr,'gods'=>$gods,'img'=>$img,'data'=>$data,'banner'=>$banner,'adv'=>$adv]
     );
+
 
     }
 
