@@ -77,7 +77,7 @@ class PersonalController extends Controller
             return back()->with('error','修改失败');
         }
     }
-
+    //修改默认地址
     public function dostatus(Request $request)
     {
         $id = $request->input('id');
@@ -90,7 +90,7 @@ class PersonalController extends Controller
         }
             
     }
-
+    //删除地址
     public function destory(Request $request)
     {
         // $id = strip_tags($_GET['id']);
@@ -101,6 +101,113 @@ class PersonalController extends Controller
         } else {
             echo 0;
         }
-    }    
+    }
+    //修改地址信息
+    public function addedit($id)
+    {   
+        $address = DB::table('address')->where('id', $id)->first();
+        // dd($address);
+        
+        return view('home.personal.addedit',[
+            'title'=>'地址修改页面',
+            'add'=>$address
+            ]);
+
+    }   
+
+    //修改地址方法
+    public function addupdate(Request $request,$id) 
+    {
+        $res = $request->except('_token');
+        //dd($res);
+        try{
+ 
+            $data = address::where('id', $id)->update($res);
+            
+            if($data){
+                return redirect('/home/personal/address')->with('alert','修改成功');
+            }
+
+        }catch(\Exception $e){
+
+            return back()->with('alert','修改失败');
+        }
+    }
+
+    //安全中心
+    public function safety()
+    {
+        return view('home.personal.safety',['title'=>'安全中心']);
+    }
+
+    //修改密码
+    public function password()
+    {
+        return view('home.personal.password',['title'=>'修改密码']);
+    }
+    //获取验证码
+    public function getphone(Request $request)
+    {
+        $number = $request->post('number');
+
+        $options['accountsid']='747c9976a92afc490ce85a81dfc08053';
+        $options['token']='2d7e18073da43bd7e9a73f9415a321ef';
+
+        $ucpass = new \App\Library\Ucpaas($options);
+
+        // $ucpass->getDevinfo('xml');
+
+        //验证码
+        $code = rand(111111,999999);
+
+        //session
+        session('code',$code);
+
+        $appId = "28b753e772144ea48f54a6bde1979869";
+        
+        $templateId = "390744";
+        // $param=$code;
+
+        $ucpass->templateSMS($appId,$number,$templateId,$code);
+
+        echo $code;
+    }
+    //比较验证码
+    public function getcode(Request $request)
+    {
+        $code = $request->get('code');
+
+        $cd = session('code');
+        dump($code,$cd);
+        //比较   跟手机收到的验证码作比较
+        if($code == $cd){
+
+            echo 1;
+        } else {
+            echo 0;
+        }
+
+    }
+
+    public function changepassword(Request $request,$id)
+    {
+        $res = $request->except('_token','phone','code','repassword');
+
+        //往数据表里面添加数据  hash加密
+        $res['password'] = Hash::make($request->password);
+        //dd($res);
+        try{
+ 
+            $data = customer::where('id', $id)->update($res);
+            
+            if($data){
+                return redirect('/home/personal/information')->with('alert','修改成功');
+            }
+
+        }catch(\Exception $e){
+
+            return back()->with('alert','修改失败');
+        }
+    }
 
 }

@@ -179,7 +179,7 @@
 						<a href="#">个人资料</a>
 						<ul>
 							<li class="active"> <a href="/home/personal/information">个人信息</a></li>
-							<li> <a href="safety.html">安全设置</a></li>
+							<li> <a href="/home/personal/safety">安全设置</a></li>
 							<li> <a href="/home/personal/address">收货地址</a></li>
 						</ul>
 					</li>

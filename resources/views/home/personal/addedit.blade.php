@@ -69,7 +69,6 @@
 								</div>
 
 								<div class="new-addr-btn ">
-									{{csrf_field()}}
 									<a href="/home/personal/addedit/{{$v->id}}"><i class="am-icon-edit"></i>编辑</a>
 									<span class="new-addr-bar">|</span>
 									<a class="al" aid="{{$v->id}}" href="javascript:void(0);" ><i class="am-icon-trash"></i>删除</a>
@@ -96,7 +95,7 @@
 							</script>
 						</ul>
 						<div class="clear"></div>
-						<a class="new-abtn-type" data-am-modal="{target: '#doc-modal-1', closeViaDimmer: 0}">添加新地址</a>
+						<a class="new-abtn-type" data-am-modal="{target: '#doc-modal-1', closeViaDimmer: 0}">修改地址</a>
 						<!--例子-->
 						<div class="am-modal am-modal-no-btn" id="doc-modal-1">
 
@@ -104,28 +103,26 @@
 
 								<!--标题 -->
 								<div class="am-cf am-padding">
-									<div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">新增地址</strong> / <small>Add&nbsp;address</small></div>
+									<div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">修改地址</strong> / <small>Update&nbsp;address</small></div>
 								</div>
 								<hr/>
 								
 								<div class="am-u-md-12 am-u-lg-8" style="margin-top: 20px;">
-									<form action="/home/create" method="post" class="am-form am-form-horizontal">
-									@php
-									$customer = DB::table('customer')->where('id',session('cid'))->first();
-									
-									@endphp
-									
+									<form action="/home/addupdate/{{$add->id}}" method="post" class="am-form am-form-horizontal">
+
+									    
 										<div class="am-form-group">
 											<label for="user-name" class="am-form-label">收货人</label>
 											<div class="am-form-content">
-												<input type="text" id="user-name" placeholder="收货人" name="name">
+												<input type="text" id="user-name" placeholder="收货人" name="name"
+												value="{{$add->name}}">
 											</div>
 										</div>
 
 										<div class="am-form-group">
 											<label for="user-phone" class="am-form-label">手机号码</label>
 											<div class="am-form-content">
-												<input id="user-phone" placeholder="手机号必填" type="tel" name="phone">
+												<input id="user-phone" placeholder="手机号必填" type="tel" name="phone" value="{{$add->phone}}">
 											</div>
 										</div>
 										<!-- <div class="am-form-group">
@@ -145,20 +142,20 @@
 												</select>
 											</div>
 										</div> -->
-										{{csrf_field()}}
+										 {{csrf_field()}}
 										<div class="am-form-group">
 											<label for="user-intro" class="am-form-label">详细地址</label>
 											<div class="am-form-content">
-												<textarea class="" rows="3" id="user-intro" placeholder="输入详细地址" name="location"></textarea>
+												<textarea class="" rows="3" id="user-intro" placeholder="输入详细地址" name="location" >{{$add->location}}</textarea>
 												<small>100字以内写出你的详细地址...</small>
 											</div>
 										</div>
-										<input type="hidden" value="{{$customer->id}}" name="cid">
-
+										<input type="hidden" value="{{$add->cid}}" name="cid">
 										<div class="am-form-group">
 											<div class="am-u-sm-9 am-u-sm-push-3">
+												
 												<button type="submit" class="am-btn am-btn-danger">保存</button>
-												<a href="javascript: void(0)" class="am-close am-btn am-btn-danger" data-am-modal-close>取消</a>
+												
 											</div>
 										</div>
 									</form>
@@ -192,7 +189,7 @@
 								 	  	 // 获取标签里面的文本
 								 	  	 var ts = $(this).text();
 								 	  	 // 将里面的文本重新赋值
-								 	  	 var ts = $(this).text('默认地址');
+								 	  	 var ts = $(this).text('默认地址'); 
 								 	  }
 								 	  window.location.reload(); 
 								 })
@@ -223,8 +220,8 @@
 						<a href="#">个人资料</a>
 						<ul>
 							<li> <a href="/home/personal/information">个人信息</a></li>
-							<li> <a href="/home/personal/safety">安全设置</a></li>
-							<li class="active"> <a href="#">收货地址</a></li>
+							<li> <a href="/home/personal/satefy">安全设置</a></li>
+							<li class="active"> <a href="/home/personal/address">收货地址</a></li>
 						</ul>
 					</li>
 					<li class="person">

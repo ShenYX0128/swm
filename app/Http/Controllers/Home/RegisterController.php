@@ -64,7 +64,7 @@ class RegisterController extends Controller
     {
         $res = $request->except('_token','code');
 
-         //往数据表里面添加数据  hash加密
+        //往数据表里面添加数据  hash加密
         $res['password'] = Hash::make($request->password);
         //dd($res);
         
