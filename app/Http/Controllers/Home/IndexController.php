@@ -8,7 +8,6 @@ use App\Model\Admin\Goods;
 use App\Model\Admin\Goodsimg;
 use App\Model\Admin\Category;
 use DB;
-use App\Model\Admin\Category;
 use App\Model\Admin\Banner;
 
 
@@ -44,5 +43,6 @@ class IndexController extends Controller
     	// dd($data);
     	$banner=Banner::get();
 
-    	return view('home.index',['title'=>'g-mall首页','type'=>$type,'arr'=>$arr,'gods'=>$gods,'img'=>$img],'data'=>$data,'banner'=>$banner]);
+    	return view('home.index',['title'=>'g-mall首页','type'=>$type,'arr'=>$arr,'gods'=>$gods,'img'=>$img,'data'=>$data,'banner'=>$banner]);
+    }
 }
