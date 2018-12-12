@@ -50,8 +50,11 @@
 						<div class="user-infoPic">
 
 							<div class="filePic">
-								<!-- <img class="am-circle am-img-thumbnail" src="../images/getAvatar.do.jpg" alt="" /> -->
+								@if(!$customer->profile)
+								<img class="am-circle am-img-thumbnail" src="/homes/images/getAvatar.do.jpg" alt="" />
+								@else 
 								<img class="am-circle am-img-thumbnail" src="{{$customer->profile}}" alt="" />
+								@endif
 							</div>
 
 							<p class="am-form-help">头像</p>
@@ -64,7 +67,7 @@
 						            </span>
 								</div>
 								<div class="u-safety">
-									<a href="safety.html">
+									<a href="#">
 									 账户安全
 									<span class="u-profile"><i class="bc_ee0000" style="width: 60px;" width="0">60分</i></span>
 									</a>

@@ -58,12 +58,17 @@
 					<form action="/home/update" method="post" enctype="multipart/form-data" class="am-form am-form-horizontal">
 						<!--头像 -->
 						<div class="user-infoPic">
-						
+						@if(!$customer->profile)
+							<div class="filePic">
+								<input type="file" class="inputPic" allowexts="gif,jpeg,jpg,png,bmp" name="profile" accept="image/*">
+								<img class="am-circle am-img-thumbnail" name="profile" src="/homes/images/getAvatar.do.jpg" alt="" />
+							</div>
+						@else
 							<div class="filePic">
 								<input type="file" class="inputPic" allowexts="gif,jpeg,jpg,png,bmp" name="profile" accept="image/*">
 								<img class="am-circle am-img-thumbnail" name="profile" src="{{$customer->profile}}" alt="" />
 							</div>
-
+						@endif
 							<p class="am-form-help">头像</p>
 
 							<div class="info-m">
