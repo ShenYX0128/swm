@@ -1,13 +1,13 @@
 @extends('layout.home')
 @section('title',$title)
-
-
 @section('content')
 		
 		<link href="/homes/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css" />
 		<link href="/homes/basic/css/demo.css" rel="stylesheet" type="text/css"/>
 		<link href="/homes/css/seastyle.css" rel="stylesheet" type="text/css" />
-
+		<link href="/homes/css/page.css" rel="stylesheet" type="text/css" />
+		
+		<script type="text/javascript" src="/homes/js/jquery.js"></script>
 
 		<!-- <script type="text/javascript" src="/homes/basic/js/jquery-1.7.min.js"></script> -->
 		<script type="text/javascript" src="/homes/js/script.js"></script>
@@ -88,8 +88,12 @@
 									<li>
 										<div class="i-pic limit">
 											
-											<img src="{{$gimg->gpic}}" />			
-																	
+											<a href="/home/detail/{{$v->id}}">
+												@foreach($gimg as $ke => $val)
+												@if($v->id == $val->gid)
+												<img src="{{$val->gpic}}" width="218" height="218" />
+												@endif	
+												@endforeach					
 											<p class="title fl">{{$v->gname}}</p>
 											<p class="price fl">
 												<b>¥</b>
@@ -97,7 +101,7 @@
 											</p>
 											<p class="number fl">
 												销量<span>{{$v->num}}</span>
-											</p>
+											</p></a>
 										</div>
 									</li>
 									@endforeach
@@ -153,14 +157,8 @@
 							</div>
 							<div class="clear"></div>
 							
-							<ul class="am-pagination am-pagination-right">
-								<li class="am-disabled"><a href="#">&laquo;</a></li>
-								<li class="am-active"><a href="#">1</a></li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-								<li><a href="#">5</a></li>
-								<li><a href="#">&raquo;</a></li>
+							<ul class="paginations paginations-right">
+								{{$goods->links()}}
 							</ul>
 							
 						</div>

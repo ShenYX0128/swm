@@ -3,6 +3,7 @@
 		<meta name="_token" content="{!! csrf_token() !!}">
 		<link type="text/css" href="/homes/css/style.css" rel="stylesheet" />
 		<link rel="stylesheet" type="text/css" href="/homes/js-plug/css/zcity.css">
+		<link rel="stylesheet" type="text/css" href="/homes/css/page.css">
 		<script type="text/javascript" src="/homes/basic/js/jquery-1.7.min.js"></script>
 		<script type="text/javascript" src="/homes/basic/js/quick_links.js"></script>
 		<script type="text/javascript" src="/homes/AmazeUI-2.4.2/assets/js/amazeui.js"></script>
@@ -115,23 +116,15 @@
 						<div class="tb-detail-list">
 							<!--价格-->
 							<div class="tb-detail-price">
-								@if($v->discount)
 								<li class="price iteminfo_price">
 									<dt>促销价</dt>
-									<dd><em>¥</em><b class="sys_item_price">{{$disc[0]}}</b>  </dd>                                 
+									<dd><em>¥</em><b class="sys_item_price">{{$v->discount}}</b>  </dd>                                 
 								</li>
 								<li class="price iteminfo_mktprice">
 									<dt>原价</dt>
-									
-									<dd><em>¥</em><b class="sys_item_mktprice">{{$prices[0]}}</b></dd>						
-									
+									<dd><em>¥</em><b class="sys_item_mktprice">{{$v->price}}</b></dd>									
 								</li>
-								@else
-								<li class="price iteminfo_mktprice">
-									<dt>原价</dt>
-									<dd><em>¥</em><b class="sys_item_mktprice">{{$prices[0]}}</b></dd>									
-								</li>
-								@endif
+								
 								<div class="clear"></div>
 							</div>
 
@@ -522,14 +515,16 @@
 										</ul>
 									</div>
 									<div class="clear"></div>
-
+								<div id="box">
 									<ul class="am-comments-list am-comments-list-flip">
-										@foreach($com as $k => $v)
+										<!-- 第二部分 -->
+										
+										@foreach($data as $val)
+										@foreach($user as $v)
+										@if($v->id == $val->uid)
 										<li class="am-comment">
-											<!-- 评论容器 -->
-											<a href="">
-												<img class="am-comment-avatar" src="/homes/images/hwbn40x40.jpg" />
-												<!-- 评论者头像 -->
+											<a href="" style="display: inline-block; width: 48px; height: 48px; border-radius: 50%;">
+												<img class="am-comment-avatar" src="{{$v->profile}}" />
 											</a>
 
 											<div class="am-comment-main">
@@ -538,20 +533,20 @@
 													<!--<h3 class="am-comment-title">评论标题</h3>-->
 													<div class="am-comment-meta">
 														<!-- 评论元数据 -->
-														<a href="#link-to-user" class="am-comment-author">b***1 (匿名)</a>
+														<a href="#link-to-user" class="am-comment-author">{{$v->customername}}</a>
 														<!-- 评论者 -->
 														评论于
-														<time datetime="">{{$v->addtime}}</time>
+														<time datetime="">{{$val->addtime}}</time>
 													</div>
 												</header>
 
 												<div class="am-comment-bd">
 													<div class="tb-rev-item " data-id="255776406962">
 														<div class="J_TbcRate_ReviewContent tb-tbcr-content ">
-															{{$v->content}}
+															{{$val->content}}
 														</div>
 														<div class="tb-r-act-bar">
-															颜色分类：柠檬黄&nbsp;&nbsp;尺码：S
+															口味：
 														</div>
 													</div>
 
@@ -559,21 +554,29 @@
 												<!-- 评论内容 -->
 											</div>
 										</li>
+										@endif
+										@endforeach
 										@endforeach
 									</ul>
 
 									<div class="clear"></div>
 
 									<!--分页 -->
-									<ul class="am-pagination am-pagination-right">
-										<li class="am-disabled"><a href="#">&laquo;</a></li>
-										<li class="am-active"><a href="#">1</a></li>
-										<li><a href="#">2</a></li>
-										<li><a href="#">3</a></li>
-										<li><a href="#">4</a></li>
-										<li><a href="#">5</a></li>
-										<li><a href="#">&raquo;</a></li>
+									
+									<ul class="paginations paginations-right">
+										
+										<li><a href="javascript:void(0)" onclick="page(<?php echo $prev ?>)">&laquo;</a></li>
+										@foreach($pp as $key=>$val)
+										@if($val == $page)
+										<li class="active"><a href="javascript:void(0)" onclick="page({{$val}})">{{$val}}</a></li>
+										@else
+										<li><a href="javascript:void(0)" onclick="page({{$val}})">{{$val}}</a></li>
+										
+										@endif
+										@endforeach
+										<li><a href="javascript:void(0)" onclick="page(<?php echo $next ?>)">&raquo;</a></li>
 									</ul>
+								</div>
 									<div class="clear"></div>
 
 									<div class="tb-reviewsft">
@@ -761,18 +764,7 @@ zcityrun('.zcityGroup');
 	        return Number(s1.replace(".", "")) * Number(s2.replace(".", "")) / Math.pow(10, m)
 
 		}
-		var len = $('#testes').children().length;
-		for (var i =0; i < len; i++) {
-			$('#testes').children.eq('+i+').click(function(){
-				if($('.sys_item_price').text().trim()){
-					$('.sys_item_price').text({{$disc[i]}});
-				}else{
-					$('.sys_item_mktprice').text({{$disc['+i+']}});
-				}
-				
-			})
-		}
-
+		
 	// 点击显示
 	// 购买
 	$('#LikBuy').click(function(){
@@ -825,7 +817,7 @@ zcityrun('.zcityGroup');
 		data1 += ','+$('.img-info').children().attr('src');
 		data1 += ','+$('.J_Price').text().trim().substring(1);
 		// var da = data1.join(',');
-		console.log(data1);
+		// console.log(data1);
 		$('#form_sub').click(function(){
 			$.ajax({  
                 type:'post',
@@ -870,4 +862,25 @@ zcityrun('.zcityGroup');
 		
 	})
 </script> 
+<!-- 评论 -->
+
+<script>
+/*
+@分页
+*/
+function page(page){
+$.ajax({
+type:"get",
+url:"/home/page",
+data:{
+page:page
+},
+success:function(msg){
+if(msg){
+$("#box").html(msg)
+}
+}
+})
+}
+</script>
 @stop

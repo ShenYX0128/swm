@@ -9,7 +9,12 @@
 		<title>地址管理</title>
 		<link href="/homes/css/personal.css" rel="stylesheet" type="text/css">
 		<link href="/homes/css/addstyle.css" rel="stylesheet" type="text/css">
+<<<<<<< Updated upstream
 		<script src="/homes/AmazeUI-2.4.2/assets/js/jquery.min.js" type="text/javascript"></script>
+=======
+		<script type="text/javascript" src="/homes/js/jquery.js"></script>
+		
+>>>>>>> Stashed changes
 	</head>
 
 	<body>
