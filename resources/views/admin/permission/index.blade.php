@@ -3,34 +3,34 @@
 
 @section('content')
     <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        权限管理
+      </h1>
+    </section>
+    <!-- Content Header (Page header) -->
     <section class="content">
       <div class="box">
-        <div class="box-header">
-        <h3 class="box-title">
-            权限管理
-        </h3>
-      </div>
     <!-- /.box-header -->
     <div class="box-body ">
         <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
             <form action="/admin/permission" method="get">
                <div class="row">
                 <div class="col-sm-6">
-                 
                         <label>
                             显示
                             <select name="num" aria-controls="example1" class="form-control input-sm">
-                                <option value="10" @if($request->num == 5) selected = "selected" @endif>
+                                <option value="5" @if($request->num == 5) selected = "selected" @endif>
                                    5
                                 </option>
-                                <option value="25" @if($request->num == 25) selected="selected" @endif>
-                                    25
+                                <option value="10" @if($request->num == 10) selected="selected" @endif>
+                                    10
                                 </option>
-                                <option value="50" @if($request->num == 50) selected="selected" @endif>
-                                    50
+                                <option value="15" @if($request->num == 15) selected="selected" @endif>
+                                    15
                                 </option>
-                                <option value="100" @if($request->num == 100) selected="selected" @endif>
-                                    100
+                                <option value="20" @if($request->num == 20) selected="selected" @endif>
+                                    20
                                 </option>
                             </select>
                             条数据

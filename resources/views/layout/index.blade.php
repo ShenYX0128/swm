@@ -203,8 +203,10 @@
           <ul class="treeview-menu">
             <li><a href="/admin/user/create"><i class="fa fa-user-plus"></i>管理员添加</a></li>
             <li><a href="/admin/user"><i class="fa fa-users"></i>浏览管理员</a></li>
+          </ul>
 
-          </li>
+        </li>
+
 
           <li class="treeview">
           <a href="#">
@@ -247,9 +249,6 @@
             <li><a href="/admin/permission"><i class="fa fa-key"></i>浏览权限</a></li>
           </ul>
           </li>
-
-
-
         <li class="treeview">
                     <a href="#">
                       <i class="fa  fa-commenting"></i>

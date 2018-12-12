@@ -9,6 +9,7 @@
 		<title>地址管理</title>
 		<link href="/homes/css/personal.css" rel="stylesheet" type="text/css">
 		<link href="/homes/css/addstyle.css" rel="stylesheet" type="text/css">
+		<script src="/homes/AmazeUI-2.4.2/assets/js/jquery.min.js" type="text/javascript"></script>
 	</head>
 
 	<body>
@@ -65,11 +66,12 @@
 								<div class="new-mu_l2a new-p-re">
 									<p class="new-mu_l2cw">
 										<span class="title">地址：</span>
-										<span class="street">{{$v->location}}</span></p>
+										<span class="street" style="word-wrap:break-word;">{{$v->location}}</span></p>
 								</div>
 
 								<div class="new-addr-btn ">
-									<a href="#"><i class="am-icon-edit"></i>编辑</a>
+									{{csrf_field()}}
+									<a href="/home/personal/addedit/{{$v->id}}"><i class="am-icon-edit"></i>编辑</a>
 									<span class="new-addr-bar">|</span>
 									<a class="al" aid="{{$v->id}}" href="javascript:void(0);" ><i class="am-icon-trash"></i>删除</a>
 								</div>
@@ -108,7 +110,7 @@
 								<hr/>
 								
 								<div class="am-u-md-12 am-u-lg-8" style="margin-top: 20px;">
-									<form action="/home/create" method="post" class="am-form am-form-horizontal">
+									<form action="/home/create" method="post" class="am-form am-form-horizontal" id="forms">
 									@php
 									$customer = DB::table('customer')->where('id',session('cid'))->first();
 									
@@ -117,14 +119,15 @@
 										<div class="am-form-group">
 											<label for="user-name" class="am-form-label">收货人</label>
 											<div class="am-form-content">
-												<input type="text" id="user-name" placeholder="收货人" name="name">
+												<input type="text" id="user-name" placeholder="" name="name"><span> *请填写收货人</span>
 											</div>
 										</div>
 
 										<div class="am-form-group">
 											<label for="user-phone" class="am-form-label">手机号码</label>
 											<div class="am-form-content">
-												<input id="user-phone" placeholder="手机号必填" type="tel" name="phone">
+												<input id="user-phone" placeholder="" type="tel" name="phone">
+												<span> *请输入手机号</span>
 											</div>
 										</div>
 										<!-- <div class="am-form-group">
@@ -148,8 +151,8 @@
 										<div class="am-form-group">
 											<label for="user-intro" class="am-form-label">详细地址</label>
 											<div class="am-form-content">
-												<textarea class="" rows="3" id="user-intro" placeholder="输入详细地址" name="location"></textarea>
-												<small>100字以内写出你的详细地址...</small>
+												<textarea class="" rows="3" id="user-intro" placeholder="" name="location"></textarea>
+												<span>*50字以内写出你的详细地址...</span>
 											</div>
 										</div>
 										<input type="hidden" value="{{$customer->id}}" name="cid">
@@ -157,7 +160,7 @@
 										<div class="am-form-group">
 											<div class="am-u-sm-9 am-u-sm-push-3">
 												<button type="submit" class="am-btn am-btn-danger">保存</button>
-												<a href="javascript: void(0)" class="am-close am-btn am-btn-danger" data-am-modal-close>取消</a>
+												
 											</div>
 										</div>
 									</form>
@@ -169,43 +172,166 @@
 
 					</div>
 
-					<script type="text/javascript">
+		<script type="text/javascript">
 
-					    $.ajaxSetup({
-					         headers: {
-					             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-					         }
-					     });
-						$(document).ready(function() {
+		    $.ajaxSetup({
+		         headers: {
+		             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		         }
+		     });
+			$(document).ready(function() {
 
-							$(".new-option-r").click(function() {
-								$(this).parent('.user-addresslist').addClass("defaultAddr").siblings().removeClass("defaultAddr");
-                                 
-                                
-                                 // 获取到当前点击的id
-								 var id = $(this).parent().attr('aid');
-								 // 进行ajax提交
-								 $.post('/home/dostatus',{id:id},function(data){
-								 	  
-								 	  if(data == id){ 
-								 	  	 // 获取标签里面的文本
-								 	  	 var ts = $(this).text();
-								 	  	 // 将里面的文本重新赋值
-								 	  	 var ts = $(this).text('默认地址');
+				$(".new-option-r").click(function() {
+					$(this).parent('.user-addresslist').addClass("defaultAddr").siblings().removeClass("defaultAddr");
+                     
+                    
+                     // 获取到当前点击的id
+					 var id = $(this).parent().attr('aid');
+					 // 进行ajax提交
+					 $.post('/home/dostatus',{id:id},function(data){
+					 	  
+					 	  if(data == id){ 
+					 	  	 // 获取标签里面的文本
+					 	  	 var ts = $(this).text();
+					 	  	 // 将里面的文本重新赋值
+					 	  	 var ts = $(this).text('默认地址');
+					 	  }
+					 	  window.location.reload(); 
+					 })
+				});
+				
+				var $ww = $(window).width();
+				if($ww>640) {
+					$("#doc-modal-1").removeClass("am-modal am-modal-no-btn")
+				}
+				
+			});
 
-								 	  	 window.location.reload(); 
-								 	  }
-								 })
-							});
-							
-							var $ww = $(window).width();
-							if($ww>640) {
-								$("#doc-modal-1").removeClass("am-modal am-modal-no-btn")
-							}
-							
-						});
-						
-					</script>
+		var US = true;
+		var PH = true;
+		var LT = true;
+		
+		//收货人 
+		$('input[name=name]').blur(function(){
+			//获取输入的值
+			var uv = $(this).val().trim();
+			if(uv == ''){
+				$(this).next().text(' *收货人不能为空').css('color','#e53e41');
+
+				$(this).css('border','solid 1px #e53e41');
+
+				US = false;
+
+				return;
+			}
+
+			//正则
+			var reg = /^[A-Za-z_\u4e00-\u9fa5]{2,6}$/;
+			var tu = $(this);
+			//检测
+			if(!reg.test(uv)){
+				$(this).next().text(' *收货人名称格式不正确').css('color','#e53e41');
+
+				$(this).css('border','solid 1px #e53e41');
+
+				US = false;
+			} else {
+
+				$(this).next().text(' *√').css('color','green');
+
+				$(this).css('border','solid 1px green');
+
+				US = true;
+			}
+				
+			
+		})
+			
+		//手机号
+
+		$('input[name=phone]').blur(function(){
+
+			var phv = $(this).val().trim();
+
+			if(phv == ''){
+
+				$(this).next().text(' *手机号不能为空').css('color','#e53e41');
+				$(this).css('border','solid 1px #e53e41');
+
+				PH = false;
+
+				return;
+			}
+
+			var reg = /^1[3456789]\d{9}$/;
+
+			if(!reg.test(phv)){
+
+				$(this).next().text(' *手机号格式不正确').css('color','#e53e41');
+				$(this).css('border','solid 1px #e53e41');
+
+				PH = false;
+			} else {
+
+				$(this).next().text(' *√').css('color','green');
+				$(this).css('border','solid 1px green');
+
+				PH = true;
+			}
+		})
+
+		//详细地址 
+		$('textarea[name=location]').blur(function(){
+			//获取输入的值
+			var uv = $(this).val().trim();
+			if(uv == ''){
+				$(this).next().text(' *地址不能为空').css('color','#e53e41');
+
+				$(this).css('border','solid 1px #e53e41');
+
+				LT = false;
+
+				return;
+			}
+
+			//正则
+			var reg = /^[A-Za-z_\u4e00-\u9fa5]{5,50}$/;
+			var tu = $(this);
+			//检测
+			if(!reg.test(uv)){
+				$(this).next().text(' *地址格式不正确').css('color','#e53e41');
+
+				$(this).css('border','solid 1px #e53e41');
+
+				LT= false;
+			} else {
+
+				$(this).next().text(' *√').css('color','green');
+
+				$(this).css('border','solid 1px green');
+
+				LT= true;
+			}
+				
+			
+		})
+
+		$('#forms').submit(function(){
+
+			$('input[name=name]').trigger('blur');
+			$('input[name=phone]').trigger('blur');
+			$('textarea[name=location]').trigger('blur');
+			
+
+			if(US && PH && LT){
+
+				return true;
+			} 
+			
+			return false;
+		})	
+	
+	</script>
 
 					<div class="clear"></div>
 
@@ -223,7 +349,7 @@
 						<a href="#">个人资料</a>
 						<ul>
 							<li> <a href="/home/personal/information">个人信息</a></li>
-							<li> <a href="safety.html">安全设置</a></li>
+							<li> <a href="/home/personal/safety">安全设置</a></li>
 							<li class="active"> <a href="#">收货地址</a></li>
 						</ul>
 					</li>

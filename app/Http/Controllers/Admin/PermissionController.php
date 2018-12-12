@@ -17,6 +17,16 @@ class PermissionController extends Controller
     {
         //权限显示页面
         $res =  Permission::where('url_name','like','%'.$request->url_name.'%')->paginate($request->input('num',5));
+       /*  $res = Permission::orderBy('id','asc')
+            ->where(function($query) use($request){
+                //检测关键字
+                $url_name = $request->input('url_name');
+                //如果权限名不为空
+                if(!empty($url_name)) {
+                    $query->where('url_name','like','%'.$url_name.'%');
+                }
+            })
+        ->paginate($request->input('num', 5));*/
 
         return view('admin.permission.index',[
             'title'=>'角色的列表页面',

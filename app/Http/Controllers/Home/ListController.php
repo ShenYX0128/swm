@@ -18,7 +18,9 @@ class ListController extends Controller
         //如果传类别ID
         // dd($id);
         if(!empty($id)){
+
              $path = Category::where('path','like',"%,$id,%")->pluck('id');
+
             // dd($path);
         }
 

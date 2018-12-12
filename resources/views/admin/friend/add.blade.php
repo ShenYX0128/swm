@@ -15,10 +15,8 @@
         @endif
 
 
-  <section class="content-header col-md-offset-5">
-      <h1><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-        友情链接添加
-         </font></font><small><font style="vertical-align: inherit;"></font></small>
+  <section class="content-header">
+      <h1>
       </h1>
      
     </section>
@@ -32,11 +30,7 @@
         <div class="box box-primary">
             <div class="box-header with-border">
                 <h3 class="box-title">
-                    <font style="vertical-align: inherit;">
-                        <font style="vertical-align: inherit;">
-                           
-                        </font>
-                    </font>
+                   友情链接添加
                 </h3>
             </div>
             <!-- /.box-header -->

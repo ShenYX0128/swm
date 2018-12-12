@@ -1,13 +1,17 @@
 @extends('layout.index')
 @section('title',$title)
 @section('content')
+  <section class="content-header col-md-offset-5">
+      <h1>
+      </h1>
+    </section>
 	<section class="content">
 		<div class="row">
 			<div class="col-md-8 col-md-offset-2">
           <!-- general form elements -->
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">{{$title}}</h3>
+              <h3 class="box-title">权限添加</h3>
             </div>
             <div class="box-body">
             	@if (count($errors) > 0)

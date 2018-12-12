@@ -163,7 +163,7 @@
 								<li><a href="#">&raquo;</a></li>
 							</ul>
 							
-													</div>
+						</div>
 					</div>
 					
 
