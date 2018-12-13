@@ -7,6 +7,9 @@
 		<link href="/homes/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css" />
 		<link href="/homes/basic/css/demo.css" rel="stylesheet" type="text/css"/>
 		<link href="/homes/css/seastyle.css" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" href="/admins/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+
+
 
 
 		<!-- <script type="text/javascript" src="/homes/basic/js/jquery-1.7.min.js"></script> -->
@@ -152,17 +155,18 @@
 							
 							</div>
 							<div class="clear"></div>
+
+							<!-- <nav aria-label="...">
 							
+							  <ul class="pagination pull-right">
+							   
+							  </ul>
+							</nav> -->
+
 							<ul class="am-pagination am-pagination-right">
-								<li class="am-disabled"><a href="#">&laquo;</a></li>
-								<li class="am-active"><a href="#">1</a></li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-								<li><a href="#">5</a></li>
-								<li><a href="#">&raquo;</a></li>
+								
 							</ul>
-							
+				
 						</div>
 					</div>
 					
