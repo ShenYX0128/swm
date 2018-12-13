@@ -9,7 +9,7 @@
 		<title>地址管理</title>
 		<link href="/homes/css/personal.css" rel="stylesheet" type="text/css">
 		<link href="/homes/css/addstyle.css" rel="stylesheet" type="text/css">
-		<script src="/homes/AmazeUI-2.4.2/assets/js/jquery.min.js" type="text/javascript"></script>
+		<script type="text/javascript" src="/homes/js/jquery.js"></script>
 	</head>
 
 	<body>
@@ -66,7 +66,9 @@
 								<div class="new-mu_l2a new-p-re">
 									<p class="new-mu_l2cw">
 										<span class="title">地址：</span>
+
 										<span class="street" style="word-wrap:break-word;">{{$v->location}}</span></p>
+
 								</div>
 
 								<div class="new-addr-btn ">
@@ -109,12 +111,13 @@
 								<hr/>
 								
 								<div class="am-u-md-12 am-u-lg-8" style="margin-top: 20px;">
-									<form action="/home/addupdate/{{$add->id}}" method="post" class="am-form am-form-horizontal" id="forms">
 
+									<form action="/home/addupdate/{{$add->id}}" method="post" class="am-form am-form-horizontal" id="forms">
 									    
 										<div class="am-form-group">
 											<label for="user-name" class="am-form-label">收货人</label>
 											<div class="am-form-content">
+
 												<input type="text" id="user-name" placeholder="" name="name"
 												value="{{$add->name}}">
 												<span> *请填写收货人</span>
@@ -124,8 +127,11 @@
 										<div class="am-form-group">
 											<label for="user-phone" class="am-form-label">手机号码</label>
 											<div class="am-form-content">
+
+
 												<input id="user-phone" placeholder="" type="tel" name="phone" value="{{$add->phone}}">
 												<span> *请输入手机号</span>
+
 											</div>
 										</div>
 										<!-- <div class="am-form-group">
@@ -149,8 +155,11 @@
 										<div class="am-form-group">
 											<label for="user-intro" class="am-form-label">详细地址</label>
 											<div class="am-form-content">
-												<textarea class="" rows="3" id="user-intro" placeholder="输入详细地址" name="location" >{{$add->location}}</textarea>
+
+												<textarea class="" rows="3" id="user-intro" placeholder="" name="location" >{{$add->location}}</textarea>
+
 												<span>*50字以内写出你的详细地址...</span>
+
 											</div>
 										</div>
 										<input type="hidden" value="{{$add->cid}}" name="cid">

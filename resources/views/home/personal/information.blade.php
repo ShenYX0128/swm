@@ -11,7 +11,7 @@
 
 		<link href="/homes/css/personal.css" rel="stylesheet" type="text/css">
 		<link href="/homes/css/infstyle.css" rel="stylesheet" type="text/css">
-		
+		<script type="text/javascript" src="/homes/js/jquery.js"></script>
 			
 	</head>
 

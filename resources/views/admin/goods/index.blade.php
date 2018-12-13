@@ -2,6 +2,7 @@
 @section('title',$title)
 <link rel="stylesheet" href="/admins/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
 <link rel="stylesheet" href="/admins/dist/css/skins/_all-skins.min.css">
+        <script type="text/javascript" src="/homes/js/jquery.js"></script>
 @section('content')
     <!-- Content Header (Page header) -->
     <section class="content-header">

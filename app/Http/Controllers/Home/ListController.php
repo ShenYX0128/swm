@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Model\Admin\Category;
 use App\Model\Admin\Goods;
 use App\Model\Admin\Goodsimg;
+use DB;
 
 class ListController extends Controller
 {
@@ -24,7 +25,8 @@ class ListController extends Controller
             // dd($path);
         }
 
-        $goods=Goods::whereIn('tid',$path)->get();
+        $goods=Goods::whereIn('tid',$path)->paginate(1);
+
 
         // dd($goods);
         $gid=[];
@@ -32,8 +34,9 @@ class ListController extends Controller
             $gid[] = $v->id;
         }
         // dd($gid);
-         $gimg=Goodsimg::whereIn('gid',$gid)->first();
-
+         $gimg = DB::table('goods_img')
+        ->join('goods', 'goods_img.gid', '=', 'goods.id')->select('goods_img.gid','goods_img.id','goods_img.gpic')->groupBy('gid')->get();
+         // dd($gimg);
           return view('home.list',['title'=>'列表页','goods'=>$goods,'gimg'=>$gimg]);
         
       
@@ -44,14 +47,15 @@ class ListController extends Controller
     {
 
         //查询
-        $goods = Goods::where('tid',$id)->get();
+        $goods = Goods::where('tid',$id)->paginate(12);
         $gid=[];
         foreach ($goods as $k => $v) {
             $gid[] = $v->id;
         }
         // dd($gid);
 
-        $gimg=Goodsimg::whereIn('gid',$gid)->first();
+        $gimg = DB::table('goods_img')
+        ->join('goods', 'goods_img.gid', '=', 'goods.id')->select('goods_img.gid','goods_img.id','goods_img.gpic')->groupBy('gid')->get();
         // dd($gimg);
         //显示页面
         return view('home.list',['title'=>'列表页','goods'=>$goods,'gimg'=>$gimg]);

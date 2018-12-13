@@ -10,6 +10,7 @@
 		<link href="/homes/css/personal.css" rel="stylesheet" type="text/css">
 		<link href="/homes/css/addstyle.css" rel="stylesheet" type="text/css">
 		<script src="/homes/AmazeUI-2.4.2/assets/js/jquery.min.js" type="text/javascript"></script>
+		<script type="text/javascript" src="/homes/js/jquery.js"></script>
 	</head>
 
 	<body>
@@ -332,6 +333,7 @@
 		})	
 	
 	</script>
+
 
 					<div class="clear"></div>
 
