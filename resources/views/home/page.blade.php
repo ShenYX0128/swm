@@ -15,7 +15,7 @@
 										@foreach($user as $v)
 										@if($v->id == $val->uid)
 										<li class="am-comment">
-											<a href="" style="display: inline-block; width: 48px; height: 48px; border-radius: 50%;">
+											<a href="">
 												<img class="am-comment-avatar" src="{{$v->profile}}" />
 											</a>
 
@@ -38,7 +38,7 @@
 															{{$val->content}}
 														</div>
 														<div class="tb-r-act-bar">
-															口味：
+															口味：{{$val->norns}}
 														</div>
 													</div>
 

@@ -118,4 +118,5 @@ class DetailController extends Controller
         }
         return view('home.page',['data'=>$data,'user'=>$user,'prev'=>$prev,'next'=>$next,'sums'=>$sums,'pp'=>$pp,'page'=>$page]);
     }
+  
 }

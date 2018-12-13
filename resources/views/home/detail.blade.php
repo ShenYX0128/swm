@@ -116,6 +116,7 @@
 						<div class="tb-detail-list">
 							<!--价格-->
 							<div class="tb-detail-price">
+
 								<li class="price iteminfo_price">
 									<dt>促销价</dt>
 									<dd><em>¥</em><b class="sys_item_price">{{$v->discount}}</b>  </dd>                                 
@@ -167,12 +168,14 @@
 									<div class="norns" >
 										<div class="theme-span"></div>
 										<div class="theme-popbod" >
-											<form class="theme-signin" action="" method="post">
+											<form class="theme-signin" id="close" action="" method="post">
+												{{ csrf_field() }}
 												<input type="hidden" gid="{{$v->id}}" id="hidden" value="@if($v->discount)
 															{{$v->discount}}
 														 @else
 														 {{$v->price}}
 														 @endif">
+												<input type="hidden" name="gid" value="{{$v->id}}">
 												<div class="theme-signin-left" style="width: 100%;">
 
 													<div class="theme-options">
@@ -181,13 +184,15 @@
 															@foreach($arr as $ke => $val)
 															<li class="sku-line @if($ke == 0)selected @endif">{{$val}}<i></i></li>
 															@endforeach
+
 														</ul>
+														<input type="hidden" name="norns" id="nor" value="">
 													</div>
 													<div class="theme-options">
 														<div class="cart-title number" style="margin-left: 5px">数量</div>
 														<dd>
 															<input id="min" class="am-btn am-btn-default" name="" type="button" value="-" />
-															<input id="text_box" name="" type="text" value="1" style="width:30px;" />
+															<input id="text_box" name="d_num" type="text" value="1" style="width:30px;" />
 															<input id="add" class="am-btn am-btn-default" name="" type="button" value="+" />
 															<span id="Stock" class="tb-hidden">库存<span class="stock">{{$v->stock}}</span>件</span>
 														</dd>
@@ -523,7 +528,7 @@
 										@foreach($user as $v)
 										@if($v->id == $val->uid)
 										<li class="am-comment">
-											<a href="" style="display: inline-block; width: 48px; height: 48px; border-radius: 50%;">
+											<a href="">
 												<img class="am-comment-avatar" src="{{$v->profile}}" />
 											</a>
 
@@ -546,7 +551,7 @@
 															{{$val->content}}
 														</div>
 														<div class="tb-r-act-bar">
-															口味：
+															口味：{{$val->norns}}
 														</div>
 													</div>
 
@@ -768,7 +773,16 @@ zcityrun('.zcityGroup');
 	// 点击显示
 	// 购买
 	$('#LikBuy').click(function(){
-		$('.theme-popover-mask,.theme-popover,.btn-op,.theme-poptit').css('display','block');
+		/*var close = [];
+		 close['gid'] = $('#hidden').attr('gid');
+		 close['norns'] = $('#testes').children('.selected').text().trim();
+		 close['d_num'] = $('#text_box').val().trim();
+		 close['d_price'] = $('#hidden').val().trim();*/
+		 var a = $('#testes').children('.selected').text().trim();
+		 $('#nor').val(a);
+		 $('#close').attr('action','/home/addpay');
+		 $('#close').submit();
+
 	})
 	// 加入购物车
 	$('#LikBasket').click(function(){
