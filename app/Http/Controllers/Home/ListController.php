@@ -27,6 +27,7 @@ class ListController extends Controller
 
         $goods=Goods::whereIn('tid',$path)->paginate(1);
 
+
         // dd($goods);
         $gid=[];
         foreach ($goods as $k => $v) {

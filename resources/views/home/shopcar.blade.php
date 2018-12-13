@@ -141,6 +141,8 @@
 									<span class="list-change theme-login">编辑</span>
 								</div>
 							</div>
+
+					<form action="/home/commit" method="post" enctype="multipart/form-data">
 							<div class="clear"></div>
 
 							@foreach($res as $k => $v)
@@ -151,7 +153,7 @@
 								<ul class="item-content clearfix">
 									<li class="td td-chk">
 										<div class="cart-checkbox ">
-											<input class="check" gid="{{$v->id}}" name="items[]" value="170769542747" type="checkbox">
+											<input class="check" gid="{{$v->id}}" name="items[]" value="{{$val->id}}" type="checkbox">
 											<label for="J_CheckBox_170769542747"></label>
 										</div>
 									</li>
@@ -178,10 +180,10 @@
 										<div class="item-price price-promo-promo">
 											<div class="price-content">
 												<div class="price-line">
-													<em class="price-original">{{$val->discount}}</em>
+													<em class="price-original">{{$val->price}}</em>
 												</div>
 												<div class="price-line">
-													<em class="J_Price price-now" tabindex="0">{{$val->price}}</em>
+													<em class="J_Price price-now" tabindex="0">{{$val->discount}}</em>
 												</div>
 											</div>
 										</div>
@@ -248,13 +250,16 @@
 							<strong class="price">¥<em id="J_Total">0.00</em></strong>
 						</div>
 						<div class="btn-area">
-							<a href="pay.html" id="J_Go" class="submit-btn submit-btn-disabled" aria-label="请注意如果没有选择宝贝，将无法结算">
-								<span>结&nbsp;算</span></a>
+							 {{csrf_field()}}
+							<button style="background:#F03726;width:82px"  id="J_Go" class="submit-btn submit-btn-disabled" aria-label="请注意如果没有选择宝贝，将无法结算">
+								<span>结&nbsp;算</span></button>
 						</div>
 					</div>
 
 				</div>
 			</div>
+
+		</form>
 			<div class="cart-empty" style='display:none'>
 			    <div class="message">
 			        <ul>

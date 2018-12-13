@@ -8,6 +8,10 @@
 		<link href="/homes/css/page.css" rel="stylesheet" type="text/css" />
 		
 		<script type="text/javascript" src="/homes/js/jquery.js"></script>
+		<link rel="stylesheet" href="/admins/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+
+
+
 
 		<!-- <script type="text/javascript" src="/homes/basic/js/jquery-1.7.min.js"></script> -->
 		<script type="text/javascript" src="/homes/js/script.js"></script>
@@ -156,11 +160,10 @@
 							
 							</div>
 							<div class="clear"></div>
-							
-							<ul class="paginations paginations-right">
+							<ul class="am-paginations am-paginations-right">
 								{{$goods->links()}}
 							</ul>
-							
+				
 						</div>
 					</div>
 					

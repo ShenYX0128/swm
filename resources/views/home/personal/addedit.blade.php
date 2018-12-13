@@ -10,7 +10,6 @@
 		<link href="/homes/css/personal.css" rel="stylesheet" type="text/css">
 		<link href="/homes/css/addstyle.css" rel="stylesheet" type="text/css">
 		<script type="text/javascript" src="/homes/js/jquery.js"></script>
-
 	</head>
 
 	<body>
@@ -114,8 +113,6 @@
 								<div class="am-u-md-12 am-u-lg-8" style="margin-top: 20px;">
 
 									<form action="/home/addupdate/{{$add->id}}" method="post" class="am-form am-form-horizontal" id="forms">
-
-
 									    
 										<div class="am-form-group">
 											<label for="user-name" class="am-form-label">收货人</label>
@@ -124,13 +121,13 @@
 												<input type="text" id="user-name" placeholder="" name="name"
 												value="{{$add->name}}">
 												<span> *请填写收货人</span>
-
 											</div>
 										</div>
 
 										<div class="am-form-group">
 											<label for="user-phone" class="am-form-label">手机号码</label>
 											<div class="am-form-content">
+
 
 												<input id="user-phone" placeholder="" type="tel" name="phone" value="{{$add->phone}}">
 												<span> *请输入手机号</span>
@@ -158,6 +155,7 @@
 										<div class="am-form-group">
 											<label for="user-intro" class="am-form-label">详细地址</label>
 											<div class="am-form-content">
+
 												<textarea class="" rows="3" id="user-intro" placeholder="" name="location" >{{$add->location}}</textarea>
 
 												<span>*50字以内写出你的详细地址...</span>
@@ -180,6 +178,7 @@
 						</div>
 
 					</div>
+
 		<script type="text/javascript">
 
 		    $.ajaxSetup({
@@ -340,7 +339,6 @@
 		})	
 			
 		</script>
-
 
 					<div class="clear"></div>
 
