@@ -305,6 +305,18 @@
             </ul>
           </li>
 
+          <li class="treeview">
+            <a href="#">
+              <i class="fa  fa-cogs"></i>
+              <span>网站管理</span>
+                <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+              </a>
+            <ul class="treeview-menu">
+              <li><a href="/admin/config/edit"><i class="fa fa-cog"></i>修改配置</a></li>
+            </ul>
+          </li>
 
 
       </ul>

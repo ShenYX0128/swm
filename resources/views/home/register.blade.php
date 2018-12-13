@@ -31,37 +31,37 @@
 
 						<div class="am-tabs" id="doc-my-tabs">
 							<ul class="am-tabs-nav am-nav am-nav-tabs am-nav-justify">
-								<li class="am-active"><a href="">邮箱注册</a></li>
+								<!-- <li class="am-active"><a href="">邮箱注册</a></li> -->
 								<li><a href="">手机号注册</a></li>
 							</ul>
 
-							 <div class="am-tabs-bd">
-								<div class="am-tab-panel am-active">
-							<form action="" method="post">
-								<div class="user-email">
-									<label for="user"><i class="am-icon-user"></i></label>
-									<input type="text" name="username" id="email" placeholder="请输入6-12位用户名">
-							    </div>			
-							    <div class="user-email">
-									<label for="email"><i class="am-icon-envelope-o"></i></label>
-									<input type="email" name="email" id="email" placeholder="请输入邮箱">
-							    </div>										
-						         
-						         <div class="user-pass">
-								    <label for="password"><i class="am-icon-lock"></i></label>
-								    <input type="password" name="password" id="password" placeholder="设置6-12位密码">
-						         </div>	         			
-							               
-								{{csrf_field()}}
-								<div class="am-cf">
-									<input type="submit" name="" value="注册" class="am-btn am-btn-primary am-btn-sm am-fl">
-								</div>
-							</form>
-							</div>
+							 <!-- <div class="am-tabs-bd">
+							 <div class="am-tab-panel am-active">
+							  <form action="" method="post">
+							  <div class="user-email">
+							  	<label for="user"><i class="am-icon-user"></i></label>
+							  	<input type="text" name="username" id="email" placeholder="请输入6-12位用户名">
+							  </div>			
+							 						<div class="user-email">
+							  	<label for="email"><i class="am-icon-envelope-o"></i></label>
+							  	<input type="email" name="email" id="email" placeholder="请输入邮箱">
+							 						</div>										
+							  						         
+							 							<div class="user-pass">
+							      <label for="password"><i class="am-icon-lock"></i></label>
+							      <input type="password" name="password" id="password" placeholder="设置6-12位密码">
+							 							</div>	         			
+							  							               
+							  {{csrf_field()}}
+							  <div class="am-cf">
+							  	<input type="submit" name="" value="注册" class="am-btn am-btn-primary am-btn-sm am-fl">
+							  </div>
+							  </form>
+							 </div>  -->
 
 							<div class="am-tab-panel">
 								<!-- 手机注册 -->
-							<form action="/home/doregister" method="post">
+							<form action="/home/doregister" method="post" id="forms">
                  				<div class="user-phone">
 								    <label for="phone"><i class="am-icon-mobile-phone am-icon-md"></i></label>
 								    <input type="tel" name="phone" id="phone" placeholder="请输入手机号">
@@ -74,9 +74,11 @@
 
                  				<div class="user-pass">
 								    <label for="password"><i class="am-icon-lock"></i></label>
+								    <span></span>
 								    <input type="password" name="password" id="password" placeholder="设置6-12位密码">
                  				</div>	
 								{{csrf_field()}}
+								<a href="/home/login" class="zcnext am-fr am-btn-default">登录</a>
 									<div class="am-cf">
 										<input type="submit" name="" value="注册" class="am-btn am-btn-primary am-btn-sm am-fl">
 									</div>
@@ -93,6 +95,13 @@
 		$(function() {
 	    $('#doc-my-tabs').tabs();
 	    })
+
+
+		
+		var PH = true;
+		var CV = true;
+		var PS = true;
+
 		//手机号
 		$('input[name=phone]').focus(function(){
 			$(this).addClass('cur');
@@ -143,6 +152,19 @@
 
 		})
 
+		/*var but = document.getElementById('but');
+			var i = 20;
+			var bu = setInterval(function(){
+				i--;
+				but.innerHTML = ''+i+'秒';
+				console.log(but.innerHTML); 
+			},1000)
+			setTimeout(function(){
+				clearInterval(bu);
+				but.disabled = '';
+				but.innerHTML = '验证码';
+			},20000)*/
+
 		//获取验证码
 		$('input[name=code]').focus(function(){
 			$(this).addClass('cur');
@@ -153,7 +175,7 @@
 			var cd = $(this).val().trim();
 
 			if(cd == ''){
-				$(this).next().text(' *验证码不能为空').css('color','#e53e41');
+				//$(this).next().text(' *验证码不能为空').css('color','#e53e41');
 
 				$(this).css('border','solid 1px #e53e41');
 
@@ -217,6 +239,21 @@
 				PS = true;
 			}
 		})
+
+		$('#forms').submit(function(){
+
+			$('input[name=code]').trigger('blur');
+			$('input[name=phone]').trigger('blur');
+			$('input[name=password]').trigger('blur');
+			
+
+			if(PS && PH && CV){
+
+				return true;
+			} 
+			
+			return false;
+		})
 	</script>
                         	
 			</div>
@@ -226,28 +263,6 @@
 				</div>
 			</div>
 			
-					<div class="footer ">
-						<div class="footer-hd ">
-							<p>
-								<a href="# ">恒望科技</a>
-								<b>|</b>
-								<a href="# ">商城首页</a>
-								<b>|</b>
-								<a href="# ">支付宝</a>
-								<b>|</b>
-								<a href="# ">物流</a>
-							</p>
-						</div>
-						<div class="footer-bd ">
-							<p>
-								<a href="# ">关于恒望</a>
-								<a href="# ">合作伙伴</a>
-								<a href="# ">联系我们</a>
-								<a href="# ">网站地图</a>
-								<em>© 2015-2025 Hengwang.com 版权所有. 更多模板 <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></em>
-							</p>
-						</div>
-					</div>
 	</body>
 
 </html>

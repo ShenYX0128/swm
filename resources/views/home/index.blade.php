@@ -461,20 +461,30 @@
 								     <img src="/homes/images/TJ.jpg"></img>
 								     <p>XXXXXXXXXXXXXXXXXX</p>
 							    </a></li>
-							    
+						@php
+						$customer = DB::table('customer')->where('id',session('cid'))->first();
+						@endphp
+
+						@if(session('cid'))
 						<div class="mod-vip">
 							<div class="m-baseinfo">
-								<a href="../person/index.html">
+								@if(!$customer->profile)
+									<a href="#">
 									<img src="/homes/images/getAvatar.do.jpg">
-								</a>
+									</a>
+								@else
+									<a href="#">
+										<img src="{{$customer->profile}}">
+									</a>
+								@endif
 								<em>
-									Hi,<span class="s-name">小叮当</span>
+									Hi,<span class="s-name">{{$customer->customername}}</span>
 									<a href="#"><p>点击更多优惠活动</p></a>									
 								</em>
 							</div>
 							<div class="member-logout">
-								<a class="am-btn-warning btn" href="login.html">登录</a>
-								<a class="am-btn-warning btn" href="register.html">注册</a>
+								<a class="am-btn-warning btn" href="/home/personal/information">个人中心</a>
+								<a class="am-btn-warning btn" href="/home/logout">退出登录</a>
 							</div>
 							<div class="member-login">
 								<a href="#"><strong>0</strong>待收货</a>
@@ -483,7 +493,31 @@
 								<a href="#"><strong>0</strong>待评价</a>
 							</div>
 							<div class="clear"></div>	
-						</div>																	    
+						</div>
+						@else	    
+						<div class="mod-vip">
+							<div class="m-baseinfo">
+								<a href="#">
+									<img src="/homes/images/getAvatar.do.jpg">
+								</a>
+								<em>
+									Hi,<span class="s-name">小叮当</span>
+									<a href="#"><p>点击更多优惠活动</p></a>									
+								</em>
+							</div>
+							<div class="member-logout">
+								<a class="am-btn-warning btn" href="/home/login">登录</a>
+								<a class="am-btn-warning btn" href="/home/register">注册</a>
+							</div>
+							<div class="member-login">
+								<a href="#"><strong>0</strong>待收货</a>
+								<a href="#"><strong>0</strong>待发货</a>
+								<a href="#"><strong>0</strong>待付款</a>
+								<a href="#"><strong>0</strong>待评价</a>
+							</div>
+							<div class="clear"></div>	
+						</div>													
+						@endif			    
 							    
 								<li><a target="_blank" href="#"><span>[特惠]</span>洋河年末大促，低至两件五折</a></li>
 								<li><a target="_blank" href="#"><span>[公告]</span>华北、华中部分地区配送延迟</a></li>
