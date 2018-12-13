@@ -31,33 +31,11 @@
 
 						<div class="am-tabs" id="doc-my-tabs">
 							<ul class="am-tabs-nav am-nav am-nav-tabs am-nav-justify">
-								<!-- <li class="am-active"><a href="">邮箱注册</a></li> -->
+								
 								<li><a href="">手机号注册</a></li>
 							</ul>
 
-							 <!-- <div class="am-tabs-bd">
-							 <div class="am-tab-panel am-active">
-							  <form action="" method="post">
-							  <div class="user-email">
-							  	<label for="user"><i class="am-icon-user"></i></label>
-							  	<input type="text" name="username" id="email" placeholder="请输入6-12位用户名">
-							  </div>			
-							 						<div class="user-email">
-							  	<label for="email"><i class="am-icon-envelope-o"></i></label>
-							  	<input type="email" name="email" id="email" placeholder="请输入邮箱">
-							 						</div>										
-							  						         
-							 							<div class="user-pass">
-							      <label for="password"><i class="am-icon-lock"></i></label>
-							      <input type="password" name="password" id="password" placeholder="设置6-12位密码">
-							 							</div>	         			
-							  							               
-							  {{csrf_field()}}
-							  <div class="am-cf">
-							  	<input type="submit" name="" value="注册" class="am-btn am-btn-primary am-btn-sm am-fl">
-							  </div>
-							  </form>
-							 </div>  -->
+							 
 
 							<div class="am-tab-panel">
 								<!-- 手机注册 -->
@@ -141,6 +119,20 @@
 
 		//获取验证码
 		$('#but').click(function(){
+
+			/*var bt = document.getElementById('but');
+			var i = 60;
+			var bu = setInterval(function(){
+				i--;
+				bt.innerHTML = '倒计'+i+'秒';
+				console.log(bt.innerHTML); 
+			},1000)
+			setTimeout(function(){
+				clearInterval(bu);
+				bt.disabled = '';
+				bt.innerHTML = '验证码';
+			},60000)*/
+
 			//获取手机号
 			var phone = $('input[name=phone]').val().trim();
 
@@ -152,18 +144,7 @@
 
 		})
 
-		/*var but = document.getElementById('but');
-			var i = 20;
-			var bu = setInterval(function(){
-				i--;
-				but.innerHTML = ''+i+'秒';
-				console.log(but.innerHTML); 
-			},1000)
-			setTimeout(function(){
-				clearInterval(bu);
-				but.disabled = '';
-				but.innerHTML = '验证码';
-			},20000)*/
+		
 
 		//获取验证码
 		$('input[name=code]').focus(function(){

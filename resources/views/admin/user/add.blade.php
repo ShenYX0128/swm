@@ -5,17 +5,16 @@
       <div class="row">
         <div class="col-md-8 col-md-offset-2">
           <div class="box box-primary">
-	<div class="box-body">
-		@if (count($errors) > 0)
-			<div class="callout callout-danger">
-            	显示错误信息
-                <ul>
-                	@foreach ($errors->all() as $error)
-                	<li style='font-size:14px'>{{$error}}</li>
-                	@endforeach
-                </ul>
+             <div class="box-header with-border">
+                <h3 class="box-title">
+                    <font style="vertical-align: inherit;">
+                        <font style="vertical-align: inherit;">
+                            {{$title}}
+                        </font>
+                    </font>
+                </h3>
             </div>
-        @endif
+	<div class="box-body">
           <form role="form" action="/admin/user" method="post" enctype='multipart/form-data'>
             
             <!-- 用户名 -->
@@ -41,8 +40,7 @@
                   <input type="radio" name="sex" id="optionsRadios2" value="0"><font style="vertical-align: inherit;">女<font style="vertical-align: inherit;"> 
                 </font></font></label>
                 <label>
-                  <input type="radio" name="sex" id="optionsRadios2" value="2" checked><font style="vertical-align: inherit;">保密<font style="vertical-align: inherit;">
-     			</font></font></label>
+                  <input type="radio" name="sex" id="optionsRadios2" value="2" checked><font style="vertical-align: inherit;">保密<font style="vertical-align: inherit;"></font></font></label>
               </div>
             </div>
 
@@ -87,8 +85,8 @@
     	    <button type="submit" class="btn btn-primary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">提交</font></font></button>
             
 
-          </form>
-        </div>
+  </form>
+  </div>
         </div>
       </div>
     </div>
@@ -96,6 +94,6 @@
 
 @section('js')
 <script>
-  $('.callout').delay(2000).fadeOut(2000);
+  $('.alert').delay(1000).fadeOut(2000);
 </script>
 @stop

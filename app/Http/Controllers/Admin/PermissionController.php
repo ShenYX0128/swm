@@ -29,7 +29,7 @@ class PermissionController extends Controller
         ->paginate($request->input('num', 5));*/
 
         return view('admin.permission.index',[
-            'title'=>'角色的列表页面',
+            'title'=>'权限的列表页面',
             'res'=>$res,
             'request'=>$request
 
@@ -108,7 +108,7 @@ class PermissionController extends Controller
     {
         //权限修改方法
         $res = $request->only('url_name','url');
-
+        //dd($res);
         try{
 
             $data = Permission::where('id',$id)->update($res);
