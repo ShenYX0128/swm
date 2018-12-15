@@ -5,7 +5,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0 ,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>结算页面</title>
+		<title>订单成功</title>
 
 		<link href="/homes/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css" />
 
@@ -16,6 +16,14 @@
 		<link href="/homes/css/personal.css" rel="stylesheet" type="text/css">
 		<link href="/homes/css/addstyle.css" rel="stylesheet" type="text/css">
 		<script type="text/javascript" src="/homes/js/address.js"></script>
+
+
+
+		<link href="/homes/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css">
+	
+
+		<link href="/homes/css/sustyle.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="/homes/basic/js/jquery-1.7.min.js"></script>
 
 	</head>
 
@@ -76,231 +84,31 @@
 				</div>
 			</div>
 
-			<div class="clear"></div>
-			<div class="concent">
-				<!--地址 -->
-				<div class="paycont">
-					<div class="address">
-						<h3>确认收货地址 </h3>
-						<div class="control">
-							<div class="tc-btn createAddr  am-btn am-btn-danger"><a href="/home/personal/address">使用新地址</a></div>
-						</div>
-						<div class="clear"></div>
-						<ul>
-							<div class="per-border"></div>
-
-							@php
-
-							$address = DB::table('address')->where('cid',session('cid'))->get();
-							
-							@endphp
-
-							@foreach($address as $k =>$v)
-							
-							
-								@if($v->status == '0')
-								<li class="user-addresslist defaultAddr lis"  aid="{{$v->id}}" >
-								<span class="new-option-r" id="dz_{{$v->id}}"><i class="am-icon-check-circle"></i>默认地址</span>
-								@else
-								<li class="user-addresslist lis"   aid="{{$v->id}}" >
-								<span class="new-option-r" id="dz_{{$v->id}}"><i class="am-icon-check-circle"></i>设为默认</span>
-								@endif
-								<p class="new-tit new-p-re">
-									<span class="new-txt">{{$v->name}}</span>
-									<span class="new-txt-rd2">{{$v->phone}}</span>
-								</p>
-								<div class="new-mu_l2a new-p-re">
-									<p class="new-mu_l2cw">
-										<span class="title">地址：</span>
-										<span class="street">{{$v->location}}</span></p>
-								</div>
-
-								<div class="new-addr-btn ">
-									{{csrf_field()}}
-									<a href="/home/personal/addedit/{{$v->id}}"><i class="am-icon-edit"></i>编辑</a>
-									<span class="new-addr-bar">|</span>
-									<a class="al" aid="{{$v->id}}" href="javascript:void(0);" ><i class="am-icon-trash"></i>删除</a>
-								</div>
-							</li>
-
-							
-							@endforeach
-
-						<div class="clear"></div>
-					</div>
-					<!--物流 -->
-					
-					<!--支付方式-->
-					
-					<div class="clear"></div>
-
-					<!--订单 -->
-					<form action="/jiesuan"  method="post" id="orders">
-				    @php 
-				     $tot = 0;
-				    @endphp
-					<div class="concent">
-						<div id="payTable">
-							<h3>确认订单信息</h3>
-							<div class="cart-table-th">
-								<div class="wp">
-
-									<div class="th th-item">
-										<div class="td-inner">商品信息</div>
-									</div>
-									<div class="th th-price">
-										<div class="td-inner">单价</div>
-									</div>
-									<div class="th th-amount">
-										<div class="td-inner">数量</div>
-									</div>
-									<div class="th th-sum">
-										<div class="td-inner">金额</div>
-									</div>
-									
-
-								</div>
-							</div>
-							<div class="clear"></div>
-							@foreach($newArr as $k=>$v)
-							<tr class="item-list">
-								<div class="bundle  bundle-last">
-									<div class="bundle-main">
-										<ul class="item-content clearfix">
-											<div class="pay-phone">
-												<li class="td td-item">
-													<div class="item-pic">
-														<a href="#" class="J_MakePoint">
-															<img src="@php
-					                                               $tu = DB::table('goods_img')->where('gid',$v['id'])->first();
-					                                               echo $tu->gpic
-					                                               @endphp" class="itempic J_ItemImg"></a>
-													</div>
-													<div class="item-info">
-														<div class="item-basic-info" style="text-align:center">
-															<a href="#" class="item-title J_MakePoint" data-point="tbcart.8.11">{{$v['goodsinfo']->gname}}</a>
-														</div>
-													</div>
-												</li>
-												<li class="td td-info">
-													<div class="item-props">
-														<span class="sku-line"></span>
-														<!-- <span class="sku-line">包装：裸装</span> -->
-													</div>
-												</li>
-												<li class="td td-price">
-													<div class="item-price price-promo-promo">
-														<div class="price-content">
-															<em class="J_Price price-now">{{$v['goodsinfo']->price}}</em>
-														</div>
-													</div>
-												</li>
-											</div>
-											<li class="td td-amount">
-												<div class="amount-wrapper ">
-													<div class="item-amount ">
-														<span class="phone-title">购买数量</span>
-														<div class="sl">
-															<input class="mins am-btn" name="" type="button" value="-" />
-															<input class="text_box" name="" type="text" value="{{$v['num']}}" style="width:30px;" />
-															<input class="add am-btn" name="" type="button" value="+" />
-														</div>
-													</div>
-												</div>
-											</li>
-											<li class="td td-sum">
-												<div class="td-inner">
-													@php
-			                                         $money = $v['num']*$v['goodsinfo']->price;
-			                                         $tot+=$money
-			                                        @endphp
-													<em tabindex="0" class="J_ItemSum number">{{$v['goodsinfo']->price*$v['num']}}</em>
-												</div>
-											</li>
-											
-										</ul>
-										<div class="clear"></div>
-
-									</div>
-							</tr>
-                            <input type="hidden" name="shopid[]" value="{{$v['id']}}">
-                            <input type="hidden" name="num[]" value="{{$v['num']}}">
-                            <input type="hidden" name="price[]" value="{{$v['goodsinfo']->price}}">
-							<div class="clear"></div>
-							</div>
-							@endforeach
-			
-							<div class="clear"></div>
-							<div class="pay-total">
-						<!--留言-->
-							<div class="order-extra">
-								<div class="order-user-info">
-									<div id="holyshit257" class="memo">
-										<label>买家留言：</label>
-										<input type="text" title="选填,对本次交易的说明（建议填写已经和卖家达成一致的说明）" placeholder="选填,建议填写和卖家达成一致的说明" class="memo-input J_MakePoint c2c-text-default memo-close">
-										<div class="msg hidden J-msg">
-											<p class="error">最多输入500个字符</p>
-										</div>
-									</div>
-								</div>
-
-							</div>
-							<!--优惠券 -->
-							
-							<div class="clear"></div>
-							</div>
-							<!--含运费小计 -->
-							
-
-							<!--信息 -->
-							<div class="order-go clearfix">
-								<div class="pay-confirm clearfix">
-									
-									<div class="box">
-										<div tabindex="0" id="holyshit267" class="realPay"><em class="t">实付款：</em>
-											<span class="price g_price ">
-                                    <span>¥</span> <em class="style-large-bold-red " id="J_ActualFee" name="pricesum">{{$tot}}</em>
-											</span>
-										</div>
-                                           <input type="hidden" value="{{$tot}}" name="pricesum" /> 
-										<div id="holyshit268" class="pay-address">
-
-										<!-- 	<p class="buy-footer-address">
-												<span class="buy-line-title buy-line-title-type">寄送至：</span>
-												<span class="buy--address-detail">
-								   
-												<span class="street"></span>
-												</span>
-												</span>
-											</p>
-											<p class="buy-footer-address">
-												<span class="buy-line-title">收货人：</span>
-												<span class="buy-address-detail">   
-                                         <span class="buy-user"> </span>
-												<span class="buy-phone"></span>
-												</span>
-											</p> -->
-										</div>
-									</div>
-								
-									<div id="holyshit269" class="submitOrder">
-										<div class="go-btn-wrap">
-											
-											<input type="submit"  id="J_Go" class="btn-go" value="提交订单" style="
-    float: right;
-"/>
-										</div>
-									</div>
-									<div class="clear"></div>
-								</div>
-							</div>
-						</div>
-
-						<div class="clear"></div>
-					</div>
-					 {{csrf_field()}}
-					</form>
-				</div>
+			<div class="take-delivery">
+			 <div class="status">
+			   <h2>订单成功</h2>
+			   <div class="successInfo">
+			     <ul>
+			     	
+			      <!--  <li>付款金额<em>¥</em></li> -->
+			      
+			       <div class="user-info">
+			      
+			      
+			       
+			       </div>
+			             请认真核对您的收货信息，如有错误请联系客服
+			                               
+			     </ul>
+			     <div class="option">
+			       <span class="info">您可以</span>
+			        <a href="/home/order" class="J_MakePoint">查看<span>已买到的宝贝</span></a>
+			        <a href="/home/orderdetails" class="J_MakePoint">查看<span>交易详情</span></a>
+			     </div>
+			    </div>
+			  </div>
+			</div>
+				
 				<div class="footer">
 					
 					<div class="footer-hd">
@@ -389,7 +197,7 @@
 			</div>
 
 			<div class="clear"></div>
-
+		</div>
 			<script>
 				//加
 				$('.add').click(function(){

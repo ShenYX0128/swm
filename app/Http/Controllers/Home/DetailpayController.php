@@ -31,14 +31,15 @@ class DetailpayController extends Controller
     	// $img = DB::table('goods_img')
      //    ->join('goods', 'goods_img.gid', '=', 'goods.id')->select('goods_img.gid','goods_img.id','goods_img.gpic')->groupBy('gid')->get();
     	$god = DB::table('goods')->where('id',$req['gid'])->first();
-    	$det = DB::table('detail')->where([['gid',$req['gid']],['uid',session('cid')]])->last();
-    	dd($det);
+    	$det = DB::table('orders')->where([['gid',$req['gid']],['uid',session('cid')]])->orderBy('id', 'desc')->first();
+    	// dd($det);
+    	$deta['oid'] = $det->id;
     	$deta['gid'] = $god->id;
     	$deta['gname'] = $god->gname;
     	$deta['d_price'] = $god->price;
     	$deta['d_num'] = $req['d_num'];
     	// dd($deta);
-    	$re = DB::table('detail')->insert($deta);
+    	// $re = DB::table('detail')->insert($deta);
 
     }
 }
