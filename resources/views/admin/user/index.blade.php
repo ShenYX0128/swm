@@ -110,19 +110,12 @@
                                     </font>
                                 </font>
                             </th>
+                            
                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
                             colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">
                                 <font style="vertical-align: inherit;">
                                     <font style="vertical-align: inherit;">
-                                        地址
-                                    </font>
-                                </font>
-                            </th>
-                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
-                            colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">
-                                <font style="vertical-align: inherit;">
-                                    <font style="vertical-align: inherit;">
-                                        用户权限
+                                        管理员权限
                                     </font>
                                 </font>
                             </th>
@@ -194,21 +187,15 @@
                                     </font>
                                 </font>
                             </td>
-                            <td class="">
-                                <font style="vertical-align: inherit;">
-                                    <font style="vertical-align: inherit;">
-                                        {{$v->address}}
-                                    </font>
-                                </font>
-                            </td>
+                           
                             <td class="">
                                 <font style="vertical-align: inherit;">
                                     <font style="vertical-align: inherit;">
                                         @if($v->auth== 1)
 
-                                            普通用户
+                                           禁用
                                         @else 
-                                            管理员
+                                           启用
 
                                         @endif
                                     </font>

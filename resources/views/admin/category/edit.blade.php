@@ -23,11 +23,11 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form" action="/admin/category/{{$res->id}}" method="post" ">
+            <form role="form" action="/admin/category/{{$res->id}}" method="post">
                 <div class="box-body">
                    <div class="form-group">
                       <label>顶级分类</label>
-                      <select name="pid" class="form-control">
+                      <select name="pid" class="form-control" disabled>
                           <option value='0'>请选择</option>
                         @foreach($rs as $v)
                           <option value="{{$v->id}}"
@@ -69,7 +69,7 @@
                     {{csrf_field()}}
 
                     {{method_field('PUT')}}
-                    <input type="submit" name="" class="btn btn-primary" value="添加">
+                    <input type="submit" name="" class="btn btn-primary" value="修改">
                  
                 </div>
             </form>

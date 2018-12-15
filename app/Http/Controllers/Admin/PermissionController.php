@@ -16,7 +16,7 @@ class PermissionController extends Controller
     public function index(Request $request)
     {
         //权限显示页面
-        $res =  Permission::where('url_name','like','%'.$request->url_name.'%')->paginate($request->input('num',5));
+        $res =  Permission::where('url_name','like','%'.$request->url_name.'%')->paginate($request->input('num',10));
        /*  $res = Permission::orderBy('id','asc')
             ->where(function($query) use($request){
                 //检测关键字
@@ -113,7 +113,7 @@ class PermissionController extends Controller
 
             $data = Permission::where('id',$id)->update($res);
             
-            if($data){
+            if($data==0 || $data){
                 return redirect('/admin/permission')->with('success','修改成功');
             }
 

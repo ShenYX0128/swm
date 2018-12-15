@@ -114,7 +114,7 @@ class FriendController extends Controller
           try{
             $data=Friend::where('id',$id)->update($res);
 
-            if($data){
+            if($data==0 || $data){
                 return redirect('/admin/friend')->with('success','修改成功');
             }
         }catch(\Exception $e){

@@ -40,20 +40,22 @@
 							<div class="am-tab-panel">
 								<!-- 手机注册 -->
 							<form action="/home/doregister" method="post" id="forms">
-                 				<div class="user-phone">
+                 				<div class="user-phone" style="margin-bottom:30px">
 								    <label for="phone"><i class="am-icon-mobile-phone am-icon-md"></i></label>
 								    <input type="tel" name="phone" id="phone" placeholder="请输入手机号">
+								    <span></span>
                  			    </div>																			
-								<div class="verification">
+								<div class="verification" style="margin-bottom:30px">
 									<label for="code"><i class="am-icon-code-fork"></i></label>
 									<input type="text" name="code" id="code" placeholder="请输入验证码" style="width: 200px;">
 									<input id='but' type="button" value='验证码'style="width:95px;text-align:center;padding-left:10px;" >
+								    <span style="display:block"></span>
 								</div>
 
                  				<div class="user-pass">
 								    <label for="password"><i class="am-icon-lock"></i></label>
-								    <span></span>
 								    <input type="password" name="password" id="password" placeholder="设置6-12位密码">
+								    <span></span>
                  				</div>	
 								{{csrf_field()}}
 								<a href="/home/login" class="zcnext am-fr am-btn-default">登录</a>
@@ -100,7 +102,7 @@
 			}
 
 			var reg = /^1[3456789]\d{9}$/;
-
+			var th = $(this);
 			if(!reg.test(phv)){
 
 				$(this).next().text(' *手机号格式不正确').css('color','#e53e41');
@@ -108,11 +110,22 @@
 
 				PH = false;
 			} else {
+				$.post('/home/checkrephone',{phone:phv},function (data){
+					if(data == '1'){
 
-				$(this).next().text(' *√').css('color','green');
-				$(this).css('border','solid 1px green');
+						th.next().text(' *手机号已被注册').css('color','#e53e41');
+						th.css('border','solid 1px #e53e41');
 
-				PH = true;
+						PH = false;
+					} else {
+						th.next().text(' *√').css('color','green');
+						th.css('border','solid 1px green');
+
+						PH = true;
+					}
+				})
+				
+
 			}
 		})
               
@@ -120,28 +133,56 @@
 		//获取验证码
 		$('#but').click(function(){
 
-			/*var bt = document.getElementById('but');
-			var i = 60;
-			var bu = setInterval(function(){
-				i--;
-				bt.innerHTML = '倒计'+i+'秒';
-				console.log(bt.innerHTML); 
-			},1000)
-			setTimeout(function(){
-				clearInterval(bu);
-				bt.disabled = '';
-				bt.innerHTML = '验证码';
-			},60000)*/
 
-			//获取手机号
-			var phone = $('input[name=phone]').val().trim();
+			var phv = $('input[name=phone]').val().trim();
 
-			//发送ajax
-			$.post('/home/checkphone',{number:phone},function(data){
+			if(phv == ''){
 
+				$('input[name=phone]').next().text(' *手机号不能为空').css('color','#e53e41');
+				$('input[name=phone]').css('border','solid 1px #e53e41');
+
+				PH = false;
+
+				return;
+			}
+
+			var reg = /^1[3456789]\d{9}$/;
+			var th = $('input[name=phone]');
+			if(!reg.test(phv)){
+
+				$('input[name=phone]').next().text(' *手机号格式不正确').css('color','#e53e41');
+				$('input[name=phone]').css('border','solid 1px #e53e41');
+
+				PH = false;
+			} else {
+				$.post('/home/checkrephone',{phone:phv},function (data){
+					if(data == '1'){
+
+						th.next().text(' *手机号已被注册').css('color','#e53e41');
+						th.css('border','solid 1px #e53e41');
+
+						PH = false;
+					} else {
+						th.next().text(' *√').css('color','green');
+						th.css('border','solid 1px green');
+
+						PH = true;
+						//获取手机号
+						var phone = $('input[name=phone]').val().trim();
+
+						//发送ajax
+						$.post('/home/checkphone',{number:phone},function(data){
+
+							
+						})
+
+					}
+				})
 				
-			})
 
+			}
+
+			
 		})
 
 		
@@ -156,7 +197,7 @@
 			var cd = $(this).val().trim();
 
 			if(cd == ''){
-				//$(this).next().text(' *验证码不能为空').css('color','#e53e41');
+				$(this).next().next().text(' *验证码不能为空').css('color','#e53e41');
 
 				$(this).css('border','solid 1px #e53e41');
 
@@ -167,17 +208,17 @@
 			var cs = $(this);
 			//发送ajax
 			$.get('/home/checkcode',{code:cd},function(data){
+				console.log(data);
+				if(data == 0){
 
-				if(data == '0'){
-
-					cs.next().text(' *验证码不正确').css('color','#e53e41');
+					cs.next().next().text(' *验证码不正确').css('color','#e53e41');
 
 					cs.css('border','solid 1px #e53e41');
 
 					CV = false;
 				} else {
 
-					cs.next().text(' *√').css('color','green');
+					cs.next().next().text(' *√').css('color','green');
 
 					cs.css('border','solid 1px green');
 

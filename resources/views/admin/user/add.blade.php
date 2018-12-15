@@ -19,7 +19,7 @@
             
             <!-- 用户名 -->
             <div class="form-group">
-              <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">用户名</font></font></label>
+              <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">管理员名</font></font></label>
               <input type="text" class="form-control" name="username" placeholder="Enter ...">
             </div>
 			
@@ -56,21 +56,15 @@
               <input type="text" name="phone" class="form-control" placeholder="Enter ...">
             </div>
 
-            <!-- 地址 -->
+            <!-- 管理员权限 -->
             <div class="form-group">
-              <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">地址</font></font></label>
-              <input type="text" name="address" class="form-control" placeholder="Enter ...">
-            </div>
-
-            <!-- 用户权限 -->
-            <div class="form-group">
-            	<label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">用户权限</font></font></label>	
+            	<label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">管理员权限</font></font></label>	
               <div class="radio">
                 <label>
-                  <input type="radio" name="auth" id="optionsRadios1" value="1" checked="" checked><font style="vertical-align: inherit;">普通用户<font style="vertical-align: inherit;">
+                  <input type="radio" name="auth" id="optionsRadios1" value="1" ><font style="vertical-align: inherit;">管理员禁用<font style="vertical-align: inherit;">
                 </font></font></label>
                 <label>
-                  <input type="radio" name="auth" id="optionsRadios2" value="0"><font style="vertical-align: inherit;">管理员<font style="vertical-align: inherit;"> 
+                  <input type="radio" name="auth" id="optionsRadios2" value="0" checked><font style="vertical-align: inherit;">管理员启用<font style="vertical-align: inherit;"> 
                 </font></font></label>
               </div>
             </div>
