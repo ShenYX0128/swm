@@ -55,6 +55,7 @@
 			</ul>
 			<ul class="message-r">
 				<div class="topMessage home">
+<<<<<<< Updated upstream
 					<div class="menu-hd"><a href="#" target="_top" class="h">商城首页</a></div>
 				</div>
 				<div class="topMessage my-shangcheng">
@@ -63,6 +64,19 @@
 				<div class="topMessage mini-cart">
 					<div class="menu-hd"><a id="mc-menu-hd" href="#" target="_top"><i class="am-icon-shopping-cart  am-icon-fw"></i><span>购物车</span><strong id="J_MiniCartNum" class="h">0</strong></a></div>
 				</div>
+=======
+						<div class="menu-hd"><a href="/" target="_top" class="h">商城首页</a></div>
+					</div>
+					<div class="topMessage my-shangcheng">
+						<div class="menu-hd MyShangcheng"><a href="/home/personal/information" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
+					</div>
+					<div class="topMessage mini-cart">
+						@php
+						$count = DB::table('shopcar')->where('uid',session('cid'))->count();
+						@endphp
+						<div class="menu-hd"><a id="mc-menu-hd" href="http://g-mall.cn/shopcar" target="_top"><i class="am-icon-shopping-cart  am-icon-fw"></i><span>购物车</span><strong id="J_MiniCartNum" class="h">({{$count}})</strong></a></div>
+					</div>
+>>>>>>> Stashed changes
 				<div class="topMessage favorite">
 					<div class="menu-hd"><a href="#" target="_top"><i class="am-icon-heart am-icon-fw"></i><span>收藏夹</span></a></div>
 			</ul>
@@ -129,29 +143,46 @@
 							</div>
 							<div class="clear"></div>
 
+<<<<<<< Updated upstream
 							@foreach($res as $k => $v)
 							<div class="bundle-main">
 								<ul class="item-content clearfix">
 									<li class="td td-chk">
 										<div class="cart-checkbox ">
 											<input class="check" gid="{{$v->id}}" name="items[]" value="170769542747" type="checkbox">
+=======
+							@foreach($shop as $k=>$car)
+							<div class="bundle-main" id="shop_{{$car['id']}}">
+								<ul class="item-content clearfix">
+									<li class="td td-chk">
+										<div class="cart-checkbox ">
+											<input class="check" gid="{{$car['goodsinfo']->id}}" name="items[]" value="{{$car['id']}}" type="checkbox">
+>>>>>>> Stashed changes
 											<label for="J_CheckBox_170769542747"></label>
 										</div>
 									</li>
 									<li class="td td-item">
 										<div class="item-pic">
+<<<<<<< Updated upstream
 											<a href="#" target="_blank" data-title="{{$v->name}}" class="J_MakePoint" data-point="tbcart.8.12">
 												<img src="{{$v->shop_img}}" class="itempic J_ItemImg"></a>
+=======
+											<a href="#" target="_blank" data-title="{{$car['goodsinfo']->gname}}" class="J_MakePoint" data-point="tbcart.8.12">
+												<img src="@php
+                                               $tu = DB::table('goods_img')->where('gid',$car['id'])->first();
+                                               echo $tu->gpic;
+                                               @endphp" class="itempic J_ItemImg" width="80px"></a>
+>>>>>>> Stashed changes
 										</div>
 										<div class="item-info">
 											<div class="item-basic-info">
-												<a href="#" target="_blank" title="{{$v->name}}" class="item-title J_MakePoint" data-point="tbcart.8.11">{{$v->name}}</a>
+												<a href="#" target="_blank" title="{{$car['goodsinfo']->gname}}" class="item-title J_MakePoint" data-point="tbcart.8.11">{{$car['goodsinfo']->gname}}</a>
 											</div>
 										</div>
 									</li>
 									<li class="td td-info">
 										<div class="item-props item-props-can">
-											<span class="sku-line">{{$v->norns}}</span>
+											<span class="sku-line">{{$car['goodsinfo']->norns}}</span>
 											<span class="sku-line"></span>
 											<span tabindex="0" class="btn-edit-sku theme-login">修改</span>
 											<i class="theme-login am-icon-sort-desc"></i>
@@ -160,11 +191,16 @@
 									<li class="td td-price">
 										<div class="item-price price-promo-promo">
 											<div class="price-content">
+												
 												<div class="price-line">
+<<<<<<< Updated upstream
 													<em class="price-original">{{$v->prime}}</em>
 												</div>
 												<div class="price-line">
 													<em class="J_Price price-now" tabindex="0">{{$v->price}}</em>
+=======
+													<em class="J_Price price-now" tabindex="0">{{$car['goodsinfo']->price}}</em>
+>>>>>>> Stashed changes
 												</div>
 											</div>
 										</div>
@@ -174,7 +210,7 @@
 											<div class="item-amount ">
 												<div class="sl">
 													<input class="mins am-btn" name="" type="button" value="-" />
-													<input class="text_box" name="" type="text" value="{{$v->num}}" style="width:30px;" />
+													<input class="text_box" name="" type="text" value="{{$car['num']}}" style="width:30px;" />
 													<input class="add am-btn" name="" type="button" value="+" />
 												</div>
 											</div>
@@ -182,20 +218,31 @@
 									</li>
 									<li class="td td-sum">
 										<div class="td-inner">
+<<<<<<< Updated upstream
 											<em tabindex="0" class="J_ItemSum number">{{$v->num*$v->price}}</em>
+=======
+											<em tabindex="0" class="J_ItemSum number">{{$car['goodsinfo']->price*$car['num']}}</em>
+>>>>>>> Stashed changes
 										</div>
 									</li>
 									<li class="td td-op">
 										<div class="td-inner">
 											<a title="移入收藏夹" class="btn-fav" href="#">
                   移入收藏夹</a>
-											<a href="javascript:void(0)" data-point-url="#" class="delete">
+											<a href="javascript:void(0)" data-point-url="#" class="delete" gid="{{$car['id']}}">
                   删除</a>
 										</div>
 									</li>
 								</ul>
 							</div>
+<<<<<<< Updated upstream
 							@endforeach
+=======
+						
+				@endforeach
+
+
+>>>>>>> Stashed changes
 						</div>
 					</tr>
 				</div>
@@ -212,7 +259,7 @@
 					</div>
 					<div class="operations">
 						<a href="javascript:void(0)" hidefocus="true" class="deleteAll">删除</a>
-						<a href="#" hidefocus="true" class="J_BatchFav">移入收藏夹</a>
+						<a href="#" hidefocus="true" class="J_BatchFav">清空购物车</a>
 					</div>
 					<div class="float-bar-right">
 						<div class="amount-sum">
@@ -453,25 +500,6 @@
 		    }
 		});
 	
-		// 删除数据
-		$('.delete').click(function(){
-			// 提示信息
-			var res = confirm('真的决定要删除宝贝吗？');
-			if(!res) return;
-			// 将参数发送到控制器中 
-			// 获取id
-			var gid = $(this).parents('ul').find('.check').attr('gid');
-			var rem = $(this);
-			// console.log(gid);
-			$.post('/home/shopdata',{gid:gid},function(data){
-				if(data == 1){
-					rem.parents('.bundle-main').remove();
-					// 刷新
-					nums()
-				}
-				// console.log(data);
-			})
-		})
 		$.ajaxSetup({
 		    headers: {
 		        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -513,5 +541,23 @@
 			}
 		}
 		nums()
+	</script>
+	<script>
+		 // 删除商品的弹出框
+    $('.delete').click(function(){
+        var gid = $(this).attr('gid');
+        
+        $.post('/home/shopdel',{gid:gid},function(data){
+            
+            
+             if(data){
+               $("#shop_"+gid).remove();
+                 //刷新
+               window.location.reload(); 
+             };   
+        });
+
+    })
+
 	</script>
 </html>
