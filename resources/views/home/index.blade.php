@@ -5,6 +5,9 @@
 		<script src="/homes/AmazeUI-2.4.2/assets/js/jquery.min.js"></script>
 		<script src="/homes/AmazeUI-2.4.2/assets/js/amazeui.min.js"></script>
 		<script type="text/javascript" src="/homes/js/jquery.SuperSlide2.js"></script>
+		<style type="text/css">
+			.title{width: 80%; line-height: 28px; overflow: hidden; text-overflow:ellipsis; white-space:nowrap;}
+		</style>
 @section('content')
 			<div class="banner">
                       <!--轮播 -->
@@ -73,66 +76,6 @@
 											<b class="arrow"></b>	
 											</li>
 											@endforeach
-											<li class="appliance js_toggle relative">
-												<div class="category-info">
-													<h3 class="category-name b-category-name"><i><img src="/homes/images/cookies.png"></i><a class="ml-22" title="饼干、膨化">饼干/膨化</a></h3>
-													<em>&gt;</em></div>
-												<div class="menu-item menu-in top">
-													<div class="area-in">
-														<div class="area-bg">
-															<div class="menu-srot">
-																<div class="sort-side">
-																	<dl class="dl-sort">
-																		<dt><span title="饼干">饼干</span></dt>
-																		<dd><a title="蒸蛋糕" href="#"><span>蒸蛋糕</span></a></dd>
-																		<dd><a title="脱水蛋糕" href="#"><span>脱水蛋糕</span></a></dd>
-																		<dd><a title="瑞士卷" href="#"><span>瑞士卷</span></a></dd>
-																		<dd><a title="软面包" href="#"><span>软面包</span></a></dd>
-																		<dd><a title="马卡龙" href="#"><span>马卡龙</span></a></dd>
-																	</dl>
-																	<dl class="dl-sort">
-																		<dt><span title="薯片">薯片</span></dt>
-																		<dd><a title="蒸蛋糕" href="#"><span>蒸蛋糕</span></a></dd>
-																		<dd><a title="脱水蛋糕" href="#"><span>脱水蛋糕</span></a></dd>
-																		<dd><a title="瑞士卷" href="#"><span>瑞士卷</span></a></dd>
-																		<dd><a title="软面包" href="#"><span>软面包</span></a></dd>
-																		<dd><a title="马卡龙" href="#"><span>马卡龙</span></a></dd>
-																		<dd><a title="千层饼" href="#"><span>千层饼</span></a></dd>
-																		<dd><a title="甜甜圈" href="#"><span>甜甜圈</span></a></dd>
-																		<dd><a title="蒸三明治" href="#"><span>蒸三明治</span></a></dd>
-																		<dd><a title="铜锣烧" href="#"><span>铜锣烧</span></a></dd>
-																	</dl>
-																	<dl class="dl-sort">
-																		<dt><span title="蛋糕">虾条</span></dt>
-																		<dd><a title="蒸蛋糕" href="#"><span>蒸蛋糕</span></a></dd>
-																		<dd><a title="脱水蛋糕" href="#"><span>脱水蛋糕</span></a></dd>
-																		<dd><a title="瑞士卷" href="#"><span>瑞士卷</span></a></dd>
-																		<dd><a title="软面包" href="#"><span>软面包</span></a></dd>
-																		<dd><a title="马卡龙" href="#"><span>马卡龙</span></a></dd>
-																		<dd><a title="千层饼" href="#"><span>千层饼</span></a></dd>
-																		<dd><a title="甜甜圈" href="#"><span>甜甜圈</span></a></dd>
-																		<dd><a title="蒸三明治" href="#"><span>蒸三明治</span></a></dd>
-																		<dd><a title="铜锣烧" href="#"><span>铜锣烧</span></a></dd>
-																	</dl>
-																</div>
-																<div class="brand-side">
-																	<dl class="dl-sort"><dt><span>实力商家</span></dt>
-																		<dd><a rel="nofollow" title="YYKCLOT" target="_blank" href="#" rel="nofollow"><span  class ="red" >YYKCLOT</span></a></dd>
-																		<dd><a rel="nofollow" title="池氏品牌男装" target="_blank" href="#" rel="nofollow"><span  class ="red" >池氏品牌男装</span></a></dd>
-																		<dd><a rel="nofollow" title="男装日志" target="_blank" href="#" rel="nofollow"><span >男装日志</span></a></dd>
-																		<dd><a rel="nofollow" title="索比诺官方旗舰店" target="_blank" href="#" rel="nofollow"><span >索比诺官方旗舰店</span></a></dd>
-																		<dd><a rel="nofollow" title="onTTno傲徒" target="_blank" href="#" rel="nofollow"><span  class ="red" >onTTno傲徒</span></a></dd>
-																		<dd><a rel="nofollow" title="玛狮路男装旗舰店" target="_blank" href="#" rel="nofollow"><span >玛狮路男装旗舰店</span></a></dd>
-																		<dd><a rel="nofollow" title="劳威特品牌男装" target="_blank" href="#" rel="nofollow"><span >劳威特品牌男装</span></a></dd>
-																		<dd><a rel="nofollow" title="卡斯郎世家批发城" target="_blank" href="#" rel="nofollow"><span  class ="red" >卡斯郎世家批发城</span></a></dd>
-																	</dl>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-                                             <b class="arrow"></b>
-											</li>
 											<li class="appliance js_toggle relative">
 												<div class="category-info">
 													<h3 class="category-name b-category-name"><i><img src="/homes/images/meat.png"></i><a class="ml-22" title="熟食、肉类">熟食/肉类</a></h3>
@@ -641,13 +584,14 @@
 						});
 					</script>
 					@foreach($type as $k => $v)
+					@foreach($array as $n)
+					@if($v->id == $n)
                     <div id="f{{$v->id}}">
 					<!--甜点-->
 					
 					<div class="am-container ">
 						<div class="shopTitle ">
 							<h4>{{$v->tname}}</h4>
-							<h3>每一道甜品都有一个故事</h3>
 							<div class="today-brands ">
 								@foreach($arr as $ke =>$va )
 									@if($v->id == $va->pid)
@@ -671,25 +615,16 @@
 									@endif
 								@endforeach					
 							</div>
-							<a href="# ">
-								<div class="outer-con ">
-									<div class="title ">
-									开抢啦！
-									</div>
-									<div class="sub-title ">
-										零食大礼包
-									</div>									
-								</div>
-                                  <img src="/homes/images/act1.png " />								
-							</a>
+						
 							<div class="triangle-topright"></div>						
 						</div> 
-						@foreach($gods[$v->id] as $key => $val)
+						@foreach($gods[$n] as $key => $val)
+						@if($v->id == $val->pid)
 						@if($key == 0)
 						<div class="am-u-sm-7 am-u-md-4 text-two sug">
 						@foreach($img as $vlu)
 								@if($vlu->gid == $val->id)
-								<a href="http://g-mall.cn/home/detail/{{$val->id}}"><img src="{{$vlu->gpic}}" /></a>
+								<a href="http://g-mall.cn/home/detail/{{$val->id}}"><img src="{{$vlu->gpic}}" width="180" height="180" /></a>
 								@endif						
 						@endforeach
 								<div class="outer-con ">
@@ -706,7 +641,7 @@
 						<div class="am-u-sm-7 am-u-md-4 text-two">
 						@foreach($img as $vlu)
 								@if($vlu->gid == $val->id)
-								<a href="http://g-mall.cn/home/detail/{{$val->id}}"><img src="{{$vlu->gpic}}" /></a>
+								<a href="http://g-mall.cn/home/detail/{{$val->id}}"><img src="{{$vlu->gpic}}" width="180" height="180" /></a>
 								@endif						
 						@endforeach
 								<div class="outer-con ">
@@ -723,7 +658,7 @@
 						<div class="am-u-sm-3 am-u-md-2 text-three big">
 						@foreach($img as $vlu)
 							@if($vlu->gid == $val->id)
-								<a href="http://g-mall.cn/home/detail/{{$val->id}}"><img src="{{$vlu->gpic}}" /></a>
+								<a href="http://g-mall.cn/home/detail/{{$val->id}}"><img src="{{$vlu->gpic}}" width="180" height="180" /></a>
 								@endif						
 						@endforeach
 							<div class="outer-con ">
@@ -740,7 +675,7 @@
 						<div class="am-u-sm-3 am-u-md-2 text-three sug">
 						@foreach($img as $vlu)
 							@if($vlu->gid == $val->id)
-								<a href="http://g-mall.cn/home/detail/{{$val->id}}"><img src="{{$vlu->gpic}}" /></a>
+								<a href="http://g-mall.cn/home/detail/{{$val->id}}"><img src="{{$vlu->gpic}}" width="180" height="180" /></a>
 								@endif						
 						@endforeach
 							<div class="outer-con ">
@@ -757,7 +692,7 @@
 						<div class="am-u-sm-3 am-u-md-2 text-three ">
 						@foreach($img as $vlu)
 							@if($vlu->gid == $val->id)
-								<a href="http://g-mall.cn/home/detail/{{$val->id}}"><img src="{{$vlu->gpic}}" /></a>
+								<a href="http://g-mall.cn/home/detail/{{$val->id}}"><img src="{{$vlu->gpic}}" width="180" height="180" /></a>
 								@endif						
 						@endforeach
 							<div class="outer-con ">
@@ -783,15 +718,17 @@
 							</div>
 						@foreach($img as $vlu)
 							@if($vlu->gid == $val->id)
-								<a href="http://g-mall.cn/home/detail/{{$val->id}}"><img src="{{$vlu->gpic}}" /></a>
+								<a href="http://g-mall.cn/home/detail/{{$val->id}}"><img src="{{$vlu->gpic}}" width="180" height="180" /></a>
 								@endif						
 						@endforeach
 						</div>	
 						@endif
+						@endif
 					@endforeach
                  <div class="clear "></div>  
                  </div>
-                 
+                 @endif
+				 @endforeach
                  @endforeach
 @stop
 @section('js')

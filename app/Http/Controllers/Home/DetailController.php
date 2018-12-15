@@ -15,6 +15,9 @@ class DetailController extends Controller
     public function detail(Request $request,$id)
     {
         // 商品详情
+        // dd($id);
+         session('gid',$id);
+        // dd($a);
     	$good = Goods::where('id',$id)->get();
     	$imgs = Goodsimg::where('gid',$id)->get();
     	$img = Goodsimg::where('gid',$id)->first();
@@ -23,8 +26,13 @@ class DetailController extends Controller
             $prices = explode(',', $v->price);
             $disc = explode(',', $v->discount);
         }
-
-    	// dd($prices);
+        $ord = DB::table('orders')->where([['gid',$id],['o_status',0]])->get();
+        foreach ($ord as $k => $v) {
+            $det = DB::table('detail')->where('oid',$v->id)->get();
+        }
+        // dd($det);
+       /* $ord = DB::table('orders')->join('detail','detail.oid','=','orders.id')->join('orders','orders.o_status','0')->select('detail.id')->get();
+    	dd($ord);*/
         // 评论
         /*// $com = DB::table('comment')->where('gid',$id)->get();
         $com = DB::table('goods')->join('comment','goods.id', '=', 'comment.gid')
@@ -67,8 +75,8 @@ class DetailController extends Controller
         foreach ($data as $k => $v) {
             $user = DB::table('customer')->where('id',$v->uid)->get();
         }
-        // dd($pp);
-    	return view('home.detail',['title'=>'前台详情页','good'=>$good,'imgs'=>$imgs,'img'=>$img,'arr'=>$arr,'prices'=>$prices,'disc'=>$disc,'data'=>$data,'user'=>$user,'prev'=>$prev,'next'=>$next,'sums'=>$sums,'pp'=>$pp,'page'=>$page]);
+        // dd($user);
+    	return view('home.detail',['title'=>'前台详情页','good'=>$good,'imgs'=>$imgs,'img'=>$img,'arr'=>$arr,'prices'=>$prices,'disc'=>$disc,'data'=>$data,'det'=>$det,'user'=>$user,'prev'=>$prev,'next'=>$next,'sums'=>$sums,'pp'=>$pp,'page'=>$page]);
     }
     public function detailadd(Request $request)
     {
