@@ -552,7 +552,16 @@
 														<div class="J_TbcRate_ReviewContent tb-tbcr-content ">
 															{{$val->content}}
 														</div>
+<<<<<<< HEAD
 														
+=======
+														<div class="tb-r-act-bar">
+
+															口味：
+
+														
+								</div>
+>>>>>>> fdfcf55a7505d6ea93b5e9854c03ffea44c364f5
 													</div>
 
 												</div>

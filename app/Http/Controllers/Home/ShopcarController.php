@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use DB;
 class ShopcarController extends Controller
 {
+
     //购物车显示
     public function shopcar(Request $request)
     {
@@ -19,10 +20,13 @@ class ShopcarController extends Controller
             'shop'=>$shop
         ]);
     }
+
    
+
      // 删除商品
     public function shopdel(Request $request)
     {
+
         $id = $request->input('gid');
         
        
@@ -56,6 +60,7 @@ class ShopcarController extends Controller
             }
          }
 
+
          //将数据写入到session中
          $request->session()->put('shop',$shop);
 
@@ -63,8 +68,17 @@ class ShopcarController extends Controller
     }
 
 
+         //将数据写入到session中
+         $request->session()->put('shop',$shop);
+
+         echo 1;
+    }
+
+
+
     //购物车数量的减
     public function shopdec(Request $request)
+
     {
         //获取修改的id
         $id=$request->input('id');
