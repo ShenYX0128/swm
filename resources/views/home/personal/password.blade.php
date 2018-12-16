@@ -24,16 +24,8 @@
 					   <div class="long-title"><span class="all-goods">全部分类</span></div>
 					   <div class="nav-cont">
 							<ul>
-								<li class="index"><a href="#">首页</a></li>
-                                <li class="qc"><a href="#">闪购</a></li>
-                                <li class="qc"><a href="#">限时抢</a></li>
-                                <li class="qc"><a href="#">团购</a></li>
-                                <li class="qc last"><a href="#">大包装</a></li>
+								<li class="index"><a href="/">首页</a></li>
 							</ul>
-						    <div class="nav-extra">
-						    	<i class="am-icon-user-secret am-icon-md nav-user"></i><b></b>我的福利
-						    	<i class="am-icon-angle-right" style="padding-left: 10px;"></i>
-						    </div>
 						</div>
 			</div>
 			<b class="line"></b>
@@ -83,6 +75,25 @@
 							<input type="button" id='but' value="获取验证码" style="position: relative; left:303px;top:-32px;height: 32px; background:#dd514c; color:#fff;    border-color: #dd514c;font-size:12px;padding-left:10px;padding-right:10px;">
 							<span class="sp"> *请输入验证码</span>
 						</div>
+							<script type="text/javascript">
+								$('#but').click(function(){
+									var t = 60;
+									var into = null;
+									var but = $(this);
+									into = setInterval(function(){
+										but.attr('disabled',true);
+										but.val(t);
+										but.css('cursor','not-allowed');
+										t--;
+										if (t==0) {
+											but.val('验证码');
+											but.attr('disabled',false);
+											but.css('cursor','pointer');
+											clearInterval(into);
+										};
+									},1000)
+								})
+				        	</script>
 						<div class="am-form-group" style="width: 386px;">
 							<label for="user-new-password" class="am-form-label">新密码</label>
 							<div class="am-form-content">
@@ -187,7 +198,7 @@
 			//发送ajax
 			$.get('/home/getcode',{code:cd},function(data){
 
-				if(data == '0'){
+				if(data == 0){
 
 					cs.parents('.am-form-group').find('.sp').text(' *验证码不正确').css('color','#e53e41');
 
@@ -288,48 +299,7 @@
 		})
 	</script>
 
-			<aside class="menu">
-				<ul>
-					<li class="person">
-						<a href="index.html">个人中心</a>
-					</li>
-					<li class="person">
-						<a href="#">个人资料</a>
-						<ul>
-							<li> <a href="/home/personal/information">个人信息</a></li>
-							<li> <a href="/home/personal/safety">安全设置</a></li>
-							<li> <a href="/home/personal/address">收货地址</a></li>
-						</ul>
-					</li>
-					<li class="person">
-						<a href="#">我的交易</a>
-						<ul>
-							<li><a href="order.html">订单管理</a></li>
-							<li> <a href="change.html">退款售后</a></li>
-						</ul>
-					</li>
-					<li class="person">
-						<a href="#">我的资产</a>
-						<ul>
-							<li> <a href="coupon.html">优惠券 </a></li>
-							<li> <a href="bonus.html">红包</a></li>
-							<li> <a href="bill.html">账单明细</a></li>
-						</ul>
-					</li>
-
-					<li class="person">
-						<a href="#">我的小窝</a>
-						<ul>
-							<li> <a href="collection.html">收藏</a></li>
-							<li> <a href="foot.html">足迹</a></li>
-							<li> <a href="comment.html">评价</a></li>
-							<li> <a href="news.html">消息</a></li>
-						</ul>
-					</li>
-
-				</ul>
-
-			</aside>
+			
 		</div>
 
 	</body>

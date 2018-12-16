@@ -1,6 +1,7 @@
 @extends('layout.index')
 @section('title',$title)
-
+<link rel="stylesheet" href="/admins/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+<link rel="stylesheet" href="/admins/dist/css/skins/_all-skins.min.css">
 @section('content')
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -28,9 +29,6 @@
                                 </option>
                                 <option value="15" @if($request->num == 15) selected="selected" @endif>
                                     15
-                                </option>
-                                <option value="20" @if($request->num == 20) selected="selected" @endif>
-                                    20
                                 </option>
                             </select>
                             条数据

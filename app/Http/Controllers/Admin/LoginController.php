@@ -28,19 +28,19 @@ class LoginController extends Controller
         
         if(!$rs){
 
-            return back()->with('error','用户名或者密码错误');
+            return back()->with('error','管理员名或者密码错误');
         }
         //判断用户身份
         if($rs->auth != '0'){
 
-            return back()->with('error','用户没有权限，请联系上级BOSS给予权限');
+            return back()->with('error','管理员已被禁用，请联系超级管理员');
         }
 
         //判断密码
         //hash
         if (!Hash::check($request->password, $rs->password)) {
             
-            return back()->with('error','用户名或者密码错误');
+            return back()->with('error','管理员名或者密码错误');
         }
 
         //判断验证码

@@ -164,7 +164,7 @@ class RoleController extends Controller
 
             $data = Role::where('id',$id)->update($res);
             
-            if($data){
+            if($data==0 || $data){
                 return redirect('/admin/role')->with('success','修改成功');
             }
 

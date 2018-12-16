@@ -51,6 +51,29 @@ class PersonalController extends Controller
         }
     }
 
+    //实时改变用户头像
+    public function profile(Request $request)
+    {
+        //获取上传的文件对象
+        $file = $request->file('profile');
+        //判断文件是否有效
+        if($file->isValid()){
+            //上传文件的后缀名
+            $entension = $file->getClientOriginalExtension();
+            //修改名字
+            $newName = date('YmdHis').mt_rand(1000,9999).'.'.$entension;
+            //移动文件
+            $path = $file->move('./uploads',$newName);
+
+            $filepath = '/uploads/'.$newName;
+
+            $res['profile'] = $filepath;
+            DB::table('customer')->where('id',session('cid'))->update($res);
+            //返回文件的路径
+            return  $filepath;
+        }
+    }
+
     //收货地址
     public function address()
     {
@@ -83,10 +106,12 @@ class PersonalController extends Controller
         $id = $request->input('id');
 
         $res = DB::table('address')->where('id',$id)->first();
+        
+        $rs = DB::table('customer')->where('id',session('cid'))->first();
        
         if($res->status){
-            DB::update('update address set status="0" where id =?',[$id]);
-            DB::update('update address set status="1" where id !=?',[$id]);    
+            DB::update('update address set status="0" where cid=? && id =?',[session('cid'),$id]);
+            DB::update('update address set status="1" where  cid=? && id !=?',[session('cid'),$id]);    
         }
             
     }
@@ -124,7 +149,7 @@ class PersonalController extends Controller
  
             $data = address::where('id', $id)->update($res);
             
-            if($data){
+            if($data==0 || $data){
                 return redirect('/home/personal/address')->with('alert','修改成功');
             }
 
@@ -161,7 +186,8 @@ class PersonalController extends Controller
         $code = rand(111111,999999);
 
         //session
-        session('code',$code);
+        session(['code'=>$code]);
+
 
         $appId = "28b753e772144ea48f54a6bde1979869";
         
@@ -178,7 +204,7 @@ class PersonalController extends Controller
         $code = $request->get('code');
 
         $cd = session('code');
-        dump($code,$cd);
+        //dump($code,$cd);
         //比较   跟手机收到的验证码作比较
         if($code == $cd){
 
@@ -201,7 +227,7 @@ class PersonalController extends Controller
             $data = customer::where('id', $id)->update($res);
             
             if($data){
-                return redirect('/home/personal/information')->with('alert','修改成功');
+                return redirect('/')->with('alert','修改成功');
             }
 
         }catch(\Exception $e){
