@@ -149,7 +149,7 @@ class PersonalController extends Controller
  
             $data = address::where('id', $id)->update($res);
             
-            if($data){
+            if($data==0 || $data){
                 return redirect('/home/personal/address')->with('alert','修改成功');
             }
 
@@ -186,7 +186,8 @@ class PersonalController extends Controller
         $code = rand(111111,999999);
 
         //session
-        session('code',$code);
+        session(['code'=>$code]);
+
 
         $appId = "28b753e772144ea48f54a6bde1979869";
         
@@ -203,7 +204,7 @@ class PersonalController extends Controller
         $code = $request->get('code');
 
         $cd = session('code');
-        dump($code,$cd);
+        //dump($code,$cd);
         //比较   跟手机收到的验证码作比较
         if($code == $cd){
 

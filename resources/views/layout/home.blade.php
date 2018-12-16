@@ -131,7 +131,11 @@
 				@endphp
 
 						<div class="avatar_box ">
+							@if(!$customer->profile)
+							<p class="avatar_imgbox"><img src="/homes/images/no-img_mid_.jpg" / style="width:100px;height:100px;margin-right:30px;"></p>
+							@else
 							<p class="avatar_imgbox"><img src="{{$customer->profile}}" / style="width:100px;height:100px;margin-right:30px;"></p>
+							@endif
 							<ul class="user_info ">
 								@if(!$customer->customername)
 								<li>{{$customer->phone}}</li>

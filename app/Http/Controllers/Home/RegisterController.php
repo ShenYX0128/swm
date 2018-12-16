@@ -49,6 +49,7 @@ class RegisterController extends Controller
     	$code = $request->get('code');
 
     	$cd = session('code');
+        //dump($code,$cd);
     	//比较   跟手机收到的验证码作比较
     	if($code == $cd){
 

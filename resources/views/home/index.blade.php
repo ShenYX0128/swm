@@ -418,7 +418,11 @@
 									</a>
 								@endif
 								<em>
+								@if(!$customer->customername)
+									Hi,<span class="s-name">{{$customer->phone}}</span>
+								@else	
 									Hi,<span class="s-name">{{$customer->customername}}</span>
+								@endif	
 									<a href="#"><p>点击更多优惠活动</p></a>									
 								</em>
 							</div>

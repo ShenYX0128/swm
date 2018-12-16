@@ -48,9 +48,29 @@
 								<div class="verification" style="margin-bottom:30px">
 									<label for="code"><i class="am-icon-code-fork"></i></label>
 									<input type="text" name="code" id="code" placeholder="请输入验证码" style="width: 200px;">
-									<input id='but' type="button" value='验证码'style="width:95px;text-align:center;padding-left:10px;" >
+									<input id='but' type="button" value='验证码'style="width:95px;text-align:center;padding-left:10px;"  >
 								    <span style="display:block"></span>
 								</div>
+			<script type="text/javascript">
+				$('#but').click(function(){
+					var t = 60;
+					var into = null;
+					var but = $(this);
+					into = setInterval(function(){
+						but.attr('disabled',true);
+						but.val(t);
+						but.css('cursor','not-allowed');
+						t--;
+						if (t==0) {
+							but.val('验证码');
+							but.attr('disabled',false);
+							but.css('cursor','pointer');
+							clearInterval(into);
+						};
+					},1000)
+				})
+        	</script>
+
 
                  				<div class="user-pass">
 								    <label for="password"><i class="am-icon-lock"></i></label>

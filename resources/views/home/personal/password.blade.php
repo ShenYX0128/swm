@@ -75,6 +75,25 @@
 							<input type="button" id='but' value="获取验证码" style="position: relative; left:303px;top:-32px;height: 32px; background:#dd514c; color:#fff;    border-color: #dd514c;font-size:12px;padding-left:10px;padding-right:10px;">
 							<span class="sp"> *请输入验证码</span>
 						</div>
+							<script type="text/javascript">
+								$('#but').click(function(){
+									var t = 60;
+									var into = null;
+									var but = $(this);
+									into = setInterval(function(){
+										but.attr('disabled',true);
+										but.val(t);
+										but.css('cursor','not-allowed');
+										t--;
+										if (t==0) {
+											but.val('验证码');
+											but.attr('disabled',false);
+											but.css('cursor','pointer');
+											clearInterval(into);
+										};
+									},1000)
+								})
+				        	</script>
 						<div class="am-form-group" style="width: 386px;">
 							<label for="user-new-password" class="am-form-label">新密码</label>
 							<div class="am-form-content">
@@ -179,7 +198,7 @@
 			//发送ajax
 			$.get('/home/getcode',{code:cd},function(data){
 
-				if(data == '0'){
+				if(data == 0){
 
 					cs.parents('.am-form-group').find('.sp').text(' *验证码不正确').css('color','#e53e41');
 
