@@ -47,7 +47,7 @@ class ListController extends Controller
     {
 
         //查询
-        $goods = Goods::where('tid',$id)->paginate(12);
+        $goods = Goods::where([['tid',$id],['status','1']])->paginate(12);
         $gid=[];
         foreach ($goods as $k => $v) {
             $gid[] = $v->id;

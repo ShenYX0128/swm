@@ -16,8 +16,9 @@ class DetailController extends Controller
     {
         // 商品详情
         // dd($id);
-         session('gid',$id);
-        // dd($a);
+         // session('gid',$id);
+        // dd(session('gid',$id));
+        session()->put('gid',$id);
     	$good = Goods::where('id',$id)->get();
     	$imgs = Goodsimg::where('gid',$id)->get();
     	$img = Goodsimg::where('gid',$id)->first();
@@ -26,11 +27,9 @@ class DetailController extends Controller
             $prices = explode(',', $v->price);
             $disc = explode(',', $v->discount);
         }
-        $ord = DB::table('orders')->where([['gid',$id],['o_status',0]])->get();
-        foreach ($ord as $k => $v) {
-            $det = DB::table('detail')->where('oid',$v->id)->get();
-        }
+       
         // dd($det);
+        // dd(session('gid'));
        /* $ord = DB::table('orders')->join('detail','detail.oid','=','orders.id')->join('orders','orders.o_status','0')->select('detail.id')->get();
     	dd($ord);*/
         // 评论
@@ -44,11 +43,10 @@ class DetailController extends Controller
         
         // dd($com->links());
         //1、查询数据库总条数
-        $count = count(DB::table('goods')->join('comment','goods.id', '=', 'comment.gid')->select('goods.norns','comment.uid','comment.gid','comment.content','comment.star','comment.addtime')
-                ->get());
+        $count = count(DB::table('comment')->where('gid',$id)->get());
         // dd($count);
         //2、设置每页显示条数
-        $rev = '1';
+        $rev = '4';
         //3、求总页数
         $sums = ceil($count/$rev);
         // dd($sums);
@@ -64,19 +62,26 @@ class DetailController extends Controller
         //6、求偏移量
         $offset = ($page-1)*$rev;
         //7、sql查询数据库
-        $data = DB::table('goods')->join('comment','goods.id', '=', 'comment.gid')->select('goods.norns','comment.uid','comment.gid','comment.content','comment.star','comment.addtime')
-                ->paginate($rev);
+        $data =DB::table('comment')->where('gid',$id)->paginate($rev);
         //8、数字分页(可有可无)
         $pp = array();
         for($i=1;$i<=$sums;$i++){
         $pp[$i]=$i;
         }
-        
-        foreach ($data as $k => $v) {
-            $user = DB::table('customer')->where('id',$v->uid)->get();
+        // dd($data);
+        if($data->count()){
+            foreach ($data as $k => $v) {
+                $user = DB::table('customer')->where('id',$v->uid)->get();
+            }
+        }else{
+            $user = 1;
         }
+        
+        $hao = count(DB::table('comment')->where([['gid',$id],['star',2]])->get());
+        $zhong = count(DB::table('comment')->where([['gid',$id],['star',1]])->get());
+        $cha = count(DB::table('comment')->where([['gid',$id],['star',0]])->get());
         // dd($user);
-    	return view('home.detail',['title'=>'前台详情页','good'=>$good,'imgs'=>$imgs,'img'=>$img,'arr'=>$arr,'prices'=>$prices,'disc'=>$disc,'data'=>$data,'det'=>$det,'user'=>$user,'prev'=>$prev,'next'=>$next,'sums'=>$sums,'pp'=>$pp,'page'=>$page]);
+    	return view('home.detail',['title'=>'前台详情页','good'=>$good,'imgs'=>$imgs,'img'=>$img,'arr'=>$arr,'prices'=>$prices,'disc'=>$disc,'data'=>$data,'user'=>$user,'prev'=>$prev,'next'=>$next,'sums'=>$sums,'pp'=>$pp,'page'=>$page,'count'=>$count,'hao'=>$hao,'zhong'=>$zhong,'cha'=>$cha]);
     }
     public function detailadd(Request $request)
     {
@@ -110,12 +115,11 @@ class DetailController extends Controller
         
     }
     public function page(){
+
         //1、查询数据库总条数
-        $count = count(DB::table('goods')->join('comment','goods.id', '=', 'comment.gid')
-                    ->select('goods.norns','comment.uid','comment.gid','comment.content','comment.star','comment.addtime')
-                ->get());
+        $count = count(DB::table('comment')->where('gid',session('gid'))->get());
         //2、设置每页显示条数
-        $rev = '1';
+        $rev = '4';
         //3、求总页数
         $sums = ceil($count/$rev);
         //4、求单前页
@@ -129,17 +133,20 @@ class DetailController extends Controller
         //6、求偏移量
         $offset = ($page-1)*$rev;
         //7、sql查询数据库
-        $data = DB::table('goods')->join('comment','goods.id', '=', 'comment.gid')->select('goods.norns','comment.uid','comment.gid','comment.content','comment.star','comment.addtime')
-                ->paginate($rev);
+        $data = DB::table('comment')->where('gid',session('gid'))->paginate($rev);
         //8、数字分页(可有可无)
         $pp = array();
         for($i=1;$i<=$sums;$i++){
         $pp[$i]=$i;
         }
-        foreach ($data as $k => $v) {
-            $user = DB::table('customer')->where('id',$v->uid)->get();
+        if($data->count()){
+            foreach ($data as $k => $v) {
+                $user = DB::table('customer')->where('id',$v->uid)->get();
+            }
+        }else{
+            $user = 1;
         }
-        return view('home.page',['data'=>$data,'user'=>$user,'prev'=>$prev,'next'=>$next,'sums'=>$sums,'pp'=>$pp,'page'=>$page]);
+        return view('home.page',['data'=>$data,'user'=>$user,'prev'=>$prev,'next'=>$next,'sums'=>$sums,'pp'=>$pp,'page'=>$page,'count'=>$count]);
     }
   
 }

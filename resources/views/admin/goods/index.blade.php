@@ -3,6 +3,9 @@
 <link rel="stylesheet" href="/admins/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
 <link rel="stylesheet" href="/admins/dist/css/skins/_all-skins.min.css">
         <script type="text/javascript" src="/homes/js/jquery.js"></script>
+<style type="text/css">
+    .des img{ height: 50%;}
+</style>
 @section('content')
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -106,7 +109,7 @@
                                 <td>{{$v->tid}}</td>
                                 <td>{{$v->price}}</td>
                                 <td>{{$v->norns}}</td>
-                                <td>{{$v->descr}}</td>
+                                <td class="des" style="width: 400px; height: 100px; overflow: hidden;white-space:nowrap;">{!!$v->descr!!}</td>
                                 <td>{{$v->stock}}</td>
                                 <td>
                                     @if($v->status==1)

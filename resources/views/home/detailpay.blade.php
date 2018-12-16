@@ -2,6 +2,7 @@
 @section('title',$title)
 		<meta name="_token" content="{!! csrf_token() !!}">
 		<link href="/homes/css/jsstyle.css" rel="stylesheet" type="text/css" />
+		<link href="/homes/css/cartstyle.css" rel="stylesheet" type="text/css" />
 		<script type="text/javascript" src="/homes/js/address.js"></script>
 @section('content')
 <!--地址 -->
@@ -248,7 +249,7 @@
 	});
 	$('#J_Go').click(function(){
 
-		$.post('/home/paycreate',{oname:n,o_address:a,o_phone:p,oid:{{$order->id}},total:{{$val->d_num*$val->price,o_status:3}}},function(data){
+		$.post('/home/paycreate',{oname:n,o_address:a,o_phone:p,oid:{{$order->id}},total:{{$val->d_num*$val->price}},o_status:3},function(data){
 			location.href='/home/success/{{$order->id}}';
 		})
 	})

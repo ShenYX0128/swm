@@ -9,7 +9,6 @@
 
 @section('content')
 		
->>>>>>> 94eb53332f1b7e608985e4d91ec3437f5ceb3235
 			<div class="take-delivery">
 			 <div class="status">
 			   <h2>订单成功</h2>

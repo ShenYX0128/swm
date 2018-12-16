@@ -58,7 +58,7 @@ class DetailpayController extends Controller
     	if($deta){
     		$re = DB::table('detail')->insert($deta);
     	}
-    	
+    
     	if($res && $re){
     		echo "<script>location.href='/home/detailpay'</script>";
     	} else{
