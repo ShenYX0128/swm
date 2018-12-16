@@ -24,11 +24,15 @@ class LoginController extends Controller
     	//判断手机号
         $rs = DB::table('customer')->where('phone',$request->phone)->first();
         //dd($rs);
-        if(!$rs){
+        $rss = DB::table('customer')->where('customername',$request->phone)->first();
+        if(!$rs && !$rss){
 
             return back()->with('error','账号或者密码错误');
         }
 
+          
+        
+            
         //判断密码
         //hash
         if (!Hash::check($request->password, $rs->password)) {

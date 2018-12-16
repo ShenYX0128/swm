@@ -1,39 +1,23 @@
 @extends('layout.index')
 @section('title',$title)
+<link rel="stylesheet" href="/admins/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+<link rel="stylesheet" href="/admins/dist/css/skins/_all-skins.min.css">
 @section('content')
-	<section class="content-header">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+    <h1>
+        用户管理
+      </h1>
     </section>
     <section class="content">
-      <div class="row">
-      	<div class="col-md-8 col-md-offset-2">
-		    <!-- general form elements -->
-		    <div class="box box-primary">
-		        <div class="box-header with-border">
-		            <h3 class="box-title">
-		                <font style="vertical-align: inherit;">
-		                    <font style="vertical-align: inherit;">
-		                        {{$title}}
-		                    </font>
-		                </font>
-		            </h3>
-		        </div>
-		        <!-- /.box-header -->
-		        <!-- form start -->
-		        <form role="form" action="/admin/customer" method="get">
-		            <div class="box-body">
-		        <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-        <div class="row">
-            <div class="col-sm-6">
-            </div>
-            <div class="col-sm-6">
-            </div>
-        </div>
-
-        <div class="row">
-          <form action="/admin/customer" method='get'>
-          <div class="col-sm-6">
-    <div class="dataTables_length" id="example1_length">
-        <label>
+        <div class="box">
+    <!-- /.box-header -->
+    <div class="box-body">
+        <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+            <form action="/admin/customer" method="get">
+               <div class="row">
+                <div class="col-sm-6">
+            <label>
             <font style="vertical-align: inherit;">
                 <font style="vertical-align: inherit;">
                     数据
@@ -69,23 +53,19 @@
             </font>
         </label>
     </div>
-</div>
+              <div class="col-sm-6">
+                <div id="example1_filter" class="dataTables_filter">
+                    <label>用户名:<input type="search" name="customername" value="{{$request->customername}}" class="form-control input-sm" placeholder="" aria-controls="example1">
+                    </label>
+                    <button class="btn btn-info">搜索</button>
+                </div>
+              </div>
+        </div> 
+    </form>
+            
 
-    <div class="col-sm-6">
-    <div id="example1_filter" class="dataTables_filter">
-        <label>
-            <font style="vertical-align: inherit;">
-                <font style="vertical-align: inherit;">
-                    查找：
-                </font>
-            </font>
-            <input type="search" name="customername" value="{{$request->customername}}" class="form-control input-sm" placeholder="" aria-controls="example1">
-            <button class='btn btn-info'>搜索</button>
-        </label>
-    </div>
-</div>
-</form>
-            <div class="col-sm-12">
+            <div class="row">
+                <div class="col-sm-12">
                 <table id="example2" class="table table-bordered table-hover dataTable"
                 role="grid" aria-describedby="example2_info">
                     <thead>
@@ -98,7 +78,7 @@
                                     </font>
                                 </font>
                             </th>
-                            <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1"
+                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
                             colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">
                                 <font style="vertical-align: inherit;">
                                     <font style="vertical-align: inherit;">
@@ -106,7 +86,7 @@
                                     </font>
                                 </font>
                             </th>
-                            <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1"
+                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
                             colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">
                                 <font style="vertical-align: inherit;">
                                     <font style="vertical-align: inherit;">
@@ -114,7 +94,7 @@
                                     </font>
                                 </font>
                             </th>
-                            <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1"
+                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
                             colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">
                                 <font style="vertical-align: inherit;">
                                     <font style="vertical-align: inherit;">
@@ -122,7 +102,7 @@
                                     </font>
                                 </font>
                             </th>
-                            <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1"
+                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
                             colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">
                                 <font style="vertical-align: inherit;">
                                     <font style="vertical-align: inherit;">
@@ -130,7 +110,7 @@
                                     </font>
                                 </font>
                             </th>
-                            <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1"
+                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
                             colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">
                                 <font style="vertical-align: inherit;">
                                     <font style="vertical-align: inherit;">
@@ -138,7 +118,7 @@
                                     </font>
                                 </font>
                             </th>
-                            <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1"
+                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
                             colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">
                                 <font style="vertical-align: inherit;">
                                     <font style="vertical-align: inherit;">
@@ -146,7 +126,7 @@
                                     </font>
                                 </font>
                             </th>
-                             <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1"
+                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
                             colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">
                                 <font style="vertical-align: inherit;">
                                     <font style="vertical-align: inherit;">
@@ -158,13 +138,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($res as $k => $v)
-
-            @if($k % 2 == 0)
-              <tr class="odd">
-            @else 
-              <tr class="even">
-            @endif
+                    @foreach($res as $k => $v)
+                        @if($k % 2 == 0)
+                          <tr class="odd">
+                        @else 
+                          <tr class="even">
+                        @endif
                             <td class="">
                                 <font style="vertical-align: inherit;">
                                     <font style="vertical-align: inherit;">
@@ -238,20 +217,33 @@
                 </table>
 
             </div>
+        
+            <div class="row">
+                <div class="col-sm-5">
+                    <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">
+                        本页码是{{$res->currentPage()}}&nbsp;&nbsp;&nbsp;&nbsp;本页是从{{$res->firstItem()}} to {{$res->lastItem()}}&nbsp;&nbsp;&nbsp;&nbsp;本表共有{{$res->total()}}条数据
+                    </div>
+                </div>
+                <div class="col-sm-7">
+                    <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
+                      {{$res->appends($request->all())->links()}}
+                    </div>
+                </div>
+            </div>
         </div>
-        {{$res->appends($request->all())->links()}}
     </div>
+    <!-- /.box-body -->
 </div>
-		        </form>
-		    </div>
-		</div>
-      </div>
-    	
     </section>
-	
-@stop
+
+@endsection
+
+
 @section('js')
 <script>
   $('.alert').delay(1000).fadeOut(2000);
 </script>
+
+
+
 @stop

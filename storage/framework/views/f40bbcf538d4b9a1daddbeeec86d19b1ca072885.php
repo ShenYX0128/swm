@@ -208,6 +208,7 @@
 
         </li>
 
+
           <li class="treeview">
           <a href="#">
           <i class="fa fa-user"></i>
@@ -249,7 +250,6 @@
             <li><a href="/admin/permission"><i class="fa fa-key"></i>浏览权限</a></li>
           </ul>
           </li>
-
         <li class="treeview">
                     <a href="#">
                       <i class="fa  fa-commenting"></i>
@@ -303,9 +303,22 @@
               </a>
             <ul class="treeview-menu">
               <li><a href="/admin/orders"><i class="fa fa-circle-o"></i>浏览订单</a></li>
+              <li><a href="/admin/orders_status"><i class="fa fa-circle-o"></i>浏览订单状态</a></li>
             </ul>
           </li>
 
+          <li class="treeview">
+            <a href="#">
+              <i class="fa  fa-cogs"></i>
+              <span>网站管理</span>
+                <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+              </a>
+            <ul class="treeview-menu">
+              <li><a href="/admin/config/edit"><i class="fa fa-cog"></i>修改配置</a></li>
+            </ul>
+          </li>
 
 
       </ul>

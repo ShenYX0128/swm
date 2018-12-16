@@ -39,7 +39,7 @@
 						    	<i class="am-icon-user-secret am-icon-md nav-user"></i><b></b>我的福利
 						    	<i class="am-icon-angle-right" style="padding-left: 10px;"></i>
 						    </div>
-						</div>
+						</div>			
 			</div>
 			<b class="line"></b>
 		<div class="center">
@@ -55,18 +55,18 @@
 						@php
 						$customer = DB::table('customer')->where('id',session('cid'))->first();
 						@endphp
-					<form action="/home/update" method="post" enctype="multipart/form-data" class="am-form am-form-horizontal">
+					<form id="art_form" action="/home/update" method="post" enctype="multipart/form-data" class="am-form am-form-horizontal">
 						<!--头像 -->
 						<div class="user-infoPic">
 						@if(!$customer->profile)
 							<div class="filePic">
-								<input type="file" class="inputPic" allowexts="gif,jpeg,jpg,png,bmp" name="profile" accept="image/*">
-								<img class="am-circle am-img-thumbnail" name="profile" src="/homes/images/getAvatar.do.jpg" alt="" />
+								<input type="file" class="inputPic" allowexts="gif,jpeg,jpg,png,bmp" id="file_upload" name="profile" accept="image/*">
+								<img class="am-circle am-img-thumbnail" id='imgs' name="profile" src="/homes/images/getAvatar.do.jpg" alt="" />
 							</div>
 						@else
 							<div class="filePic">
-								<input type="file" class="inputPic" allowexts="gif,jpeg,jpg,png,bmp" name="profile" accept="image/*">
-								<img class="am-circle am-img-thumbnail" name="profile" src="{{$customer->profile}}" alt="" />
+								<input type="file" class="inputPic" allowexts="gif,jpeg,jpg,png,bmp" id="file_upload" name="profile" accept="image/*">
+								<img class="am-circle am-img-thumbnail" id='imgs' name="profile" src="{{$customer->profile}}" alt="" />
 							</div>
 						@endif
 							<p class="am-form-help">头像</p>
@@ -175,8 +175,48 @@
 				
 			</div>
 
+
 			@include('home.public.order')
 		</div>
 
 	</body>
 @endsection
+
+@section('js')
+    <script type="text/javascript">
+    $(function () {
+        $("#file_upload").change(function () {
+
+            var imgPath = $("#file_upload").val();
+
+          if (imgPath == "") {
+              alert("请选择上传图片！");
+              return;
+          }
+          //判断上传文件的后缀名
+          var strExtension = imgPath.substr(imgPath.lastIndexOf('.') + 1);
+          if (strExtension != 'jpg' && strExtension != 'gif'
+              && strExtension != 'png' && strExtension != 'bmp') {
+              alert("请选择图片文件");
+              return;
+          }
+
+          var formData = new FormData($('#art_form')[0]);
+          $.ajax({
+            type: "POST",
+            url: "/home/profile",
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(data) {
+                $('#imgs').attr('src',data);
+                
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                alert("上传失败，请检查网络后重试");
+            }
+        });
+        })
+    })
+</script>
+@stop

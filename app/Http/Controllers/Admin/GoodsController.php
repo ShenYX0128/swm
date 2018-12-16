@@ -178,7 +178,7 @@ class GoodsController extends Controller
                 }
             }
             $rs = Goodsimg::where('gid',$id)->insert($arr);
-            if($rs){
+            if($rs==0 || $rs){
                 return redirect('/admin/goods')->with('success','修改成功');
             }
         }

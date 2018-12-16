@@ -152,7 +152,7 @@ class CustomerController extends Controller
  
             $data = Customer::where('id', $id)->update($res);
             
-            if($data){
+            if($data==0 || $data){
                 return redirect('/admin/customer')->with('success','修改成功');
             }
 

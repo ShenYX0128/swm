@@ -33,7 +33,7 @@ class UserController extends Controller
 
         return view('admin.user.user_role',[
 
-            'title'=>'用户添加角色页面',
+            'title'=>'管理员添加角色页面',
             'res'=>$res,
             'roles'=>$roles,
             'info'=>$info
@@ -83,7 +83,7 @@ class UserController extends Controller
                 //检测关键字
                 $username = $request->input('username');
                 $email = $request->input('email');
-                //如果用户名不为空
+                //如果管理员名不为空
                 if(!empty($username)) {
                     $query->where('username','like','%'.$username.'%');
                 }
@@ -94,7 +94,7 @@ class UserController extends Controller
             })
         ->paginate($request->input('num', 2));
         return view('admin.user.index',[
-            'title'=>'用户的列表页面',
+            'title'=>'管理员列表页面',
             'res'=>$res,
             'request'=>$request
         ]);
@@ -175,7 +175,7 @@ class UserController extends Controller
         $res = User::find($id);
 
         return view('admin.user.edit',[
-            'title'=>'用户的修改页面',
+            'title'=>'管理员修改页面',
             'res'=>$res,
             
         ]);
@@ -209,8 +209,8 @@ class UserController extends Controller
         try{
  
             $data = User::where('id', $id)->update($res);
-            
-            if($data){
+            //dd($data);
+            if($data==0 || $data){
                 return redirect('/admin/user')->with('success','修改成功');
             }
 
@@ -228,6 +228,13 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
+        $rs = DB::table('user_role')->where('user_id',$id)->get();
+        foreach ($rs as $v) {
+            if($v->role_id == 7){
+                return back()->with('error','超级管理员不能被删除');
+            }
+        }
+
         //删除管理员
         try{
 
