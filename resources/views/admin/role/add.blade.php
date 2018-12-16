@@ -14,7 +14,16 @@
               <h3 class="box-title">角色添加</h3>
             </div>
             <div class="box-body">
-            
+            	@if (count($errors) > 0)
+					<div class="callout callout-danger">
+		            	显示错误信息
+		                <ul>
+		                	@foreach ($errors->all() as $error)
+		                	<li style='font-size:14px'>{{$error}}</li>
+		                	@endforeach
+		                </ul>
+		            </div>
+       			 @endif
            	<form role="form" action="/admin/role" method="post" enctype='multipart/form-data'>
             
             <!-- 角色名 -->
