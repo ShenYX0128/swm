@@ -6,7 +6,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
     <h1>
-        订单管理
+        订单浏览页面
       </h1>
     </section>
     <section class="content">
@@ -14,7 +14,7 @@
     <!-- /.box-header -->
     <div class="box-body">
         <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-            <form action="/admin/orders" method="get">
+            <form action="/admin/orders_status" method="get">
                <div class="row">
                 <div class="col-sm-6">
                  
@@ -34,11 +34,12 @@
                             </select>
                             条数据
                         </label>
-                   
+                        <a href="/admin/orders_status/create" class="btn btn-info">添加状态</a>
                 </div>
+
               <div class="col-sm-6">
                 <div id="example1_filter" class="dataTables_filter">
-                    <label>收货人:<input type="text" class="form-control input-sm" placeholder="" aria-controls="example1" name="oname" value="{{$request->oname}}">
+                    <label>状态:<input type="text" class="form-control input-sm" placeholder="" aria-controls="example1" name="fname" value="{{$request->name}}">
                     </label>
                     <button class="btn btn-info">搜索</button>
                 </div>
@@ -58,29 +59,14 @@
                                 style="width: 182px;">
                                    ID
                                 </th>
+
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
                                 colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 224px;">
-                                    订单号
+                                    状态
                                 </th>
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
-                                colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 224px;">
-                                   收货人
-                                </th>
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
-                                colspan="1" aria-label="Platform(s): activate to sort column ascending"
-                                style="width: 199px;">
-                                  收货人电话
-                                </th>
-                               <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
-                               colspan="1" aria-label="Platform(s): activate to sort column ascending"
-                               style="width: 199px;">
-                                 添加时间
-                               </th>
-                               <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
-                               colspan="1" aria-label="Platform(s): activate to sort column ascending"
-                               style="width: 199px;">
-                                 订单状态
-                               </th>
+                              
+                               
+                               
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
                                 colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 112px;">
                                     操作
@@ -92,20 +78,13 @@
                             <tr role="row" class="odd">
                             
                                 <td>{{$v->id}}</td>
-                                <td><a href="/admin/detail?id={{$v->id}}">{{$v->number}}</a></td>
-                                <td>{{$v->oname}}</td>
-                                <td>{{$v->o_phone}}</td>
-                                <td>{{date('Y-m-d H:i:s',$v->addtime)}}</td>
-                                @foreach($statuss as $k=>$vv)
-                                @if($v->o_status==$vv->id)
-                                <td>{{$vv->name}}</td>
-                                @endif
-                                 @endforeach
+                                <td>{{$v->name}}</td>
                                
-                                <td width='220px'>
-                                    <a href="/admin/orders/{{$v->id}}/edit" class='btn btn-info'>修改</a>
-                                    <!-- <a href="/admin/category/{{$v->id}}" class='btn btn-info'>添加子分类</a> -->
 
+                                <td>
+                                    <a href="/admin/orders_status/{{$v->id}}/edit" class='btn btn-info'>修改</a>
+
+                                
                                 </td>
                             </tr>
                             @endforeach
@@ -151,12 +130,12 @@
             <div class="row">
                 <div class="col-sm-5">
                     <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">
-                        本页码是{{--$res->currentPage()--}}&nbsp;&nbsp;&nbsp;&nbsp;本页是从{{--$res->firstItem()--}} to {{--$res->lastItem()--}}&nbsp;&nbsp;&nbsp;&nbsp;本表共有{{--$res->total()--}}条数据
+                        本页码是{{$res->currentPage()}}&nbsp;&nbsp;&nbsp;&nbsp;本页是从{{$res->firstItem()}} to {{$res->lastItem()}}&nbsp;&nbsp;&nbsp;&nbsp;本表共有{{$res->total()}}条数据
                     </div>
                 </div>
                 <div class="col-sm-7">
                     <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
-                      {{--$res->appends($request->all())->links()--}}
+                      {{$res->appends($request->all())->links()}}
                     </div>
                 </div>
             </div>
@@ -173,7 +152,5 @@
 <script>
   $('.alert').delay(1000).fadeOut(2000);
 </script>
-
-
 
 @stop

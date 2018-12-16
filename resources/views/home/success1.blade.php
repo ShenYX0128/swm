@@ -9,23 +9,19 @@
 
 @section('content')
 		
->>>>>>> 94eb53332f1b7e608985e4d91ec3437f5ceb3235
-			<div class="take-delivery">
+			<div class="take-delivery" style="margin-top:100px;margin-bottom:100px;">
 			 <div class="status">
 			   <h2>订单成功</h2>
 			   <div class="successInfo">
 			     <ul>
-			     @foreach($res as $k => $v)
-			       <li>付款金额<em>¥{{$v->total}}</em></li>
+			       <li>付款金额<em></em></li>
 			      
 			       <div class="user-info">
-				         <p>收货人：{{$v->oname}}</p>
-				         <p>联系电话：{{$v->o_phone}}</p>
-				         <p>收货地址：{{$v->o_address}}</p>
+				        
 			      
 			       
 			       </div>
-			       @endforeach
+			      
 			             请认真核对您的收货信息，如有错误请联系客服
 			                               
 			     </ul>

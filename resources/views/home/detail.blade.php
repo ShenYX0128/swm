@@ -527,7 +527,6 @@
 										@foreach($data as $val)
 										@foreach($user as $v)
 										@if($v->id == $val->uid)
-										@foreach($det as $va)
 										<li class="am-comment">
 											<a href="">
 												<img class="am-comment-avatar" src="{{$v->profile}}" />
@@ -552,7 +551,7 @@
 															{{$val->content}}
 														</div>
 														<div class="tb-r-act-bar">
-															口味：{{$va->norns}}
+															口味：
 														</div>
 													</div>
 
@@ -560,7 +559,6 @@
 												<!-- 评论内容 -->
 											</div>
 										</li>
-										@endforeach
 										@endif
 										@endforeach
 										@endforeach

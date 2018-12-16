@@ -91,7 +91,11 @@ class OrderController extends Controller
         $data_cont['number'] = $order_number;
         //收货地址
         $data_cont['o_address'] = $addr_data['id'];
-        //订单状态 待支付（下单成功）
+              //收货人姓名
+        $data_cont['oname'] = $addr_data['name'];
+              //收货人电话
+        $data_cont['o_phone'] = $addr_data['phone'];
+        //订单状态  确认收货
         $data_cont['o_status'] = 1;
         //下单时间
         $data_cont['addtime'] = time();
@@ -107,6 +111,7 @@ class OrderController extends Controller
             $data_cont['total'] = $price[$i];
             //数量
             $data_cont['num'] = $num[$i];
+           
             Orders::create($data_cont);
            
            
@@ -135,12 +140,12 @@ class OrderController extends Controller
         $fri=Friend::get();
 
        
-        return view('home.success',[
+        return view('home.success1',[
+            'title'=>'结算页面',
             'pricesum' => $pricesum,
             'codecode' => $order_number,
             'shop'=>$shop,
-            'fri'=>$fri
-      
+            'fri'=>$fri,
         ]);
     }
 }

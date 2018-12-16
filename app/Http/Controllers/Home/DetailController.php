@@ -27,14 +27,19 @@ class DetailController extends Controller
             $disc = explode(',', $v->discount);
         }
         $ord = DB::table('orders')->where([['gid',$id],['o_status',0]])->get();
-        foreach ($ord as $k => $v) {
-            $det = DB::table('detail')->where('oid',$v->id)->get();
+
+        if($ord){
+            foreach ($ord as $k => $v) {
+                $det = DB::table('detail')->where('oid',$v->id)->get();
+            }
+        }else{
+            echo '该商品没有评论';
         }
-        // dd($det);
+        // dd($ord);
        /* $ord = DB::table('orders')->join('detail','detail.oid','=','orders.id')->join('orders','orders.o_status','0')->select('detail.id')->get();
-    	dd($ord);*/
+    	dd($ord);
         // 评论
-        /*// $com = DB::table('comment')->where('gid',$id)->get();
+        // $com = DB::table('comment')->where('gid',$id)->get();
         $com = DB::table('goods')->join('comment','goods.id', '=', 'comment.gid')
                     ->select('goods.norns','comment.uid','comment.gid','comment.content','comment.star','comment.addtime')
                 ->paginate(1);
@@ -76,7 +81,7 @@ class DetailController extends Controller
             $user = DB::table('customer')->where('id',$v->uid)->get();
         }
         // dd($user);
-    	return view('home.detail',['title'=>'前台详情页','good'=>$good,'imgs'=>$imgs,'img'=>$img,'arr'=>$arr,'prices'=>$prices,'disc'=>$disc,'data'=>$data,'det'=>$det,'user'=>$user,'prev'=>$prev,'next'=>$next,'sums'=>$sums,'pp'=>$pp,'page'=>$page]);
+    	return view('home.detail',['title'=>'前台详情页','good'=>$good,'imgs'=>$imgs,'img'=>$img,'arr'=>$arr,'prices'=>$prices,'disc'=>$disc,'data'=>$data,'user'=>$user,'prev'=>$prev,'next'=>$next,'sums'=>$sums,'pp'=>$pp,'page'=>$page]);
     }
     public function detailadd(Request $request)
     {
@@ -98,7 +103,7 @@ class DetailController extends Controller
                
                 "id"=>$_GET['id'],
                 "num"=>$_GET['num'],
-                "goodsinfo"=>\DB::table("goods")->where('id',$_GET['id'])->first(),
+                "goodsinfo"=>DB::table("goods")->where('id',$_GET['id'])->first(),
             );
         }
        
