@@ -15,9 +15,12 @@ class DetailController extends Controller
     public function detail(Request $request,$id)
     {
         // 商品详情
+
         // dd($id);
          session('gid',$id);
         // dd($a);
+
+
     	$good = Goods::where('id',$id)->get();
     	$imgs = Goodsimg::where('gid',$id)->get();
     	$img = Goodsimg::where('gid',$id)->first();
@@ -26,6 +29,7 @@ class DetailController extends Controller
             $prices = explode(',', $v->price);
             $disc = explode(',', $v->discount);
         }
+
         $ord = DB::table('orders')->where([['gid',$id],['o_status',0]])->get();
 
         if($ord){
@@ -35,19 +39,7 @@ class DetailController extends Controller
         }else{
             echo '该商品没有评论';
         }
-        // dd($ord);
-       /* $ord = DB::table('orders')->join('detail','detail.oid','=','orders.id')->join('orders','orders.o_status','0')->select('detail.id')->get();
-    	dd($ord);
-        // 评论
-        // $com = DB::table('comment')->where('gid',$id)->get();
-        $com = DB::table('goods')->join('comment','goods.id', '=', 'comment.gid')
-                    ->select('goods.norns','comment.uid','comment.gid','comment.content','comment.star','comment.addtime')
-                ->paginate(1);
-        foreach ($com as $k => $v) {
-            $user = DB::table('customer')->where('id',$v->uid)->get();
-        }*/
-        
-        // dd($com->links());
+
         //1、查询数据库总条数
         $count = count(DB::table('goods')->join('comment','goods.id', '=', 'comment.gid')->select('goods.norns','comment.uid','comment.gid','comment.content','comment.star','comment.addtime')
                 ->get());
@@ -80,7 +72,11 @@ class DetailController extends Controller
         foreach ($data as $k => $v) {
             $user = DB::table('customer')->where('id',$v->uid)->get();
         }
+
         // dd($user);
+
+        // dd($pp);
+
     	return view('home.detail',['title'=>'前台详情页','good'=>$good,'imgs'=>$imgs,'img'=>$img,'arr'=>$arr,'prices'=>$prices,'disc'=>$disc,'data'=>$data,'user'=>$user,'prev'=>$prev,'next'=>$next,'sums'=>$sums,'pp'=>$pp,'page'=>$page]);
     }
     public function detailadd(Request $request)
@@ -103,7 +99,10 @@ class DetailController extends Controller
                
                 "id"=>$_GET['id'],
                 "num"=>$_GET['num'],
+
                 "goodsinfo"=>DB::table("goods")->where('id',$_GET['id'])->first(),
+
+
             );
         }
        
