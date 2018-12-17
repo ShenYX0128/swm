@@ -72,7 +72,11 @@
 							<p class="am-form-help">头像</p>
 
 							<div class="info-m">
+								@if(!$customer->customername)
+								<div><b>用户名：<i>{{$customer->phone}}</i></b></div>
+								@else
 								<div><b>用户名：<i>{{$customer->customername}}</i></b></div>
+								@endif
 								<div class="u-level">
 									<span class="rank r2">
 							             <s class="vip1"></s><a class="classes" href="#">铜牌会员</a>
@@ -175,6 +179,9 @@
 				
 			</div>
 
+
+			@include('home.public.order')
+
 			<aside class="menu">
 				<ul>
 					<li class="person">
@@ -216,6 +223,7 @@
 				</ul>
 
 			</aside>
+
 		</div>
 
 	</body>

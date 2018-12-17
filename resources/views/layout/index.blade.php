@@ -302,6 +302,7 @@
               </a>
             <ul class="treeview-menu">
               <li><a href="/admin/orders"><i class="fa fa-circle-o"></i>浏览订单</a></li>
+              <li><a href="/admin/orders_status"><i class="fa fa-circle-o"></i>浏览订单状态</a></li>
             </ul>
           </li>
 

@@ -242,7 +242,7 @@
 
 													<div class="btn-op">
 
-														<div class="btn am-btn am-btn-warning" id="form_sub">确认</div>
+														<div class="btn am-btn am-btn-warning" id="form_sub" >确认</div>
 														<div class="btn close am-btn am-btn-warning" id="indent_close">取消</div>
 													</div>
 												</div>
@@ -303,7 +303,7 @@
 							</li>
 							<li>
 								<div class="clearfix tb-btn tb-btn-basket theme-login">
-									<a id="LikBasket" title="加入购物车" href="javascript:void(0)"><i></i>加入购物车</a>
+									<a id="LikBasket" title="加入购物车" href="javascript:void(0)" gid="{{$v->id}}"><i></i>加入购物车</a>
 								</div>
 							</li>
 						</div>
@@ -551,8 +551,11 @@
 															{{$val->content}}
 														</div>
 														<div class="tb-r-act-bar">
-															口味：{{$val->norns}}
-														</div>
+
+															口味：
+
+														
+								</div>
 													</div>
 
 												</div>
@@ -832,22 +835,15 @@ zcityrun('.zcityGroup');
 		data1 += ','+$('.J_Price').text().trim().substring(1);
 		// var da = data1.join(',');
 		// console.log(data1);
+		
+
 		$('#form_sub').click(function(){
-			$.ajax({  
-                type:'post',
-        		contentType: "application/x-www-form-urlencoded",  
-                traditional: true,  
-                url:'/home/detailadd',  
-                data:{arr:data1},
-                success: function (data){
-                    window.location.href="http://g-mall.cn/home/shopcar";
-                },
-                error:function(){
-                	alert('加入购物车失败');
-                }  
-            }); 
-			
-		});
+		var gid = $('#hidden').attr('gid');
+
+		var num = $('#text_boxs').val().trim();
+		
+		window.location.href="/detailadd?id="+gid+"&num="+num;
+	    })
 	// 获取商品数量
 	// 加
 	$('#tadd').click(function(){

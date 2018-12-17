@@ -15,6 +15,12 @@ class DetailController extends Controller
     public function detail(Request $request,$id)
     {
         // 商品详情
+
+        // dd($id);
+         session('gid',$id);
+        // dd($a);
+
+
     	$good = Goods::where('id',$id)->get();
     	$imgs = Goodsimg::where('gid',$id)->get();
     	$img = Goodsimg::where('gid',$id)->first();
@@ -24,17 +30,16 @@ class DetailController extends Controller
             $disc = explode(',', $v->discount);
         }
 
-    	// dd($prices);
-        // 评论
-        /*// $com = DB::table('comment')->where('gid',$id)->get();
-        $com = DB::table('goods')->join('comment','goods.id', '=', 'comment.gid')
-                    ->select('goods.norns','comment.uid','comment.gid','comment.content','comment.star','comment.addtime')
-                ->paginate(1);
-        foreach ($com as $k => $v) {
-            $user = DB::table('customer')->where('id',$v->uid)->get();
-        }*/
-        
-        // dd($com->links());
+        $ord = DB::table('orders')->where([['gid',$id],['o_status',0]])->get();
+
+        if($ord){
+            foreach ($ord as $k => $v) {
+                $det = DB::table('detail')->where('oid',$v->id)->get();
+            }
+        }else{
+            echo '该商品没有评论';
+        }
+
         //1、查询数据库总条数
         $count = count(DB::table('goods')->join('comment','goods.id', '=', 'comment.gid')->select('goods.norns','comment.uid','comment.gid','comment.content','comment.star','comment.addtime')
                 ->get());
@@ -67,24 +72,46 @@ class DetailController extends Controller
         foreach ($data as $k => $v) {
             $user = DB::table('customer')->where('id',$v->uid)->get();
         }
+
+        // dd($user);
+
         // dd($pp);
+
     	return view('home.detail',['title'=>'前台详情页','good'=>$good,'imgs'=>$imgs,'img'=>$img,'arr'=>$arr,'prices'=>$prices,'disc'=>$disc,'data'=>$data,'user'=>$user,'prev'=>$prev,'next'=>$next,'sums'=>$sums,'pp'=>$pp,'page'=>$page]);
     }
     public function detailadd(Request $request)
     {
-        $res = $request->arr;
-        var_dump($res);
-        $arr = explode(',',$res);
-        $arr = ['address'=>$arr[0],'norns'=>$arr[1],'num'=>$arr[2],'name'=>$arr[3],'gid'=>$arr[4],'shop_img'=>$arr[5],'prime'=>$arr[6],'uid'=>session('cid')];
-
-        // var_dump($arr);
-        $req = DB::table('shopcar')->insert($arr);
-
-        if($req) {
-            echo 1;
-        } else {
-            echo 0;
+        $data = session('shop')?session('shop'):array();
+        $a = 0;
+        // 如果存在 进行遍历  
+        if($data){
+            foreach ($data as $key => &$value) {
+                if($value['id']==$_GET['id']){
+                    // 如果购物车里有该商品  在进行加的时候  将购物车里面的加进行叠加
+                    $value['num']=$value['num']+$_GET['num'];
+                    $a = 1;
+                }
+            }
         }
+
+        if(!$a){
+            $data[]=array(
+               
+                "id"=>$_GET['id'],
+                "num"=>$_GET['num'],
+
+                "goodsinfo"=>DB::table("goods")->where('id',$_GET['id'])->first(),
+
+
+            );
+        }
+       
+        // 将数据写入到session中 
+        $request->session()->put('shop',$data);
+        $data = session('shop');
+        
+        return redirect('shopcar');
+        
     }
     public function page(){
         //1、查询数据库总条数

@@ -5,6 +5,9 @@
 		<script src="/homes/AmazeUI-2.4.2/assets/js/jquery.min.js"></script>
 		<script src="/homes/AmazeUI-2.4.2/assets/js/amazeui.min.js"></script>
 		<script type="text/javascript" src="/homes/js/jquery.SuperSlide2.js"></script>
+		<style type="text/css">
+			.title{width: 80%; line-height: 28px; overflow: hidden; text-overflow:ellipsis; white-space:nowrap;}
+		</style>
 @section('content')
 			<div class="banner">
                       <!--轮播 -->
@@ -625,7 +628,7 @@
 						<div class="am-u-sm-7 am-u-md-4 text-two sug">
 						@foreach($img as $vlu)
 								@if($vlu->gid == $val->id)
-								<a href="http://g-mall.cn/home/detail/{{$val->id}}"><img src="{{$vlu->gpic}}" /></a>
+								<a href="http://g-mall.cn/home/detail/{{$val->id}}"><img src="{{$vlu->gpic}}" width="180" height="180" /></a>
 								@endif						
 						@endforeach
 								<div class="outer-con ">
@@ -642,7 +645,7 @@
 						<div class="am-u-sm-7 am-u-md-4 text-two">
 						@foreach($img as $vlu)
 								@if($vlu->gid == $val->id)
-								<a href="http://g-mall.cn/home/detail/{{$val->id}}"><img src="{{$vlu->gpic}}" /></a>
+								<a href="http://g-mall.cn/home/detail/{{$val->id}}"><img src="{{$vlu->gpic}}" width="180" height="180" /></a>
 								@endif						
 						@endforeach
 								<div class="outer-con ">
@@ -659,7 +662,7 @@
 						<div class="am-u-sm-3 am-u-md-2 text-three big">
 						@foreach($img as $vlu)
 							@if($vlu->gid == $val->id)
-								<a href="http://g-mall.cn/home/detail/{{$val->id}}"><img src="{{$vlu->gpic}}" /></a>
+								<a href="http://g-mall.cn/home/detail/{{$val->id}}"><img src="{{$vlu->gpic}}" width="180" height="180" /></a>
 								@endif						
 						@endforeach
 							<div class="outer-con ">
@@ -676,7 +679,7 @@
 						<div class="am-u-sm-3 am-u-md-2 text-three sug">
 						@foreach($img as $vlu)
 							@if($vlu->gid == $val->id)
-								<a href="http://g-mall.cn/home/detail/{{$val->id}}"><img src="{{$vlu->gpic}}" /></a>
+								<a href="http://g-mall.cn/home/detail/{{$val->id}}"><img src="{{$vlu->gpic}}" width="180" height="180" /></a>
 								@endif						
 						@endforeach
 							<div class="outer-con ">
@@ -693,7 +696,7 @@
 						<div class="am-u-sm-3 am-u-md-2 text-three ">
 						@foreach($img as $vlu)
 							@if($vlu->gid == $val->id)
-								<a href="http://g-mall.cn/home/detail/{{$val->id}}"><img src="{{$vlu->gpic}}" /></a>
+								<a href="http://g-mall.cn/home/detail/{{$val->id}}"><img src="{{$vlu->gpic}}" width="180" height="180" /></a>
 								@endif						
 						@endforeach
 							<div class="outer-con ">
@@ -719,7 +722,7 @@
 							</div>
 						@foreach($img as $vlu)
 							@if($vlu->gid == $val->id)
-								<a href="http://g-mall.cn/home/detail/{{$val->id}}"><img src="{{$vlu->gpic}}" /></a>
+								<a href="http://g-mall.cn/home/detail/{{$val->id}}"><img src="{{$vlu->gpic}}" width="180" height="180" /></a>
 								@endif						
 						@endforeach
 						</div>	

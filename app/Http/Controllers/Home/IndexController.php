@@ -30,11 +30,13 @@ class IndexController extends Controller
             // echo $sub;
            $god[] = Goods::where([['tweet','=','1'],['pid','=',$v->id]])->take(6)->get(); 
         }
-        // dd($god);
+
+        // dd($arr);
         if(!empty($god)){
             foreach ($god as $ke => $val){
                 foreach ($val as $k => $v) {
-                    $gods[$v->pid][$k] = $v;
+                    $gods[$v->pid][] = $v;
+
                     // $img[] = Goodsimg::where('gid',$v->id)->get();
                     // $a = $k;
                 }

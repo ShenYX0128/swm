@@ -135,6 +135,10 @@
 					<div class="clear"></div>
 
 					<!--订单 -->
+					<form action="/jiesuan"  method="post" id="orders">
+				    @php 
+				     $tot = 0;
+				    @endphp
 					<div class="concent">
 						<div id="payTable">
 							<h3>确认订单信息</h3>
@@ -158,34 +162,36 @@
 								</div>
 							</div>
 							<div class="clear"></div>
-							@foreach($res as $k=>$v)
+							@foreach($newArr as $k=>$v)
 							<tr class="item-list">
 								<div class="bundle  bundle-last">
-
 									<div class="bundle-main">
 										<ul class="item-content clearfix">
 											<div class="pay-phone">
 												<li class="td td-item">
 													<div class="item-pic">
 														<a href="#" class="J_MakePoint">
-															<img src="{{$v->shop_img}}" class="itempic J_ItemImg"></a>
+															<img src="@php
+					                                               $tu = DB::table('goods_img')->where('gid',$v['id'])->first();
+					                                               echo $tu->gpic
+					                                               @endphp" class="itempic J_ItemImg"></a>
 													</div>
 													<div class="item-info">
-														<div class="item-basic-info">
-															<a href="#" class="item-title J_MakePoint" data-point="tbcart.8.11">{{$v->name}}</a>
+														<div class="item-basic-info" style="text-align:center">
+															<a href="#" class="item-title J_MakePoint" data-point="tbcart.8.11">{{$v['goodsinfo']->gname}}</a>
 														</div>
 													</div>
 												</li>
 												<li class="td td-info">
 													<div class="item-props">
-														<span class="sku-line">{{$v->norns}}</span>
+														<span class="sku-line"></span>
 														<!-- <span class="sku-line">包装：裸装</span> -->
 													</div>
 												</li>
 												<li class="td td-price">
 													<div class="item-price price-promo-promo">
 														<div class="price-content">
-															<em class="J_Price price-now">{{$v->prime}}</em>
+															<em class="J_Price price-now">{{$v['goodsinfo']->price}}</em>
 														</div>
 													</div>
 												</li>
@@ -196,7 +202,7 @@
 														<span class="phone-title">购买数量</span>
 														<div class="sl">
 															<input class="mins am-btn" name="" type="button" value="-" />
-															<input class="text_box" name="" type="text" value="{{$v->num}}" style="width:30px;" />
+															<input class="text_box" name="" type="text" value="{{$v['num']}}" style="width:30px;" />
 															<input class="add am-btn" name="" type="button" value="+" />
 														</div>
 													</div>
@@ -204,7 +210,11 @@
 											</li>
 											<li class="td td-sum">
 												<div class="td-inner">
-													<em tabindex="0" class="J_ItemSum number">{{$v->prime}}</em>
+													@php
+			                                         $money = $v['num']*$v['goodsinfo']->price;
+			                                         $tot+=$money
+			                                        @endphp
+													<em tabindex="0" class="J_ItemSum number">{{$v['goodsinfo']->price*$v['num']}}</em>
 												</div>
 											</li>
 											
@@ -213,7 +223,9 @@
 
 									</div>
 							</tr>
-
+                            <input type="hidden" name="shopid[]" value="{{$v['id']}}">
+                            <input type="hidden" name="num[]" value="{{$v['num']}}">
+                            <input type="hidden" name="price[]" value="{{$v['goodsinfo']->price}}">
 							<div class="clear"></div>
 							</div>
 							@endforeach
@@ -247,33 +259,36 @@
 									<div class="box">
 										<div tabindex="0" id="holyshit267" class="realPay"><em class="t">实付款：</em>
 											<span class="price g_price ">
-                                    <span>¥</span> <em class="style-large-bold-red " id="J_ActualFee">0.0</em>
+                                    <span>¥</span> <em class="style-large-bold-red " id="J_ActualFee" name="pricesum">{{$tot}}</em>
 											</span>
 										</div>
-
+                                           <input type="hidden" value="{{$tot}}" name="pricesum" /> 
 										<div id="holyshit268" class="pay-address">
 
-											<p class="buy-footer-address">
+										<!-- 	<p class="buy-footer-address">
 												<span class="buy-line-title buy-line-title-type">寄送至：</span>
 												<span class="buy--address-detail">
 								   
-												<span class="street">{{$adr->location}}</span>
+												<span class="street"></span>
 												</span>
 												</span>
 											</p>
 											<p class="buy-footer-address">
 												<span class="buy-line-title">收货人：</span>
 												<span class="buy-address-detail">   
-                                         <span class="buy-user">{{$adr->name}} </span>
-												<span class="buy-phone">{{$adr->phone}}</span>
+                                         <span class="buy-user"> </span>
+												<span class="buy-phone"></span>
 												</span>
-											</p>
+											</p> -->
 										</div>
 									</div>
 								
 									<div id="holyshit269" class="submitOrder">
 										<div class="go-btn-wrap">
-											<a id="J_Go" href="success.html" class="btn-go" tabindex="0" title="点击此按钮，提交订单">提交订单</a>
+											
+											<input type="submit"  id="J_Go" class="btn-go" value="提交订单" style="
+    float: right;
+"/>
 										</div>
 									</div>
 									<div class="clear"></div>
@@ -283,6 +298,8 @@
 
 						<div class="clear"></div>
 					</div>
+					 {{csrf_field()}}
+					</form>
 				</div>
 				<div class="footer">
 					

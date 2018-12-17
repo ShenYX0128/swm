@@ -12,11 +12,11 @@
             <div class="box-body">
            	<form role="form" action="/admin/do_user_role?id={{$res->id}}" method="post">
             
-            <!-- 用户名 -->
+            <!-- 管理员名 -->
 
             <div class="form-group">
-              <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">用户名</font></font></label>
-              <input type="text" class="form-control" name="username" value="{{$res->username}}">
+              <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">管理员名</font></font></label>
+              <input type="text" class="form-control" name="username" value="{{$res->username}}" disabled>
             </div>
             <!-- 角色名 -->
             <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">角色名</font></font></label>
