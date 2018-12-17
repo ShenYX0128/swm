@@ -68,11 +68,7 @@ class ShopcarController extends Controller
     }
 
 
-         //将数据写入到session中
-         $request->session()->put('shop',$shop);
 
-         echo 1;
-    }
 
 
 

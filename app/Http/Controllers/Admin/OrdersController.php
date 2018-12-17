@@ -127,6 +127,19 @@ class OrdersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
+
+
+          //删除
+         try{
+            $data=Orders::destroy($id);
+
+            if($data){
+                return redirect('/admin/orders')->with('success','删除成功');
+            }
+        }catch(\Exception $e){
+
+            return back()->with('error','删除失败');
+        }
     }
 }

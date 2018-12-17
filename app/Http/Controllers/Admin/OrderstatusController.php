@@ -104,7 +104,18 @@ class OrderstatusController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+         $res=$request->only('o_status');
+         
+          try{
+            $data=Orders::where('id',$id)->update($res);
+
+            if($data){
+                return redirect('/admin/orders_status')->with('success','修改成功');
+            }
+        }catch(\Exception $e){
+
+            return back()->with('error','修改失败');
+        }
     }
 
     /**

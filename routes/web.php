@@ -114,8 +114,17 @@ Route::group(['middleware'=>['homelogin']],function(){
 	// 立即购买
 	Route::get('home/detailpay','Home\DetailpayController@detailpay');
 	Route::post('home/addpay','Home\DetailpayController@addpay');
+	// 提交定单
+	Route::post('home/paycreate','Home\DetailpayController@paycreate');
+	// 结算成功
+	Route::get('/home/success/{id}','Home\DetailpayController@success');
 	// 详情页评论
 	Route::get('home/page','Home\DetailController@page');
+	// 添加评论
+	Route::get('home/commentlist/{id}','Home\CommitController@commentlist');
+	Route::post('home/commentadd','Home\CommitController@commentadd');
+	// 评论管理
+	Route::get('home/comment','Home\CommitController@comment');
 
 	//前台个人中心
 	Route::get('home/personal/information','Home\PersonalController@information');

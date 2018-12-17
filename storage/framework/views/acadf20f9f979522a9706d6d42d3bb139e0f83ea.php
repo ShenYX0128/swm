@@ -13,9 +13,9 @@
 			   <h2>订单成功</h2>
 			   <div class="successInfo">
 			     <ul>
-			       <li>付款金额<em></em></li>
+			       <li><em></em></li>
 			      
-			       <div class="user-info">
+			       <div class="">
 				        
 			      
 			       
@@ -27,7 +27,6 @@
 			     <div class="option">
 			       <span class="info">您可以</span>
 			        <a href="/home/order" class="J_MakePoint">查看<span>已买到的宝贝</span></a>
-			        <a href="/home/orderdetails" class="J_MakePoint">查看<span>交易详情</span></a>
 			     </div>
 			    </div>
 			  </div>

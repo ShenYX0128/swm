@@ -104,7 +104,14 @@
                                
                                 <td width='220px'>
                                     <a href="/admin/orders/{{$v->id}}/edit" class='btn btn-info'>修改</a>
-                                    <!-- <a href="/admin/category/{{$v->id}}" class='btn btn-info'>添加子分类</a> -->
+                                   
+                                    <form action="/admin/orders/{{$v->id}}" method='post' style='display:inline'>
+                                      {{csrf_field()}}
+
+                                      {{method_field("DELETE")}}
+                                      <button class='btn btn-danger'>删除</button>
+
+                                    </form>
 
                                 </td>
                             </tr>
@@ -151,12 +158,12 @@
             <div class="row">
                 <div class="col-sm-5">
                     <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">
-                        本页码是{{--$res->currentPage()--}}&nbsp;&nbsp;&nbsp;&nbsp;本页是从{{--$res->firstItem()--}} to {{--$res->lastItem()--}}&nbsp;&nbsp;&nbsp;&nbsp;本表共有{{--$res->total()--}}条数据
+                        本页码是{{$res->currentPage()}}&nbsp;&nbsp;&nbsp;&nbsp;本页是从{{$res->firstItem()}} to {{$res->lastItem()}}&nbsp;&nbsp;&nbsp;&nbsp;本表共有{{$res->total()}}条数据
                     </div>
                 </div>
                 <div class="col-sm-7">
                     <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
-                      {{--$res->appends($request->all())->links()--}}
+                      {{$res->appends($request->all())->links()}}
                     </div>
                 </div>
             </div>
