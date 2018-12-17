@@ -98,6 +98,7 @@ class DetailController extends Controller
             }
         }
 
+
         if(!$a){
             $data[]=array(
                

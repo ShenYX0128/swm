@@ -250,7 +250,6 @@
    		headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
 	});
 	$('#J_Go').click(function(){
-
 		$.post('/home/paycreate',{oname:n,o_address:a,o_phone:p,oid:{{$order->id}},total:{{$val->d_num*$val->price}},o_status:1},function(data){
 			location.href='/home/success/{{$order->id}}';
 		})

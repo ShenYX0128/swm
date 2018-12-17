@@ -37,7 +37,7 @@
 						  	<form action="/home/dologin" method="post">
 							    <div class="user-name">
 								    <label for="user"><i class="am-icon-user"></i></label>
-								    <input type="text" name="phone" id="user" placeholder="手机/用户名">
+								    <input type="text" name="phone" id="user" placeholder="手机号/用户名">
                  				</div>
                  				<div class="user-pass">
 								    <label for="password"><i class="am-icon-lock"></i></label>
@@ -57,15 +57,6 @@
 									<input type="submit" name="" value="登录" class="am-btn am-btn-primary am-btn-sm">
 								</div>
 					</form>
-						<div class="partner">		
-								<h3>合作账号</h3>
-							<div class="am-btn-group">
-								<li><a href="#"><i class="am-icon-qq am-icon-sm"></i><span>QQ登录</span></a></li>
-								<li><a href="#"><i class="am-icon-weibo am-icon-sm"></i><span>微博登录</span> </a></li>
-								<li><a href="#"><i class="am-icon-weixin am-icon-sm"></i><span>微信登录</span> </a></li>
-							</div>
-						</div>	
-
 				</div>
 			</div>
 		</div>

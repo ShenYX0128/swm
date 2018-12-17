@@ -13,6 +13,7 @@ class DetailpayController extends Controller
 
     	$add = DB::table('address')->where('cid',session('cid'))->get();
     	$img = DB::table('goods_img')->join('goods', 'goods_img.gid', '=', 'goods.id')->select('goods_img.gid','goods_img.id','goods_img.gpic')->groupBy('gid')->get();
+
     	$gods = DB::table('goods')->join('detail','goods.id','=','detail.gid')->select('goods.id','detail.norns','goods.price','goods.gname','detail.d_num','detail.oid')->distinct()->get();
     	// dd($gods);
     	$order = DB::table('orders')->where('uid',session('cid'))->orderBy('id','desc')->first();
@@ -64,7 +65,6 @@ class DetailpayController extends Controller
     	if($deta){
     		$re = DB::table('detail')->insert($deta);
     	}
-    
     	if($res && $re){
     		echo "<script>location.href='/home/detailpay'</script>";
     	} else{
