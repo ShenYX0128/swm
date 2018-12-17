@@ -73,7 +73,7 @@
 							<div class="am-tabs-bd" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
 								<div class="am-tab-panel am-fade am-in am-active" id="tab1">
 									<div class="order-top">
-										<div class="th th-item" style="width:37%;">
+										<div class="th th-item" style="width:35%;">
 											商品
 										</div>
 										<div class="th th-price">
@@ -205,7 +205,7 @@
 
 															    <?php case (3): ?>
 															    <div class="col-state am-btn am-btn-danger anniu">
-															        <a href="/home/commentlist/<?php echo e($v->id); ?>">待评价</a>
+															        <a href="/jiesuan/order_evaluate/<?php echo e($v->id); ?>">待评价</a>
 															    </div>
 															    <?php break; ?>
 															<?php endswitch; ?>
@@ -225,7 +225,7 @@
 								
 								<div class="am-tab-panel am-fade" id="tab3">
 									<div class="order-top">
-										<div class="th th-item" style="width:37%;">
+										<div class="th th-item">
 											商品
 										</div>
 										<div class="th th-price">
@@ -346,7 +346,7 @@
 
 															    <?php case (3): ?>
 															    <div class="col-state am-btn am-btn-danger anniu">
-															        <a href="/home/commentlist/<?php echo e($d->id); ?>">待评价</a>
+															        <a href="/jiesuan/order_evaluate/<?php echo e($d->id); ?>">待评价</a>
 															    </div>
 															    <?php break; ?>
 															<?php endswitch; ?>
@@ -362,7 +362,7 @@
                                
 								<div class="am-tab-panel am-fade" id="tab4">
 									<div class="order-top">
-										<div class="th th-item" style="width:37%;">
+										<div class="th th-item">
 											商品
 										</div>
 										<div class="th th-price">
@@ -483,7 +483,7 @@
 
 															    <?php case (3): ?>
 															    <div class="col-state am-btn am-btn-danger anniu">
-															        <a href="/home/commentlist/<?php echo e($vvv->id); ?>">待评价</a>
+															        <a href="/jiesuan/order_evaluate/<?php echo e($vvv->id); ?>">待评价</a>
 															    </div>
 															    <?php break; ?>
 															<?php endswitch; ?>
@@ -498,7 +498,7 @@
 								</div>
 								<div class="am-tab-panel am-fade" id="tab5">
 									<div class="order-top">
-										<div class="th th-item" style="width:37%;">
+										<div class="th th-item">
 											商品
 										</div>
 										<div class="th th-price">
@@ -620,7 +620,7 @@
 
 															    <?php case (3): ?>
 															    <div class="col-state am-btn am-btn-danger anniu">
-															        <a href="/home/commentlist/<?php echo e($dd->id); ?>">待评价</a>
+															        <a href="/jiesuan/order_evaluate/<?php echo e($dd->id); ?>">待评价</a>
 															    </div>
 															    <?php break; ?>
 															<?php endswitch; ?>

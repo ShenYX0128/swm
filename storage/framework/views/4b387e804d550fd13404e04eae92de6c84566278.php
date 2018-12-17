@@ -103,16 +103,7 @@
                                
                                 <td width='220px'>
                                     <a href="/admin/orders/<?php echo e($v->id); ?>/edit" class='btn btn-info'>修改</a>
-                                   
-                                    <form action="/admin/orders/<?php echo e($v->id); ?>" method='post' style='display:inline'>
-                                      <?php echo e(csrf_field()); ?>
-
-
-                                      <?php echo e(method_field("DELETE")); ?>
-
-                                      <button class='btn btn-danger'>删除</button>
-
-                                    </form>
+                                    <!-- <a href="/admin/category/<?php echo e($v->id); ?>" class='btn btn-info'>添加子分类</a> -->
 
                                 </td>
                             </tr>
@@ -159,13 +150,12 @@
             <div class="row">
                 <div class="col-sm-5">
                     <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">
-                        本页码是<?php echo e($res->currentPage()); ?>&nbsp;&nbsp;&nbsp;&nbsp;本页是从<?php echo e($res->firstItem()); ?> to <?php echo e($res->lastItem()); ?>&nbsp;&nbsp;&nbsp;&nbsp;本表共有<?php echo e($res->total()); ?>条数据
+                        本页码是&nbsp;&nbsp;&nbsp;&nbsp;本页是从 to &nbsp;&nbsp;&nbsp;&nbsp;本表共有条数据
                     </div>
                 </div>
                 <div class="col-sm-7">
                     <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
-                      <?php echo e($res->appends($request->all())->links()); ?>
-
+                      
                     </div>
                 </div>
             </div>

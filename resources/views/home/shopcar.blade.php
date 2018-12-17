@@ -80,7 +80,6 @@
 					</div>
 					<div class="topMessage mini-cart">
 						@php
-
 						$count=count(session('shop'));
 						@endphp
 						<div class="menu-hd"><a id="mc-menu-hd" href="http://g-mall.cn/shopcar" target="_top"><i class="am-icon-shopping-cart  am-icon-fw"></i><span>购物车</span><strong id="J_MiniCartNum" class="h">({{$count}})</strong></a></div>
@@ -240,7 +239,7 @@
 					</div>
 					<div class="operations">
 						<a href="javascript:void(0)" hidefocus="true" class="deleteAll">删除</a>
-						
+						<a href="#" hidefocus="true" class="J_BatchFav">清空购物车</a>
 					</div>
 					<div class="float-bar-right">
 						<div class="amount-sum">
