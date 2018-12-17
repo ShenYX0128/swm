@@ -123,7 +123,7 @@ class PosterController extends Controller
             if($re){
                 return redirect('/admin/poster')->with('success','修改成功');
             }else{
-                return back()->with('error','修改成功');
+                return back()->with('error','修改失败');
             }
         }
          $res = $request->except('_token','_method');
@@ -131,7 +131,7 @@ class PosterController extends Controller
          if($re){
                 return redirect('/admin/poster')->with('success','修改成功');
             }else{
-                return back()->with('error','修改成功');
+                return back()->with('error','修改失败');
             }
         
 

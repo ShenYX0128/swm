@@ -25,16 +25,18 @@ class IndexController extends Controller
         foreach ($type as $k => $v) {
             $sub =Category::where('pid',$v->id)->take(6)->get();
             foreach ($sub as $key => $va) {
-                $arr[] = $va;   
+                $arr[$key] = $va;   
             } 
             // echo $sub;
            $god[] = Goods::where([['tweet','=','1'],['pid','=',$v->id]])->take(6)->get(); 
         }
+
         // dd($arr);
         if(!empty($god)){
             foreach ($god as $ke => $val){
                 foreach ($val as $k => $v) {
                     $gods[$v->pid][] = $v;
+
                     // $img[] = Goodsimg::where('gid',$v->id)->get();
                     // $a = $k;
                 }

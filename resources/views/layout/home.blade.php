@@ -33,7 +33,11 @@
 					<div class="topMessage">
 						@if(session('cid'))
 						<div class="menu-hd">
-							<a href="#" target="_top" class="h">欢迎回来,{{$customer->customername}}</a>
+							@if(!$customer->customername)
+								<a href="#" target="_top" class="h">欢迎回来,{{$customer->phone}}</a>
+							@else
+								<a href="#" target="_top" class="h">欢迎回来,{{$customer->customername}}</a>
+							@endif
 							<a href="/home/logout" target="_top">退出登录</a>
 						</div>
 						@else
@@ -97,15 +101,6 @@
 								@endforeach
 							</p>
 						</div>
-						<div class="footer-bd ">
-							<p>
-								<a href="# ">关于恒望</a>
-								<a href="# ">合作伙伴</a>
-								<a href="# ">联系我们</a>
-								<a href="# ">网站地图</a>
-								<em>© 2015-2025 Hengwang.com 版权所有. 更多模板 <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></em>
-							</p>
-						</div>
 					</div>
 
 		</div>
@@ -136,9 +131,17 @@
 				@endphp
 
 						<div class="avatar_box ">
+							@if(!$customer->profile)
+							<p class="avatar_imgbox"><img src="/homes/images/no-img_mid_.jpg" / style="width:100px;height:100px;margin-right:30px;"></p>
+							@else
 							<p class="avatar_imgbox"><img src="{{$customer->profile}}" / style="width:100px;height:100px;margin-right:30px;"></p>
+							@endif
 							<ul class="user_info ">
+								@if(!$customer->customername)
+								<li>{{$customer->phone}}</li>
+								@else
 								<li>{{$customer->customername}}</li>
+								@endif
 								<li><a href="/home/logout" style="align:center;width:110px; padding-left:26px;">退出登录</a></li>
 							</ul>
 						</div>

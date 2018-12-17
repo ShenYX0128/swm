@@ -15,7 +15,11 @@
 	</head>
 
 	<body>
-
+	@if(session('error'))
+		<script>
+			alert("{{session('error')}}")
+		</script>
+	@endif
 		<div class="login-boxtitle">
 			<a href="home.html"><img alt="logo" src="/homes/images/logobig.png" /></a>
 		</div>
@@ -33,7 +37,7 @@
 						  	<form action="/home/dologin" method="post">
 							    <div class="user-name">
 								    <label for="user"><i class="am-icon-user"></i></label>
-								    <input type="text" name="phone" id="user" placeholder="邮箱/手机/用户名">
+								    <input type="text" name="phone" id="user" placeholder="手机/用户名">
                  				</div>
                  				<div class="user-pass">
 								    <label for="password"><i class="am-icon-lock"></i></label>

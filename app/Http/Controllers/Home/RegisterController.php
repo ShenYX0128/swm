@@ -32,7 +32,7 @@ class RegisterController extends Controller
 		$code = rand(111111,999999);
 
 		//session
-		session('code',$code);
+		session(['code'=>$code]);
 
 		$appId = "28b753e772144ea48f54a6bde1979869";
 		
@@ -49,7 +49,7 @@ class RegisterController extends Controller
     	$code = $request->get('code');
 
     	$cd = session('code');
-        dump($code,$cd);
+        //dump($code,$cd);
     	//比较   跟手机收到的验证码作比较
     	if($code == $cd){
 
@@ -57,6 +57,22 @@ class RegisterController extends Controller
     	} else {
     		echo 0;
     	}
+
+    }
+
+
+
+    public function checkrephone(Request $request)
+    {
+        $phone = $request->post('phone');
+        $rs = Customer::where('phone',$phone)->first();
+
+        if($rs){
+
+            echo 1;
+        } else {
+            echo 0;
+        }
 
     }
 
@@ -71,7 +87,11 @@ class RegisterController extends Controller
             $data = Customer::create($res);
             
             if($data){
-                return redirect('/home/login')->with('success','注册成功');
+                $rs = Customer::where('phone',$res['phone'])->first();
+                //存session信息
+                session(['cid'=>$rs->id]);
+
+                return redirect('/');
             }
 
        

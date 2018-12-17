@@ -152,7 +152,7 @@ class BannerController extends Controller
             $data=Banner::where('id',$id)->update($res);
 
 
-            if($data){
+            if($data==0 || $data){
                 return redirect('/admin/banner')->with('success','修改成功');
             }
         }catch(\Exception $e){
