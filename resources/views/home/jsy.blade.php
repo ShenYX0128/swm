@@ -174,7 +174,7 @@
 															<img src="@php
 					                                               $tu = DB::table('goods_img')->where('gid',$v['id'])->first();
 					                                               echo $tu->gpic
-					                                               @endphp" class="itempic J_ItemImg"></a>
+					                                               @endphp" class="itempic J_ItemImg" width="80"></a>
 													</div>
 													<div class="item-info">
 														<div class="item-basic-info" style="text-align:center">

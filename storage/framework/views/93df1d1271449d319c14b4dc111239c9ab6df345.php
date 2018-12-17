@@ -38,7 +38,7 @@
 						    	<i class="am-icon-user-secret am-icon-md nav-user"></i><b></b>我的福利
 						    	<i class="am-icon-angle-right" style="padding-left: 10px;"></i>
 						    </div>
-						</div>
+						</div>			
 			</div>
 			<b class="line"></b>
 		<div class="center">
@@ -54,18 +54,18 @@
 						<?php
 						$customer = DB::table('customer')->where('id',session('cid'))->first();
 						?>
-					<form action="/home/update" method="post" enctype="multipart/form-data" class="am-form am-form-horizontal">
+					<form id="art_form" action="/home/update" method="post" enctype="multipart/form-data" class="am-form am-form-horizontal">
 						<!--头像 -->
 						<div class="user-infoPic">
 						<?php if(!$customer->profile): ?>
 							<div class="filePic">
-								<input type="file" class="inputPic" allowexts="gif,jpeg,jpg,png,bmp" name="profile" accept="image/*">
-								<img class="am-circle am-img-thumbnail" name="profile" src="/homes/images/getAvatar.do.jpg" alt="" />
+								<input type="file" class="inputPic" allowexts="gif,jpeg,jpg,png,bmp" id="file_upload" name="profile" accept="image/*">
+								<img class="am-circle am-img-thumbnail" id='imgs' name="profile" src="/homes/images/getAvatar.do.jpg" alt="" />
 							</div>
 						<?php else: ?>
 							<div class="filePic">
-								<input type="file" class="inputPic" allowexts="gif,jpeg,jpg,png,bmp" name="profile" accept="image/*">
-								<img class="am-circle am-img-thumbnail" name="profile" src="<?php echo e($customer->profile); ?>" alt="" />
+								<input type="file" class="inputPic" allowexts="gif,jpeg,jpg,png,bmp" id="file_upload" name="profile" accept="image/*">
+								<img class="am-circle am-img-thumbnail" id='imgs' name="profile" src="<?php echo e($customer->profile); ?>" alt="" />
 							</div>
 						<?php endif; ?>
 							<p class="am-form-help">头像</p>
@@ -175,50 +175,49 @@
 				
 			</div>
 
-			<aside class="menu">
-				<ul>
-					<li class="person">
-						<a href="/home/personal/information">个人中心</a>
-					</li>
-					<li class="person">
-						<a href="#">个人资料</a>
-						<ul>
-							<li class="active"> <a href="/home/personal/information">个人信息</a></li>
-							<li> <a href="/home/personal/safety">安全设置</a></li>
-							<li> <a href="/home/personal/address">收货地址</a></li>
-						</ul>
-					</li>
-					<li class="person">
-						<a href="#">我的交易</a>
-						<ul>
-							<li><a href="order.html">订单管理</a></li>
-							<li> <a href="change.html">退款售后</a></li>
-						</ul>
-					</li>
-					<li class="person">
-						<a href="#">我的资产</a>
-						<ul>
-							<li> <a href="coupon.html">优惠券 </a></li>
-							<li> <a href="bonus.html">红包</a></li>
-							<li> <a href="bill.html">账单明细</a></li>
-						</ul>
-					</li>
 
-					<li class="person">
-						<a href="#">我的小窝</a>
-						<ul>
-							<li> <a href="collection.html">收藏</a></li>
-							<li> <a href="foot.html">足迹</a></li>
-							<li> <a href="comment.html">评价</a></li>
-							<li> <a href="news.html">消息</a></li>
-						</ul>
-					</li>
-
-				</ul>
-
-			</aside>
+			<?php echo $__env->make('home.public.order', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 		</div>
 
 	</body>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('js'); ?>
+    <script type="text/javascript">
+    $(function () {
+        $("#file_upload").change(function () {
+
+            var imgPath = $("#file_upload").val();
+
+          if (imgPath == "") {
+              alert("请选择上传图片！");
+              return;
+          }
+          //判断上传文件的后缀名
+          var strExtension = imgPath.substr(imgPath.lastIndexOf('.') + 1);
+          if (strExtension != 'jpg' && strExtension != 'gif'
+              && strExtension != 'png' && strExtension != 'bmp') {
+              alert("请选择图片文件");
+              return;
+          }
+
+          var formData = new FormData($('#art_form')[0]);
+          $.ajax({
+            type: "POST",
+            url: "/home/profile",
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(data) {
+                $('#imgs').attr('src',data);
+                
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                alert("上传失败，请检查网络后重试");
+            }
+        });
+        })
+    })
+</script>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layout.home', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

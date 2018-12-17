@@ -109,6 +109,14 @@
 		                <div class="form-group">
 		                	<div class="form-group">
 		                    <label for="exampleInputPassword1">
+		                    	首页推荐
+		                    </label>
+		                    <p><input type="radio" name="tweet" id="optionsRadios2" value="1"<?php if($res->status==1): ?>checked <?php endif; ?>>
+		                      推荐&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="tweet" id="optionsRadios2" value="0"<?php if($res->status==0): ?>checked <?php endif; ?>>普通</p>
+		                </div>
+		                <div class="form-group">
+		                	<div class="form-group">
+		                    <label for="exampleInputPassword1">
 		                               状态
 		                    </label>
 		                    <p><input type="radio" name="status" id="optionsRadios1" value="0" <?php if($res->status==0): ?>checked <?php endif; ?>>

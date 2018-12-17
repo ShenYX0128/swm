@@ -8,9 +8,6 @@ use App\Model\Admin\Orders;
 use App\Model\Admin\Goods;
 use App\Model\Admin\Address;
 
-use App\Model\Admin\Goods;
-use App\Model\Admin\Address;
-
 
 class OrderDetailController extends Controller
 {

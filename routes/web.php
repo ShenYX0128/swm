@@ -46,6 +46,7 @@ Route::group(['middleware'=>'login'],function(){
 	Route::resource('admin/comment','Admin\CommentController');
 	// 广告管理
 	Route::resource('admin/poster','Admin\PosterController');
+	Route::resource('admin/headline','Admin\HeadlineController');
 	//订单管理
 	Route::resource('admin/orders','Admin\OrdersController');
 	Route::any('admin/detail','Admin\OrdersController@detail');
@@ -87,7 +88,7 @@ Route::any('home/list/{id}','Home\ListController@index');
 // 前台详情页
 Route::get('/detailadd','Home\DetailController@detailadd');
 Route::get('home/detail/{id}','Home\DetailController@detail');
-
+Route::post('home/shopnum','Home\DetailController@shopnum');
 // 去结算页面
 Route::post('home/commit','Home\OrderController@commit');
 

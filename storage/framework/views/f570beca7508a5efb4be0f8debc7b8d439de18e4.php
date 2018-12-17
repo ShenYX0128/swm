@@ -1,6 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-
+	<?php
+	$config = DB::table('config')->where('id',1)->first();
+	?>
+	<?php if($config->status ==1): ?>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -14,7 +17,6 @@
 
 		<link href="/homes/css/hmstyle.css" rel="stylesheet" type="text/css"/>
 		<link href="/homes/css/skin.css" rel="stylesheet" type="text/css" />
-		<link href="/homes/css/cartstyle.css" rel="stylesheet" type="text/css" />
 		<link href="/homes/css/optstyle.css" rel="stylesheet" type="text/css" />
 	</head>
 
@@ -29,7 +31,11 @@
 					<div class="topMessage">
 						<?php if(session('cid')): ?>
 						<div class="menu-hd">
-							<a href="#" target="_top" class="h">欢迎回来,<?php echo e($customer->customername); ?></a>
+							<?php if(!$customer->customername): ?>
+								<a href="#" target="_top" class="h">欢迎回来,<?php echo e($customer->phone); ?></a>
+							<?php else: ?>
+								<a href="#" target="_top" class="h">欢迎回来,<?php echo e($customer->customername); ?></a>
+							<?php endif; ?>
 							<a href="/home/logout" target="_top">退出登录</a>
 						</div>
 						<?php else: ?>
@@ -49,21 +55,21 @@
 					</div>
 					<div class="topMessage mini-cart">
 						<?php
-						$count = DB::table('shopcar')->where('uid',session('cid'))->count();
+						$count=count(session('shop'));
 						?>
-						<div class="menu-hd"><a id="mc-menu-hd" href="http://g-mall.cn/home/shopcar" target="_top"><i class="am-icon-shopping-cart  am-icon-fw"></i><span>购物车</span><strong id="J_MiniCartNum" class="h">(<?php echo e($count); ?>)</strong></a></div>
+						<div class="menu-hd"><a id="mc-menu-hd" href="http://g-mall.cn/shopcar" target="_top"><i class="am-icon-shopping-cart  am-icon-fw"></i><span>购物车</span><strong id="J_MiniCartNum" class="h">(<?php echo e($count); ?>)</strong></a></div>
 					</div>
 					<div class="topMessage favorite">
 						<div class="menu-hd"><a href="#" target="_top"><i class="am-icon-heart am-icon-fw"></i><span>收藏夹</span></a></div>
 				</ul>
 				</div>
-
+				
 				<!--悬浮搜索框-->
 
 				<div class="nav white">
-					<div class="logo"><img src="/homes/images/logo.png" /></div>
+					<div class="logo"><img src="<?php echo e($config->logo); ?>" /></div>
 					<div class="logoBig">
-						<li><img src="/homes/images/logobig.png" /></li>
+						<li><img src="<?php echo e($config->logo); ?>"style="max-width:150px;max-height:100px;" /></li>
 					</div>
 
 					<div class="search-bar pr">
@@ -118,6 +124,9 @@
 		<script type="text/javascript " src="/homes/basic/js/quick_links.js "></script>
 		<?php $__env->startSection('js'); ?>
 		<?php echo $__env->yieldSection(); ?>
+		<?php else: ?>
+			<h1>网站正在维护中......</h1>
+		<?php endif; ?>
 	</body>
 
 </html>

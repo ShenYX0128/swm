@@ -1,6 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-
+	<?php
+	$config = DB::table('config')->where('id',1)->first();
+	?>
+	<?php if($config->status ==1): ?>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -53,7 +56,11 @@
 					<div class="topMessage">
 						<?php if(session('cid')): ?>
 						<div class="menu-hd">
-							<a href="#" target="_top" class="h">欢迎回来,<?php echo e($customer->customername); ?></a>
+							<?php if(!$customer->customername): ?>
+								<a href="#" target="_top" class="h">欢迎回来,<?php echo e($customer->phone); ?></a>
+							<?php else: ?>
+								<a href="#" target="_top" class="h">欢迎回来,<?php echo e($customer->customername); ?></a>
+							<?php endif; ?>
 							<a href="/home/logout" target="_top">退出登录</a>
 						</div>
 						<?php else: ?>
@@ -73,9 +80,9 @@
 					</div>
 					<div class="topMessage mini-cart">
 						<?php
-						$count = DB::table('shopcar')->where('uid',session('cid'))->count();
+						$count=count(session('shop'));
 						?>
-						<div class="menu-hd"><a id="mc-menu-hd" href="http://g-mall.cn/home/shopcar" target="_top"><i class="am-icon-shopping-cart  am-icon-fw"></i><span>购物车</span><strong id="J_MiniCartNum" class="h">(<?php echo e($count); ?>)</strong></a></div>
+						<div class="menu-hd"><a id="mc-menu-hd" href="http://g-mall.cn/shopcar" target="_top"><i class="am-icon-shopping-cart  am-icon-fw"></i><span>购物车</span><strong id="J_MiniCartNum" class="h">(<?php echo e($count); ?>)</strong></a></div>
 					</div>
 				<div class="topMessage favorite">
 					<div class="menu-hd"><a href="#" target="_top"><i class="am-icon-heart am-icon-fw"></i><span>收藏夹</span></a></div>
@@ -141,34 +148,36 @@
 									<span class="list-change theme-login">编辑</span>
 								</div>
 							</div>
+
+					<form action="/home/commit" method="post" enctype="multipart/form-data">
 							<div class="clear"></div>
 
-							<?php $__currentLoopData = $res; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $k => $v): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-							<?php if($v->uid == session('cid')): ?>
-							<?php $__currentLoopData = $gods; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ke => $val): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-							<?php if($val->id == $v->gid): ?>
-							<div class="bundle-main">
+							<?php $__currentLoopData = $shop; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $k=>$car): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+							<div class="bundle-main" id="shop_<?php echo e($car['id']); ?>">
 								<ul class="item-content clearfix">
 									<li class="td td-chk">
 										<div class="cart-checkbox ">
-											<input class="check" gid="<?php echo e($v->id); ?>" name="items[]" value="170769542747" type="checkbox">
+											<input class="check" gid="<?php echo e($car['goodsinfo']->id); ?>" name="items[]" value="<?php echo e($car['id']); ?>" type="checkbox">
 											<label for="J_CheckBox_170769542747"></label>
 										</div>
 									</li>
 									<li class="td td-item">
 										<div class="item-pic">
-											<a href="#" target="_blank" data-title="<?php echo e($v->name); ?>" class="J_MakePoint" data-point="tbcart.8.12">
-												<img src="<?php echo e($v->shop_img); ?>" class="itempic J_ItemImg" width="80px"></a>
+											<a href="#" target="_blank" data-title="<?php echo e($car['goodsinfo']->gname); ?>" class="J_MakePoint" data-point="tbcart.8.12">
+												<img src="<?php
+                                               $tu = DB::table('goods_img')->where('gid',$car['id'])->first();
+                                               echo $tu->gpic;
+                                               ?>" class="itempic J_ItemImg" width="80px"></a>
 										</div>
 										<div class="item-info">
 											<div class="item-basic-info">
-												<a href="#" target="_blank" title="<?php echo e($v->name); ?>" class="item-title J_MakePoint" data-point="tbcart.8.11"><?php echo e($v->name); ?></a>
+												<a href="#" target="_blank" title="<?php echo e($car['goodsinfo']->gname); ?>" class="item-title J_MakePoint" data-point="tbcart.8.11"><?php echo e($car['goodsinfo']->gname); ?></a>
 											</div>
 										</div>
 									</li>
 									<li class="td td-info">
 										<div class="item-props item-props-can">
-											<span class="sku-line"><?php echo e($v->norns); ?></span>
+											<span class="sku-line"><?php echo e($car['goodsinfo']->norns); ?></span>
 											<span class="sku-line"></span>
 											<span tabindex="0" class="btn-edit-sku theme-login">修改</span>
 											<i class="theme-login am-icon-sort-desc"></i>
@@ -177,11 +186,9 @@
 									<li class="td td-price">
 										<div class="item-price price-promo-promo">
 											<div class="price-content">
+												
 												<div class="price-line">
-													<em class="price-original"><?php echo e($val->discount); ?></em>
-												</div>
-												<div class="price-line">
-													<em class="J_Price price-now" tabindex="0"><?php echo e($val->price); ?></em>
+													<em class="J_Price price-now" tabindex="0"><?php echo e($car['goodsinfo']->price); ?></em>
 												</div>
 											</div>
 										</div>
@@ -191,7 +198,7 @@
 											<div class="item-amount ">
 												<div class="sl">
 													<input class="mins am-btn" name="" type="button" value="-" />
-													<input class="text_box" name="" type="text" value="<?php echo e($v->num); ?>" style="width:30px;" />
+													<input class="text_box" name="" type="text" value="<?php echo e($car['num']); ?>" style="width:30px;" />
 													<input class="add am-btn" name="" type="button" value="+" />
 												</div>
 											</div>
@@ -199,23 +206,23 @@
 									</li>
 									<li class="td td-sum">
 										<div class="td-inner">
-											<em tabindex="0" class="J_ItemSum number"><?php echo e($v->prime); ?></em>
+											<em tabindex="0" class="J_ItemSum number"><?php echo e($car['goodsinfo']->price*$car['num']); ?></em>
 										</div>
 									</li>
 									<li class="td td-op">
 										<div class="td-inner">
 											<a title="移入收藏夹" class="btn-fav" href="#">
                   移入收藏夹</a>
-											<a href="javascript:void(0)" data-point-url="#" class="delete">
+											<a href="javascript:void(0)" data-point-url="#" class="delete" gid="<?php echo e($car['id']); ?>">
                   删除</a>
 										</div>
 									</li>
 								</ul>
 							</div>
-							<?php endif; ?>
-							<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-							<?php endif; ?>
-							<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+						
+				<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+
 						</div>
 					</tr>
 				</div>
@@ -232,7 +239,7 @@
 					</div>
 					<div class="operations">
 						<a href="javascript:void(0)" hidefocus="true" class="deleteAll">删除</a>
-						<a href="#" hidefocus="true" class="J_BatchFav">移入收藏夹</a>
+						<a href="#" hidefocus="true" class="J_BatchFav">清空购物车</a>
 					</div>
 					<div class="float-bar-right">
 						<div class="amount-sum">
@@ -248,13 +255,17 @@
 							<strong class="price">¥<em id="J_Total">0.00</em></strong>
 						</div>
 						<div class="btn-area">
-							<a href="pay.html" id="J_Go" class="submit-btn submit-btn-disabled" aria-label="请注意如果没有选择宝贝，将无法结算">
-								<span>结&nbsp;算</span></a>
+							 <?php echo e(csrf_field()); ?>
+
+							<button style="background:#F03726;width:82px"  id="J_Go" class="submit-btn submit-btn-disabled" aria-label="请注意如果没有选择宝贝，将无法结算">
+								<span>结&nbsp;算</span></button>
 						</div>
 					</div>
 
 				</div>
 			</div>
+
+		</form>
 			<div class="cart-empty" style='display:none'>
 			    <div class="message">
 			        <ul>
@@ -463,25 +474,6 @@
 		    }
 		});
 	
-		// 删除数据
-		$('.delete').click(function(){
-			// 提示信息
-			var res = confirm('真的决定要删除宝贝吗？');
-			if(!res) return;
-			// 将参数发送到控制器中 
-			// 获取id
-			var gid = $(this).parents('ul').find('.check').attr('gid');
-			var rem = $(this);
-			// console.log(gid);
-			$.post('/home/shopdata',{gid:gid},function(data){
-				if(data == 1){
-					rem.parents('.bundle-main').remove();
-					// 刷新
-					nums()
-				}
-				// console.log(data);
-			})
-		})
 		$.ajaxSetup({
 		    headers: {
 		        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -522,4 +514,25 @@
 		}
 		nums()
 	</script>
+	<script>
+		 // 删除商品的弹出框
+    $('.delete').click(function(){
+        var gid = $(this).attr('gid');
+        
+        $.post('/home/shopdel',{gid:gid},function(data){
+            
+            
+             if(data){
+               $("#shop_"+gid).remove();
+                 //刷新
+               window.location.reload(); 
+             };   
+        });
+
+    })
+
+	</script>
+	<?php else: ?>
+			<h1>网站正在维护中......</h1>
+		<?php endif; ?>
 </html>

@@ -118,13 +118,13 @@
 							<div class="tb-detail-price">
 
 								<li class="price iteminfo_price">
-									<dt>促销价</dt>
-									<dd><em>¥</em><b class="sys_item_price"><?php echo e($v->discount); ?></b>  </dd>                                 
+									<dt>单价</dt>
+									<dd><em>¥</em><b class="sys_item_price"><?php echo e($v->price); ?></b>  </dd>                                 
 								</li>
-								<li class="price iteminfo_mktprice">
+								<!-- <li class="price iteminfo_mktprice">
 									<dt>原价</dt>
 									<dd><em>¥</em><b class="sys_item_mktprice"><?php echo e($v->price); ?></b></dd>									
-								</li>
+								</li> -->
 								
 								<div class="clear"></div>
 							</div>
@@ -194,10 +194,10 @@
 													<div class="theme-options">
 														<div class="cart-title number" style="margin-left: 5px">数量</div>
 														<dd>
-															<input id="min" class="am-btn am-btn-default" name="" type="button" value="-" />
+															<input id="nmin" class="am-btn am-btn-default" name="" type="button" value="-" />
 															<input id="text_box" name="d_num" type="text" value="1" style="width:30px;" />
-															<input id="add" class="am-btn am-btn-default" name="" type="button" value="+" />
-															<span id="Stock" class="tb-hidden">库存<span class="stock"><?php echo e($v->stock); ?></span>件</span>
+															<input id="nadd" class="am-btn am-btn-default" name="" type="button" value="+" />
+															<span id="Stock" class="tb-hidden">库存<span id="Stoc" class="stock"><?php echo e($v->stock); ?></span>件</span>
 														</dd>
 
 													</div>
@@ -237,7 +237,7 @@
 															<input id="tmin" class="am-btn am-btn-default" name="" type="button" value="-" />
 															<input id="text_boxs" name="num" type="text" value="1" style="width:30px;" />
 															<input id="tadd" class="am-btn am-btn-default" name="" type="button" value="+" />
-															<span id="Stock" class="tb-hidden">库存<span class="stock"><?php echo e($v->stock); ?></span>件</span>
+															<span id="Stocks" class="tb-hidden">库存<span class="stock"><?php echo e($v->stock); ?></span>件</span>
 														</dd>
 
 													</div>
@@ -245,7 +245,7 @@
 
 													<div class="btn-op">
 
-														<div class="btn am-btn am-btn-warning" id="form_sub">确认</div>
+														<div class="btn am-btn am-btn-warning" id="form_sub" >确认</div>
 														<div class="btn close am-btn am-btn-warning" id="indent_close">取消</div>
 													</div>
 												</div>
@@ -308,7 +308,7 @@
 							</li>
 							<li>
 								<div class="clearfix tb-btn tb-btn-basket theme-login">
-									<a id="LikBasket" title="加入购物车" href="javascript:void(0)"><i></i>加入购物车</a>
+									<a id="LikBasket" title="加入购物车" href="javascript:void(0)" gid="<?php echo e($v->id); ?>"><i></i>加入购物车</a>
 								</div>
 							</li>
 						</div>
@@ -499,37 +499,39 @@
 											<li class="tb-taglist-li tb-taglist-li-current">
 												<div class="comment-info">
 													<span>全部评价</span>
-													<span class="tb-tbcr-num">(32)</span>
+													<span class="tb-tbcr-num">(<?php echo e($count); ?>)</span>
 												</div>
 											</li>
 
 											<li class="tb-taglist-li tb-taglist-li-1">
 												<div class="comment-info">
 													<span>好评</span>
-													<span class="tb-tbcr-num">(32)</span>
+													<span class="tb-tbcr-num">(<?php echo e($hao); ?>)</span>
 												</div>
 											</li>
 
 											<li class="tb-taglist-li tb-taglist-li-0">
 												<div class="comment-info">
 													<span>中评</span>
-													<span class="tb-tbcr-num">(32)</span>
+													<span class="tb-tbcr-num">(<?php echo e($zhong); ?>)</span>
 												</div>
 											</li>
 
 											<li class="tb-taglist-li tb-taglist-li--1">
 												<div class="comment-info">
 													<span>差评</span>
-													<span class="tb-tbcr-num">(32)</span>
+													<span class="tb-tbcr-num">(<?php echo e($cha); ?>)</span>
 												</div>
 											</li>
 										</ul>
 									</div>
 									<div class="clear"></div>
 								<div id="box">
+										<?php if($count == 0): ?>
+										<p style="margin-top: 20px;">该商品没有评论</p>
+										<?php else: ?>
 									<ul class="am-comments-list am-comments-list-flip">
 										<!-- 第二部分 -->
-										
 										<?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $val): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 										<?php $__currentLoopData = $user; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $v): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 										<?php if($v->id == $val->uid): ?>
@@ -547,7 +549,7 @@
 														<a href="#link-to-user" class="am-comment-author"><?php echo e($v->customername); ?></a>
 														<!-- 评论者 -->
 														评论于
-														<time datetime=""><?php echo e($val->addtime); ?></time>
+														<time datetime=""><?php echo e(date('Y-m-d',$val->addtime)); ?></time>
 													</div>
 												</header>
 
@@ -555,10 +557,6 @@
 													<div class="tb-rev-item " data-id="255776406962">
 														<div class="J_TbcRate_ReviewContent tb-tbcr-content ">
 															<?php echo e($val->content); ?>
-
-														</div>
-														<div class="tb-r-act-bar">
-															口味：<?php echo e($val->norns); ?>
 
 														</div>
 													</div>
@@ -589,6 +587,7 @@
 										<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 										<li><a href="javascript:void(0)" onclick="page(<?php echo $next ?>)">&raquo;</a></li>
 									</ul>
+									<?php endif; ?>
 								</div>
 									<div class="clear"></div>
 
@@ -840,26 +839,43 @@ zcityrun('.zcityGroup');
 		data1 += ','+$('.J_Price').text().trim().substring(1);
 		// var da = data1.join(',');
 		// console.log(data1);
+		
+
 		$('#form_sub').click(function(){
-			$.ajax({  
-                type:'post',
-        		contentType: "application/x-www-form-urlencoded",  
-                traditional: true,  
-                url:'/home/detailadd',  
-                data:{arr:data1},
-                success: function (data){
-                    window.location.href="http://g-mall.cn/home/shopcar";
-                },
-                error:function(){
-                	alert('加入购物车失败');
-                }  
-            }); 
-			
-		});
-	// 获取商品数量
+		var gid = $('#hidden').attr('gid');
+
+		var num = $('#text_boxs').val().trim();
+		
+		window.location.href="/detailadd?id="+gid+"&num="+num;
+	    })
+	// 获取商品数量// 加
+	$('#nadd').click(function(){
+		var td = $(this).prev().val();
+		var stock = $('#Stoc').text().trim();
+		td++;
+		$.post('/home/shopnum',{num:td,stock:stock},function(data){
+			$('#nadd').prev().val(data);
+		})
+		
+		 // $('#nadd').prev().val(td);
+		// console.log(a);
+	})
+	// 减
+	$('#nmin').click(function(){
+		var td = $(this).next().val();
+		// console.log(td);
+		td--;
+		if(td <= 1){
+			td = 1;
+		}
+		$(this).next().val(td);
+		
+		
+	})
 	// 加
 	$('#tadd').click(function(){
 		var td = $(this).prev().val();
+		var stock = $('#Stoc').text().trim();
 		td++;
 		$(this).prev().val(td);
 		// 获取单价

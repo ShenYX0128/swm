@@ -1,6 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-
+	@php
+	$config = DB::table('config')->where('id',1)->first();
+	@endphp
+	@if($config->status ==1)
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -28,7 +31,11 @@
 					<div class="topMessage">
 						@if(session('cid'))
 						<div class="menu-hd">
-							<a href="#" target="_top" class="h">欢迎回来,{{$customer->customername}}</a>
+							@if(!$customer->customername)
+								<a href="#" target="_top" class="h">欢迎回来,{{$customer->phone}}</a>
+							@else
+								<a href="#" target="_top" class="h">欢迎回来,{{$customer->customername}}</a>
+							@endif
 							<a href="/home/logout" target="_top">退出登录</a>
 						</div>
 						@else
@@ -48,21 +55,21 @@
 					</div>
 					<div class="topMessage mini-cart">
 						@php
-						$count = DB::table('shopcar')->where('uid',session('cid'))->count();
+						$count=count(session('shop'));
 						@endphp
-						<div class="menu-hd"><a id="mc-menu-hd" href="http://g-mall.cn/home/shopcar" target="_top"><i class="am-icon-shopping-cart  am-icon-fw"></i><span>购物车</span><strong id="J_MiniCartNum" class="h">({{$count}})</strong></a></div>
+						<div class="menu-hd"><a id="mc-menu-hd" href="http://g-mall.cn/shopcar" target="_top"><i class="am-icon-shopping-cart  am-icon-fw"></i><span>购物车</span><strong id="J_MiniCartNum" class="h">({{$count}})</strong></a></div>
 					</div>
 					<div class="topMessage favorite">
 						<div class="menu-hd"><a href="#" target="_top"><i class="am-icon-heart am-icon-fw"></i><span>收藏夹</span></a></div>
 				</ul>
 				</div>
-
+				
 				<!--悬浮搜索框-->
 
 				<div class="nav white">
-					<div class="logo"><img src="/homes/images/logo.png" /></div>
+					<div class="logo"><img src="{{$config->logo}}" /></div>
 					<div class="logoBig">
-						<li><img src="/homes/images/logobig.png" /></li>
+						<li><img src="{{$config->logo}}"style="max-width:150px;max-height:100px;" /></li>
 					</div>
 
 					<div class="search-bar pr">
@@ -117,6 +124,9 @@
 		<script type="text/javascript " src="/homes/basic/js/quick_links.js "></script>
 		@section('js')
 		@show
+		@else
+			<h1>网站正在维护中......</h1>
+		@endif
 	</body>
 
 </html>

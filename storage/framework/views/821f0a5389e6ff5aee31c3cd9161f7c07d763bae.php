@@ -1,6 +1,10 @@
 <?php $__env->startSection('title',$title); ?>
 <link rel="stylesheet" href="/admins/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
 <link rel="stylesheet" href="/admins/dist/css/skins/_all-skins.min.css">
+        <script type="text/javascript" src="/homes/js/jquery.js"></script>
+<style type="text/css">
+    .des img{ height: 50%;}
+</style>
 <?php $__env->startSection('content'); ?>
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -104,7 +108,7 @@
                                 <td><?php echo e($v->tid); ?></td>
                                 <td><?php echo e($v->price); ?></td>
                                 <td><?php echo e($v->norns); ?></td>
-                                <td><?php echo e($v->descr); ?></td>
+                                <td class="des" style="width: 400px; height: 100px; overflow: hidden;white-space:nowrap;"><?php echo $v->descr; ?></td>
                                 <td><?php echo e($v->stock); ?></td>
                                 <td>
                                     <?php if($v->status==1): ?>

@@ -25,7 +25,7 @@ class IndexController extends Controller
         foreach ($type as $k => $v) {
             $sub =Category::where('pid',$v->id)->take(6)->get();
             foreach ($sub as $key => $va) {
-                $arr[$key] = $va;   
+                $arr[] = $va;   
             } 
             // echo $sub;
            $god[] = Goods::where([['tweet','=','1'],['pid','=',$v->id],['status','=','1']])->take(6)->get(); 

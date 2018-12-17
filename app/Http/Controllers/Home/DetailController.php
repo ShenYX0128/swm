@@ -153,5 +153,16 @@ class DetailController extends Controller
         }
         return view('home.page',['data'=>$data,'user'=>$user,'prev'=>$prev,'next'=>$next,'sums'=>$sums,'pp'=>$pp,'page'=>$page,'count'=>$count]);
     }
+    public function shopnum(Request $request)
+    {
+        $num = $request->only('num');
+        $stock = $request->only('stock');
+        if($num['num'] >= $stock['stock']){
+            return $stock['stock'];
+        }else{
+            return $num['num'];
+        }
+
+    }
   
 }

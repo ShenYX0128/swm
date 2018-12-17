@@ -66,12 +66,6 @@ class ShopcarController extends Controller
 
          echo 1;
     }
-
-
-
-
-
-
     //购物车数量的减
     public function shopdec(Request $request)
 
