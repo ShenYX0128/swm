@@ -75,6 +75,7 @@
 								<div class="am-tab-panel am-fade am-in am-active" id="tab1">
 									<div class="order-top">
 										<div class="th th-item" style="width:37%;">
+
 											商品
 										</div>
 										<div class="th th-price">
@@ -100,10 +101,9 @@
                                    	 .td-item .item-basic-info{
                                    	 	margin-top:0px;
 
-                                   	 }
-									.item-info{
 
-									}
+                                   	 }
+									
 
                                    </style>
 									<div class="order-main">
@@ -662,7 +662,7 @@
 						<ul>
 							<li> <a href="collection.html">收藏</a></li>
 							<li> <a href="foot.html">足迹</a></li>
-							<li> <a href="comment.html">评价</a></li>
+							<li> <a href="/home/comment">评价</a></li>
 							<li> <a href="news.html">消息</a></li>
 						</ul>
 					</li>
@@ -702,7 +702,7 @@
                if(res.zhuangt == 0){
                     // console.log(res);
                     alert(res.tishi);
-                    $("#order_"+res.goodsid).html('<a href="/jiesuan/order_evaluate/'+res.goodsid+'">待评价</a>');
+                    $("#order_"+res.goodsid).html('<a href="/home/commentlist/'+res.goodsid+'">待评价</a>');
                      location.reload();
                 }else {
                     alert(res.tishi);

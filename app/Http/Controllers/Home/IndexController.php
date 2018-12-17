@@ -28,7 +28,7 @@ class IndexController extends Controller
                 $arr[$key] = $va;   
             } 
             // echo $sub;
-           $god[] = Goods::where([['tweet','=','1'],['pid','=',$v->id]])->take(6)->get(); 
+           $god[] = Goods::where([['tweet','=','1'],['pid','=',$v->id],['status','=','1']])->take(6)->get(); 
         }
 
         // dd($arr);

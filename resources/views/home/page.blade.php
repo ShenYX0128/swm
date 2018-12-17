@@ -6,11 +6,13 @@
 </head>
 <body>
 								<div id="box">
+									@if($count == 0)
+										<p style="margin-top: 20px;">该商品没有评论</p>
+										@else
 									<ul class="am-comments-list am-comments-list-flip">
-
-										
 										<!-- 第二部分 -->
 										
+						
 										@foreach($data as $val)
 										@foreach($user as $v)
 										@if($v->id == $val->uid)
@@ -28,7 +30,7 @@
 														<a href="#link-to-user" class="am-comment-author">{{$v->customername}}</a>
 														<!-- 评论者 -->
 														评论于
-														<time datetime="">{{$val->addtime}}</time>
+														<time datetime="">{{date('Y-m-d',$val->addtime)}}</time>
 													</div>
 												</header>
 
@@ -37,9 +39,7 @@
 														<div class="J_TbcRate_ReviewContent tb-tbcr-content ">
 															{{$val->content}}
 														</div>
-														<div class="tb-r-act-bar">
-															口味：{{$val->norns}}
-														</div>
+														
 													</div>
 
 												</div>
@@ -56,6 +56,7 @@
 									<!--分页 -->
 									
 									<ul class="paginations paginations-right">
+										
 										<li><a href="javascript:void(0)" onclick="page(<?php echo $prev ?>)">&laquo;</a></li>
 										@foreach($pp as $key=>$val)
 										@if($val == $page)
@@ -67,6 +68,7 @@
 										@endforeach
 										<li><a href="javascript:void(0)" onclick="page(<?php echo $next ?>)">&raquo;</a></li>
 									</ul>
+									@endif
 								</div>
 </body>
 </html>

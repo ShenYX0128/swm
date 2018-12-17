@@ -552,8 +552,8 @@
     							<ul id="mr_fu">
 						    	@foreach($adv as $k => $v)
 									<li class="am-u-sm-3 adv_child" style="overflow:hidden;position:relative; left: 15px; margin-left: 3px;" >
-										<div class="icon-sale one "></div>	
-											<h4>秒杀</h4>							
+										<!-- <div class="icon-sale one "></div>	
+											<h4>秒杀</h4>	 -->						
 										<div class="activityMain ">
 											<img src="{{$v->src}}" width="100%"></img>
 										</div>
@@ -632,7 +632,7 @@
 								@endif						
 						@endforeach
 								<div class="outer-con ">
-									<div class="title ">
+									<div class="title " title="{{$val->gname}}">
 										{{$val->gname}}
 									</div>									
 									<div class="sub-title ">
@@ -649,7 +649,7 @@
 								@endif						
 						@endforeach
 								<div class="outer-con ">
-									<div class="title ">
+									<div class="title " title="{{$val->gname}}">
 										{{$val->gname}}
 									</div>
 									<div class="sub-title ">
@@ -666,7 +666,7 @@
 								@endif						
 						@endforeach
 							<div class="outer-con ">
-								<div class="title ">
+								<div class="title " title="{{$val->gname}}">
 									{{$val->gname}}
 								</div>
 								<div class="sub-title ">
@@ -683,7 +683,7 @@
 								@endif						
 						@endforeach
 							<div class="outer-con ">
-								<div class="title ">
+								<div class="title " title="{{$val->gname}}">
 									{{$val->gname}}
 								</div>
 								<div class="sub-title ">
@@ -700,7 +700,7 @@
 								@endif						
 						@endforeach
 							<div class="outer-con ">
-								<div class="title ">
+								<div class="title " title="{{$val->gname}}">
 									{{$val->gname}}
 								</div>
 								<div class="sub-title ">
@@ -712,7 +712,7 @@
 						@elseif($key == 5)
 						<div class="am-u-sm-3 am-u-md-2 text-three last big ">
 							<div class="outer-con ">
-								<div class="title ">
+								<div class="title " title="{{$val->gname}}">
 									{{$val->gname}}
 								</div>
 								<div class="sub-title ">

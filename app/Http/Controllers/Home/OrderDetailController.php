@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Home;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Admin\Orders;
+use App\Model\Admin\Goods;
+use App\Model\Admin\Address;
 
 use App\Model\Admin\Goods;
 use App\Model\Admin\Address;
@@ -13,7 +15,6 @@ use App\Model\Admin\Address;
 class OrderDetailController extends Controller
 {
     public function index()
-
     {   
         $uid=session('cid');
         // dd($uid);
@@ -56,5 +57,4 @@ class OrderDetailController extends Controller
             'sp'=>$sp
         ]);
     }
-
 }

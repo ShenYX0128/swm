@@ -14,7 +14,6 @@
 
 		<link href="/homes/css/hmstyle.css" rel="stylesheet" type="text/css"/>
 		<link href="/homes/css/skin.css" rel="stylesheet" type="text/css" />
-		<link href="/homes/css/cartstyle.css" rel="stylesheet" type="text/css" />
 		<link href="/homes/css/optstyle.css" rel="stylesheet" type="text/css" />
 	</head>
 

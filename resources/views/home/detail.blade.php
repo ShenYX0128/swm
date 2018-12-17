@@ -493,37 +493,39 @@
 											<li class="tb-taglist-li tb-taglist-li-current">
 												<div class="comment-info">
 													<span>全部评价</span>
-													<span class="tb-tbcr-num">(32)</span>
+													<span class="tb-tbcr-num">({{$count}})</span>
 												</div>
 											</li>
 
 											<li class="tb-taglist-li tb-taglist-li-1">
 												<div class="comment-info">
 													<span>好评</span>
-													<span class="tb-tbcr-num">(32)</span>
+													<span class="tb-tbcr-num">({{$hao}})</span>
 												</div>
 											</li>
 
 											<li class="tb-taglist-li tb-taglist-li-0">
 												<div class="comment-info">
 													<span>中评</span>
-													<span class="tb-tbcr-num">(32)</span>
+													<span class="tb-tbcr-num">({{$zhong}})</span>
 												</div>
 											</li>
 
 											<li class="tb-taglist-li tb-taglist-li--1">
 												<div class="comment-info">
 													<span>差评</span>
-													<span class="tb-tbcr-num">(32)</span>
+													<span class="tb-tbcr-num">({{$cha}})</span>
 												</div>
 											</li>
 										</ul>
 									</div>
 									<div class="clear"></div>
 								<div id="box">
+										@if($count == 0)
+										<p style="margin-top: 20px;">该商品没有评论</p>
+										@else
 									<ul class="am-comments-list am-comments-list-flip">
 										<!-- 第二部分 -->
-										
 										@foreach($data as $val)
 										@foreach($user as $v)
 										@if($v->id == $val->uid)
@@ -541,7 +543,7 @@
 														<a href="#link-to-user" class="am-comment-author">{{$v->customername}}</a>
 														<!-- 评论者 -->
 														评论于
-														<time datetime="">{{$val->addtime}}</time>
+														<time datetime="">{{date('Y-m-d',$val->addtime)}}</time>
 													</div>
 												</header>
 
@@ -550,12 +552,6 @@
 														<div class="J_TbcRate_ReviewContent tb-tbcr-content ">
 															{{$val->content}}
 														</div>
-														<div class="tb-r-act-bar">
-
-															口味：
-
-														
-								</div>
 													</div>
 
 												</div>
@@ -584,6 +580,7 @@
 										@endforeach
 										<li><a href="javascript:void(0)" onclick="page(<?php echo $next ?>)">&raquo;</a></li>
 									</ul>
+									@endif
 								</div>
 									<div class="clear"></div>
 

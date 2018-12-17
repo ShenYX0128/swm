@@ -91,7 +91,6 @@ class OrderController extends Controller
         $data_cont['number'] = $order_number;
         //收货地址
         $data_cont['o_address'] = $addr_data['id'];
-
               //收货人姓名
         $data_cont['oname'] = $addr_data['name'];
               //收货人电话
@@ -112,7 +111,6 @@ class OrderController extends Controller
             $data_cont['total'] = $price[$i];
             //数量
             $data_cont['num'] = $num[$i];
-
             Orders::create($data_cont);
            
            
@@ -139,16 +137,12 @@ class OrderController extends Controller
         $request->session()->put('shop',$shop);
        
         $fri=Friend::get();
-
-       
-
         return view('home.success1',[
             'title'=>'结算页面',
             'pricesum' => $pricesum,
             'codecode' => $order_number,
             'shop'=>$shop,
             'fri'=>$fri,
-
         ]);
     }
 }
