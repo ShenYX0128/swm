@@ -101,6 +101,7 @@
 							@if($order->gid == $val->id)
 							@if($v->gid == $val->id)
 							@if($order->id == $val->oid)
+
 							<tr class="item-list">
 								<div class="bundle  bundle-last">
 									<div class="bundle-main">
@@ -251,7 +252,9 @@
 	});
 	$('#J_Go').click(function(){
 
+
 		$.post('/home/paycreate',{oname:n,o_address:a,o_phone:p,oid:{{$order->id}},total:{{$val->d_num*$val->price}},o_status:1},function(data){
+
 			location.href='/home/success/{{$order->id}}';
 		})
 	})

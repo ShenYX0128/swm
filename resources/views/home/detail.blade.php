@@ -552,6 +552,7 @@
 														<div class="J_TbcRate_ReviewContent tb-tbcr-content ">
 															{{$val->content}}
 														</div>
+
 													</div>
 
 												</div>
@@ -865,6 +866,7 @@ zcityrun('.zcityGroup');
 		
 		
 	})
+
 	// 加
 	$('#tadd').click(function(){
 		var td = $(this).prev().val();

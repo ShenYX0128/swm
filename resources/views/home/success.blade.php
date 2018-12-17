@@ -8,7 +8,6 @@
 		<script type="text/javascript" src="/homes/basic/js/jquery-1.7.min.js"></script>
 
 @section('content')
-		
 			<div class="take-delivery">
 			 <div class="status">
 			   <h2>订单成功</h2>
@@ -38,3 +37,4 @@
 			</div>
 
 @stop
+

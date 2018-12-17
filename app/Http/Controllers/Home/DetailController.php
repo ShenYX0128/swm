@@ -15,6 +15,7 @@ class DetailController extends Controller
     public function detail(Request $request,$id)
     {
         // 商品详情
+
         // dd($id);
          // session('gid',$id);
         // dd(session('gid',$id));
@@ -76,6 +77,7 @@ class DetailController extends Controller
         }else{
             $user = 1;
         }
+
         
         $hao = count(DB::table('comment')->where([['gid',$id],['star',2]])->get());
         $zhong = count(DB::table('comment')->where([['gid',$id],['star',1]])->get());
@@ -97,6 +99,7 @@ class DetailController extends Controller
                 }
             }
         }
+
 
         if(!$a){
             $data[]=array(

@@ -33,6 +33,7 @@ class OrderController extends Controller
             foreach ($idArr as $key => $value) {
                 foreach ($shop as $k => $v) {
 
+
                     if($v['id']==$value){
                         $newArr[] = $v;
 
@@ -139,8 +140,6 @@ class OrderController extends Controller
         $request->session()->put('shop',$shop);
        
         $fri=Friend::get();
-
-       
         return view('home.success1',[
             'title'=>'结算页面',
             'pricesum' => $pricesum,

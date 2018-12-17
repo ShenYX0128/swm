@@ -72,7 +72,7 @@
 							<div class="am-form-content">
 								<input type="text" name="code" id="user-phone" >
 							</div>
-							<input type="button" id='but' value="获取验证码" style="position: relative; left:303px;top:-32px;height: 32px; background:#dd514c; color:#fff;    border-color: #dd514c;font-size:12px;padding-left:10px;padding-right:10px;">
+							<input type="button" id='but' value="获取验证码" style="position: relative; left:303px;top:-32px;height: 32px; width:84px; background:#dd514c; color:#fff;    border-color: #dd514c;font-size:12px;padding-left:10px;padding-right:10px;">
 							<span class="sp"> *请输入验证码</span>
 						</div>
 							<script type="text/javascript">

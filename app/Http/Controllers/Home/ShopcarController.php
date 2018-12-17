@@ -43,6 +43,7 @@ class ShopcarController extends Controller
          // 将数据写入到session中 
         $request->session()->put('shop',$shop);
         echo 1;
+
     }
     // 购物车数量的加
     public function shopadd(Request $request)
@@ -67,6 +68,13 @@ class ShopcarController extends Controller
          echo 1;
     }
 
+
+
+         //将数据写入到session中
+         $request->session()->put('shop',$shop);
+
+         echo 1;
+    }
 
     //购物车数量的减
     public function shopdec(Request $request)

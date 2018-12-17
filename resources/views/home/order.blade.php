@@ -471,7 +471,7 @@
 															    @break
 
 															    @case(3)
-															    <div class="col-state am-btn am-btn-danger anniu">
+															    <div class="col-state am-btn 
 															        <a href="/home/commentlist/{{$vvv->id}}">待评价</a>
 															    </div>
 															    @break
