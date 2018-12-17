@@ -33,7 +33,11 @@
 					<div class="topMessage">
 						<?php if(session('cid')): ?>
 						<div class="menu-hd">
-							<a href="#" target="_top" class="h">欢迎回来,<?php echo e($customer->customername); ?></a>
+							<?php if(!$customer->customername): ?>
+								<a href="#" target="_top" class="h">欢迎回来,<?php echo e($customer->phone); ?></a>
+							<?php else: ?>
+								<a href="#" target="_top" class="h">欢迎回来,<?php echo e($customer->customername); ?></a>
+							<?php endif; ?>
 							<a href="/home/logout" target="_top">退出登录</a>
 						</div>
 						<?php else: ?>
@@ -53,9 +57,9 @@
 					</div>
 					<div class="topMessage mini-cart">
 						<?php
-						$count = DB::table('shopcar')->where('uid',session('cid'))->count();
+						$count=count(session('shop'));
 						?>
-						<div class="menu-hd"><a id="mc-menu-hd" href="http://g-mall.cn/home/shopcar" target="_top"><i class="am-icon-shopping-cart  am-icon-fw"></i><span>购物车</span><strong id="J_MiniCartNum" class="h">(<?php echo e($count); ?>)</strong></a></div>
+						<div class="menu-hd"><a id="mc-menu-hd" href="http://g-mall.cn/shopcar" target="_top"><i class="am-icon-shopping-cart  am-icon-fw"></i><span>购物车</span><strong id="J_MiniCartNum" class="h">(<?php echo e($count); ?>)</strong></a></div>
 					</div>
 					<div class="topMessage favorite">
 						<div class="menu-hd"><a href="#" target="_top"><i class="am-icon-heart am-icon-fw"></i><span>收藏夹</span></a></div>
@@ -97,15 +101,6 @@
 								<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 							</p>
 						</div>
-						<div class="footer-bd ">
-							<p>
-								<a href="# ">关于恒望</a>
-								<a href="# ">合作伙伴</a>
-								<a href="# ">联系我们</a>
-								<a href="# ">网站地图</a>
-								<em>© 2015-2025 Hengwang.com 版权所有. 更多模板 <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></em>
-							</p>
-						</div>
 					</div>
 
 		</div>
@@ -136,9 +131,17 @@
 				?>
 
 						<div class="avatar_box ">
+							<?php if(!$customer->profile): ?>
+							<p class="avatar_imgbox"><img src="/homes/images/no-img_mid_.jpg" / style="width:100px;height:100px;margin-right:30px;"></p>
+							<?php else: ?>
 							<p class="avatar_imgbox"><img src="<?php echo e($customer->profile); ?>" / style="width:100px;height:100px;margin-right:30px;"></p>
+							<?php endif; ?>
 							<ul class="user_info ">
+								<?php if(!$customer->customername): ?>
+								<li><?php echo e($customer->phone); ?></li>
+								<?php else: ?>
 								<li><?php echo e($customer->customername); ?></li>
+								<?php endif; ?>
 								<li><a href="/home/logout" style="align:center;width:110px; padding-left:26px;">退出登录</a></li>
 							</ul>
 						</div>

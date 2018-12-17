@@ -1,5 +1,7 @@
 <?php $__env->startSection('title',$title); ?>
+		<meta name="_token" content="<?php echo csrf_token(); ?>">
 		<link href="/homes/css/jsstyle.css" rel="stylesheet" type="text/css" />
+		<link href="/homes/css/cartstyle.css" rel="stylesheet" type="text/css" />
 		<script type="text/javascript" src="/homes/js/address.js"></script>
 <?php $__env->startSection('content'); ?>
 <!--地址 -->
@@ -7,33 +9,32 @@
 					<div class="address">
 						<h3>确认收货地址 </h3>
 						<div class="control">
-							<div class="tc-btn createAddr theme-login am-btn am-btn-danger">使用新地址</div>
+							<div class="tc-btn createAddr theme-login am-btn am-btn-danger"><a href="/home/personal/address"></a>使用新地址</div>
 						</div>
 						<div class="clear"></div>
 						<ul>
+							<?php $__currentLoopData = $add; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $v): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 							<div class="per-border"></div>
-							<li class="user-addresslist defaultAddr">
+							<li class="user-addresslist <?php if($v->status == 0): ?> defaultAddr <?php endif; ?>">
 
 								<div class="address-left">
 									<div class="user DefaultAddr">
 
 										<span class="buy-address-detail">   
-                   <span class="buy-user">艾迪 </span>
-										<span class="buy-phone">15871145629</span>
+                   						<span class="buy-user"><?php echo e($v->name); ?></span>
+										<span class="buy-phone"><?php echo e($v->phone); ?></span>
 										</span>
 									</div>
 									<div class="default-address DefaultAddr">
 										<span class="buy-line-title buy-line-title-type">收货地址：</span>
 										<span class="buy--address-detail">
-								   <span class="province">湖北</span>省
-										<span class="city">武汉</span>市
-										<span class="dist">洪山</span>区
-										<span class="street">雄楚大道666号(中南财经政法大学)</span>
-										</span>
+								   				<?php echo e($v->location); ?>
 
 										</span>
 									</div>
+									<?php if($v->status == 0): ?>
 									<ins class="deftip">默认地址</ins>
+									<?php endif; ?>
 								</div>
 								<div class="address-right">
 									<a href="../person/address.html">
@@ -42,79 +43,36 @@
 								<div class="clear"></div>
 
 								<div class="new-addr-btn">
+									<?php if($v->status != 0): ?>
 									<a href="#" class="hidden">设为默认</a>
+									<?php endif; ?>
 									<span class="new-addr-bar hidden">|</span>
-									<a href="#">编辑</a>
+									<a href="/home/personal/addedit/<?php echo e($v->id); ?>">编辑</a>
 									<span class="new-addr-bar">|</span>
-									<a href="javascript:void(0);" onclick="delClick(this);">删除</a>
+									<a class="al" aid="<?php echo e($v->id); ?>" href="javascript:void(0);" ><i class="am-icon-trash"></i>删除</a>
 								</div>
 
 							</li>
-							<div class="per-border"></div>
-							<li class="user-addresslist">
-								<div class="address-left">
-									<div class="user DefaultAddr">
+							<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+							<script>
 
-										<span class="buy-address-detail">   
-                   <span class="buy-user">艾迪 </span>
-										<span class="buy-phone">15871145629</span>
-										</span>
-									</div>
-									<div class="default-address DefaultAddr">
-										<span class="buy-line-title buy-line-title-type">收货地址：</span>
-										<span class="buy--address-detail">
-								   <span class="province">湖北</span>省
-										<span class="city">武汉</span>市
-										<span class="dist">武昌</span>区
-										<span class="street">东湖路75号众环大厦2栋9层902</span>
-										</span>
-
-										</span>
-									</div>
-									<ins class="deftip hidden">默认地址</ins>
-								</div>
-								<div class="address-right">
-									<span class="am-icon-angle-right am-icon-lg"></span>
-								</div>
-								<div class="clear"></div>
-
-								<div class="new-addr-btn">
-									<a href="#">设为默认</a>
-									<span class="new-addr-bar">|</span>
-									<a href="#">编辑</a>
-									<span class="new-addr-bar">|</span>
-									<a href="javascript:void(0);"  onclick="delClick(this);">删除</a>
-								</div>
-
-							</li>
-
+								$('.al').click(function(){
+									var addid = $(this).attr('aid');
+									var al = $(this);
+									$.get('/home/destory',{id:addid},function(data){
+										if (data) {
+											//alert('删除成功');
+											al.parents('.lis').css('display','none')
+										} else {
+											alert('删除失败，请检查后再次删除！！！')
+										}
+									})
+								})
+							</script>
 						</ul>
 
 						<div class="clear"></div>
 					</div>
-					<!--物流 -->
-					<div class="logistics">
-						<h3>选择物流方式</h3>
-						<ul class="op_express_delivery_hot">
-							<li data-value="yuantong" class="OP_LOG_BTN  "><i class="c-gap-right" style="background-position:0px -468px"></i>圆通<span></span></li>
-							<li data-value="shentong" class="OP_LOG_BTN  "><i class="c-gap-right" style="background-position:0px -1008px"></i>申通<span></span></li>
-							<li data-value="yunda" class="OP_LOG_BTN  "><i class="c-gap-right" style="background-position:0px -576px"></i>韵达<span></span></li>
-							<li data-value="zhongtong" class="OP_LOG_BTN op_express_delivery_hot_last "><i class="c-gap-right" style="background-position:0px -324px"></i>中通<span></span></li>
-							<li data-value="shunfeng" class="OP_LOG_BTN  op_express_delivery_hot_bottom"><i class="c-gap-right" style="background-position:0px -180px"></i>顺丰<span></span></li>
-						</ul>
-					</div>
-					<div class="clear"></div>
-
-					<!--支付方式-->
-					<div class="logistics">
-						<h3>选择支付方式</h3>
-						<ul class="pay-list">
-							<li class="pay card"><img src="/homes/images/wangyin.jpg" />银联<span></span></li>
-							<li class="pay qq"><img src="/homes/images/weizhifu.jpg" />微信<span></span></li>
-							<li class="pay taobao"><img src="/homes/images/zhifubao.jpg" />支付宝<span></span></li>
-						</ul>
-					</div>
-					<div class="clear"></div>
 
 					<!--订单 -->
 					<div class="concent">
@@ -126,61 +84,59 @@
 									<div class="th th-item">
 										<div class="td-inner">商品信息</div>
 									</div>
-									<div class="th th-price">
+									<div class="th th-price" style="width: 17%;">
 										<div class="td-inner">单价</div>
 									</div>
 									<div class="th th-amount">
 										<div class="td-inner">数量</div>
 									</div>
-									<div class="th th-sum">
+									<div class="th th-sum" style="width: 19%;">
 										<div class="td-inner">金额</div>
 									</div>
-									<div class="th th-oplist">
-										<div class="td-inner">配送方式</div>
-									</div>
-
 								</div>
 							</div>
 							<div class="clear"></div>
-
+							<?php $__currentLoopData = $img; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $v): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+							<?php $__currentLoopData = $gods; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $val): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+							<?php if($order->gid == $val->id): ?>
+							<?php if($v->gid == $val->id): ?>
+							<?php if($order->id == $val->oid): ?>
 							<tr class="item-list">
 								<div class="bundle  bundle-last">
-
 									<div class="bundle-main">
 										<ul class="item-content clearfix">
 											<div class="pay-phone">
 												<li class="td td-item">
 													<div class="item-pic">
 														<a href="#" class="J_MakePoint">
-															<img src="/homes/images/kouhong.jpg_80x80.jpg" class="itempic J_ItemImg"></a>
+															<img src="<?php echo e($v->gpic); ?>" width="80" class="itempic J_ItemImg"></a>
 													</div>
 													<div class="item-info">
 														<div class="item-basic-info">
-															<a href="#" class="item-title J_MakePoint" data-point="tbcart.8.11">美康粉黛醉美唇膏 持久保湿滋润防水不掉色</a>
+															<a href="#" class="item-title J_MakePoint" data-point="tbcart.8.11"><?php echo e($val->gname); ?></a>
 														</div>
 													</div>
 												</li>
 												<li class="td td-info">
 													<div class="item-props">
-														<span class="sku-line">颜色：12#川南玛瑙</span>
-														<span class="sku-line">包装：裸装</span>
+														<span class="sku-line">口味：<?php echo e($val->norns); ?></span>
 													</div>
 												</li>
 												<li class="td td-price">
 													<div class="item-price price-promo-promo">
 														<div class="price-content">
-															<em class="J_Price price-now">39.00</em>
+															<em class="J_Price price-now"><?php echo e($val->price); ?></em>
 														</div>
 													</div>
 												</li>
 											</div>
-											<li class="td td-amount">
+											<li class="td td-amount" style="width: 23%;">
 												<div class="amount-wrapper ">
 													<div class="item-amount ">
 														<span class="phone-title">购买数量</span>
 														<div class="sl">
 															<input class="min am-btn" name="" type="button" value="-" />
-															<input class="text_box" name="" type="text" value="3" style="width:30px;" />
+															<input class="text_box" name="" type="text" value="<?php echo e($val->d_num); ?>" style="width:30px;" />
 															<input class="add am-btn" name="" type="button" value="+" />
 														</div>
 													</div>
@@ -188,88 +144,21 @@
 											</li>
 											<li class="td td-sum">
 												<div class="td-inner">
-													<em tabindex="0" class="J_ItemSum number">117.00</em>
+													<em tabindex="0" class="J_ItemSum number"><?php echo e($val->d_num*$val->price); ?></em>
 												</div>
 											</li>
-											<li class="td td-oplist">
-												<div class="td-inner">
-													<span class="phone-title">配送方式</span>
-													<div class="pay-logis">
-														快递<b class="sys_item_freprice">10</b>元
-													</div>
-												</div>
-											</li>
-
 										</ul>
 										<div class="clear"></div>
 
 									</div>
 							</tr>
+							<?php endif; ?>
+							<?php endif; ?>
+							<?php endif; ?>
+							<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+							<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 							<div class="clear"></div>
 							</div>
-
-							<tr id="J_BundleList_s_1911116345_1" class="item-list">
-								<div id="J_Bundle_s_1911116345_1_0" class="bundle  bundle-last">
-									<div class="bundle-main">
-										<ul class="item-content clearfix">
-											<div class="pay-phone">
-												<li class="td td-item">
-													<div class="item-pic">
-														<a href="#" class="J_MakePoint">
-															<img src="/homes/images/kouhong.jpg_80x80.jpg" class="itempic J_ItemImg"></a>
-													</div>
-													<div class="item-info">
-														<div class="item-basic-info">
-															<a href="#" target="_blank" title="美康粉黛醉美唇膏 持久保湿滋润防水不掉色" class="item-title J_MakePoint" data-point="tbcart.8.11">美康粉黛醉美唇膏 持久保湿滋润防水不掉色</a>
-														</div>
-													</div>
-												</li>
-												<li class="td td-info">
-													<div class="item-props">
-														<span class="sku-line">颜色：10#蜜橘色+17#樱花粉</span>
-														<span class="sku-line">包装：两支手袋装（送彩带）</span>
-													</div>
-												</li>
-												<li class="td td-price">
-													<div class="item-price price-promo-promo">
-														<div class="price-content">
-															<em class="J_Price price-now">39.00</em>
-														</div>
-													</div>
-												</li>
-											</div>
-
-											<li class="td td-amount">
-												<div class="amount-wrapper ">
-													<div class="item-amount ">
-														<span class="phone-title">购买数量</span>
-														<div class="sl">
-															<input class="min am-btn" name="" type="button" value="-" />
-															<input class="text_box" name="" type="text" value="3" style="width:30px;" />
-															<input class="add am-btn" name="" type="button" value="+" />
-														</div>
-													</div>
-												</div>
-											</li>
-											<li class="td td-sum">
-												<div class="td-inner">
-													<em tabindex="0" class="J_ItemSum number">117.00</em>
-												</div>
-											</li>
-											<li class="td td-oplist">
-												<div class="td-inner">
-													<span class="phone-title">配送方式</span>
-													<div class="pay-logis">
-														包邮
-													</div>
-												</div>
-											</li>
-
-										</ul>
-										<div class="clear"></div>
-
-									</div>
-							</tr>
 							</div>
 							<div class="clear"></div>
 							<div class="pay-total">
@@ -286,56 +175,7 @@
 								</div>
 
 							</div>
-							<!--优惠券 -->
-							<div class="buy-agio">
-								<li class="td td-coupon">
-
-									<span class="coupon-title">优惠券</span>
-									<select data-am-selected>
-										<option value="a">
-											<div class="c-price">
-												<strong>￥8</strong>
-											</div>
-											<div class="c-limit">
-												【消费满95元可用】
-											</div>
-										</option>
-										<option value="b" selected>
-											<div class="c-price">
-												<strong>￥3</strong>
-											</div>
-											<div class="c-limit">
-												【无使用门槛】
-											</div>
-										</option>
-									</select>
-								</li>
-
-								<li class="td td-bonus">
-
-									<span class="bonus-title">红包</span>
-									<select data-am-selected>
-										<option value="a">
-											<div class="item-info">
-												¥50.00<span>元</span>
-											</div>
-											<div class="item-remainderprice">
-												<span>还剩</span>10.40<span>元</span>
-											</div>
-										</option>
-										<option value="b" selected>
-											<div class="item-info">
-												¥50.00<span>元</span>
-											</div>
-											<div class="item-remainderprice">
-												<span>还剩</span>50.00<span>元</span>
-											</div>
-										</option>
-									</select>
-
-								</li>
-
-							</div>
+							
 							<div class="clear"></div>
 							</div>
 							<!--含运费小计 -->
@@ -357,17 +197,14 @@
 
 										<div id="holyshit268" class="pay-address">
 
-											<p class="buy-footer-address">
+											<p class="buy-footer-address buy-sub-add">
 												<span class="buy-line-title buy-line-title-type">寄送至：</span>
 												<span class="buy--address-detail">
-								   <span class="province">湖北</span>省
-												<span class="city">武汉</span>市
-												<span class="dist">洪山</span>区
-												<span class="street">雄楚大道666号(中南财经政法大学)</span>
+								   					
 												</span>
 												</span>
 											</p>
-											<p class="buy-footer-address">
+											<p class="buy-footer-address buy-sub">
 												<span class="buy-line-title">收货人：</span>
 												<span class="buy-address-detail">   
                                          <span class="buy-user">艾迪 </span>
@@ -376,10 +213,10 @@
 											</p>
 										</div>
 									</div>
-
+									<input type="hidden" name="" id="ord_id" value="<?php echo e($order->id); ?>">
 									<div id="holyshit269" class="submitOrder">
 										<div class="go-btn-wrap">
-											<a id="J_Go" href="success.html" class="btn-go" tabindex="0" title="点击此按钮，提交订单">提交订单</a>
+											<a id="J_Go" href="javascript:void(0)" class="btn-go" tabindex="0" title="点击此按钮，提交订单">提交订单</a>
 										</div>
 									</div>
 									<div class="clear"></div>
@@ -393,66 +230,31 @@
 				
 			</div>
 			<div class="theme-popover-mask"></div>
-			<div class="theme-popover">
+			
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('js'); ?>
+<script type="text/javascript">
+	var tota = $('.J_ItemSum').text().trim();
+	$('.pay-sum').text(tota);
+	$('#J_ActualFee').text(tota);
+	var n = $('.defaultAddr').children().children().find('.buy-user').text();
+	var p = $('.defaultAddr').children().children().find('.buy-phone').text();
+	var a = $('.defaultAddr').children().children().find('.buy--address-detail').text();
+	var oid = $('#ord_id').val().trim();
+	// console.log(a);
+	 $('.buy-sub').children().children('.buy-user').text(n);
+	$('.buy-sub').children().children('.buy-phone').text(p);
+	$('.buy-sub-add').find('.buy--address-detail').text(a);
+	// console.log(d);
+	$.ajaxSetup({
+   		headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+	});
+	$('#J_Go').click(function(){
 
-				<!--标题 -->
-				<div class="am-cf am-padding">
-					<div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">新增地址</strong> / <small>Add address</small></div>
-				</div>
-				<hr/>
-
-				<div class="am-u-md-12">
-					<form class="am-form am-form-horizontal">
-
-						<div class="am-form-group">
-							<label for="user-name" class="am-form-label">收货人</label>
-							<div class="am-form-content">
-								<input type="text" id="user-name" placeholder="收货人">
-							</div>
-						</div>
-
-						<div class="am-form-group">
-							<label for="user-phone" class="am-form-label">手机号码</label>
-							<div class="am-form-content">
-								<input id="user-phone" placeholder="手机号必填" type="email">
-							</div>
-						</div>
-
-						<div class="am-form-group">
-							<label for="user-phone" class="am-form-label">所在地</label>
-							<div class="am-form-content address">
-								<select data-am-selected>
-									<option value="a">浙江省</option>
-									<option value="b">湖北省</option>
-								</select>
-								<select data-am-selected>
-									<option value="a">温州市</option>
-									<option value="b">武汉市</option>
-								</select>
-								<select data-am-selected>
-									<option value="a">瑞安区</option>
-									<option value="b">洪山区</option>
-								</select>
-							</div>
-						</div>
-
-						<div class="am-form-group">
-							<label for="user-intro" class="am-form-label">详细地址</label>
-							<div class="am-form-content">
-								<textarea class="" rows="3" id="user-intro" placeholder="输入详细地址"></textarea>
-								<small>100字以内写出你的详细地址...</small>
-							</div>
-						</div>
-
-						<div class="am-form-group theme-poptit">
-							<div class="am-u-sm-9 am-u-sm-push-3">
-								<div class="am-btn am-btn-danger">保存</div>
-								<div class="am-btn am-btn-danger close">取消</div>
-							</div>
-						</div>
-					</form>
-				</div>
-
-			</div>
+		$.post('/home/paycreate',{oname:n,o_address:a,o_phone:p,oid:<?php echo e($order->id); ?>,total:<?php echo e($val->d_num*$val->price); ?>,o_status:1},function(data){
+			location.href='/home/success/<?php echo e($order->id); ?>';
+		})
+	})
+</script>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layout.home1', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -17,7 +17,7 @@ class CommentController extends Controller
      */
     public function index(Request $request)
     {
-        //
+        
         // dd($request);
         $res = Comment::orderBy('id','asc')->where(function($query) use($request){
             // 检测关键字
@@ -26,7 +26,7 @@ class CommentController extends Controller
             if(!empty($gname)){
                 $query->where('content','like','%'.$gname.'%');
             }
-        })->paginate($request->input('num',1));
+        })->paginate($request->input('num',10));
         
         $user = User::select('id','username')->get();
 
@@ -101,9 +101,9 @@ class CommentController extends Controller
      
         $del = Comment::where('id',$id)->delete();
         if($del){
-            return  redirect('/home/commetn')->with('success','删除成功');
+            return  redirect('/admin/comment')->with('success','删除成功');
         } else {
-            return back()->with('error','添加失败');
+            return back()->with('error','删除失败');
         }
     }
 }

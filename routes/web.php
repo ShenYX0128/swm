@@ -46,6 +46,7 @@ Route::group(['middleware'=>'login'],function(){
 	Route::resource('admin/comment','Admin\CommentController');
 	// 广告管理
 	Route::resource('admin/poster','Admin\PosterController');
+	Route::resource('admin/headline','Admin\HeadlineController');
 	//订单管理
 	Route::resource('admin/orders','Admin\OrdersController');
 	Route::any('admin/detail','Admin\OrdersController@detail');
@@ -87,7 +88,7 @@ Route::any('home/list/{id}','Home\ListController@index');
 // 前台详情页
 Route::get('/detailadd','Home\DetailController@detailadd');
 Route::get('home/detail/{id}','Home\DetailController@detail');
-
+Route::post('home/shopnum','Home\DetailController@shopnum');
 // 去结算页面
 Route::post('home/commit','Home\OrderController@commit');
 
@@ -114,8 +115,17 @@ Route::group(['middleware'=>['homelogin']],function(){
 	// 立即购买
 	Route::get('home/detailpay','Home\DetailpayController@detailpay');
 	Route::post('home/addpay','Home\DetailpayController@addpay');
+	// 提交定单
+	Route::post('home/paycreate','Home\DetailpayController@paycreate');
+	// 结算成功
+	Route::get('/home/success/{id}','Home\DetailpayController@success');
 	// 详情页评论
 	Route::get('home/page','Home\DetailController@page');
+	// 添加评论
+	Route::get('home/commentlist/{id}','Home\CommitController@commentlist');
+	Route::post('home/commentadd','Home\CommitController@commentadd');
+	// 评论管理
+	Route::get('home/comment','Home\CommitController@comment');
 
 	//前台个人中心
 	Route::get('home/personal/information','Home\PersonalController@information');

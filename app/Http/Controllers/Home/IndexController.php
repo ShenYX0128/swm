@@ -25,7 +25,7 @@ class IndexController extends Controller
         foreach ($type as $k => $v) {
             $sub =Category::where('pid',$v->id)->take(6)->get();
             foreach ($sub as $key => $va) {
-                $arr[$key] = $va;   
+                $arr[] = $va;   
             } 
             // echo $sub;
 

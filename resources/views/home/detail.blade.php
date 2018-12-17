@@ -118,13 +118,13 @@
 							<div class="tb-detail-price">
 
 								<li class="price iteminfo_price">
-									<dt>促销价</dt>
-									<dd><em>¥</em><b class="sys_item_price">{{$v->discount}}</b>  </dd>                                 
+									<dt>单价</dt>
+									<dd><em>¥</em><b class="sys_item_price">{{$v->price}}</b>  </dd>                                 
 								</li>
-								<li class="price iteminfo_mktprice">
+								<!-- <li class="price iteminfo_mktprice">
 									<dt>原价</dt>
 									<dd><em>¥</em><b class="sys_item_mktprice">{{$v->price}}</b></dd>									
-								</li>
+								</li> -->
 								
 								<div class="clear"></div>
 							</div>
@@ -191,10 +191,10 @@
 													<div class="theme-options">
 														<div class="cart-title number" style="margin-left: 5px">数量</div>
 														<dd>
-															<input id="min" class="am-btn am-btn-default" name="" type="button" value="-" />
+															<input id="nmin" class="am-btn am-btn-default" name="" type="button" value="-" />
 															<input id="text_box" name="d_num" type="text" value="1" style="width:30px;" />
-															<input id="add" class="am-btn am-btn-default" name="" type="button" value="+" />
-															<span id="Stock" class="tb-hidden">库存<span class="stock">{{$v->stock}}</span>件</span>
+															<input id="nadd" class="am-btn am-btn-default" name="" type="button" value="+" />
+															<span id="Stock" class="tb-hidden">库存<span id="Stoc" class="stock">{{$v->stock}}</span>件</span>
 														</dd>
 
 													</div>
@@ -234,7 +234,7 @@
 															<input id="tmin" class="am-btn am-btn-default" name="" type="button" value="-" />
 															<input id="text_boxs" name="num" type="text" value="1" style="width:30px;" />
 															<input id="tadd" class="am-btn am-btn-default" name="" type="button" value="+" />
-															<span id="Stock" class="tb-hidden">库存<span class="stock">{{$v->stock}}</span>件</span>
+															<span id="Stocks" class="tb-hidden">库存<span class="stock">{{$v->stock}}</span>件</span>
 														</dd>
 
 													</div>
@@ -552,16 +552,6 @@
 														<div class="J_TbcRate_ReviewContent tb-tbcr-content ">
 															{{$val->content}}
 														</div>
-<<<<<<< HEAD
-														
-=======
-														<div class="tb-r-act-bar">
-
-															口味：
-
-														
-								</div>
->>>>>>> fdfcf55a7505d6ea93b5e9854c03ffea44c364f5
 													</div>
 
 												</div>
@@ -851,10 +841,34 @@ zcityrun('.zcityGroup');
 		
 		window.location.href="/detailadd?id="+gid+"&num="+num;
 	    })
-	// 获取商品数量
+	// 获取商品数量// 加
+	$('#nadd').click(function(){
+		var td = $(this).prev().val();
+		var stock = $('#Stoc').text().trim();
+		td++;
+		$.post('/home/shopnum',{num:td,stock:stock},function(data){
+			$('#nadd').prev().val(data);
+		})
+		
+		 // $('#nadd').prev().val(td);
+		// console.log(a);
+	})
+	// 减
+	$('#nmin').click(function(){
+		var td = $(this).next().val();
+		// console.log(td);
+		td--;
+		if(td <= 1){
+			td = 1;
+		}
+		$(this).next().val(td);
+		
+		
+	})
 	// 加
 	$('#tadd').click(function(){
 		var td = $(this).prev().val();
+		var stock = $('#Stoc').text().trim();
 		td++;
 		$(this).prev().val(td);
 		// 获取单价

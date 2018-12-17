@@ -11,8 +11,7 @@
       
     </section>
     <section class="content">
-    	<div class="box">
-    		
+    	<div class="box">		
     <!-- /.box-header -->
     <div class="box-body">
         <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
